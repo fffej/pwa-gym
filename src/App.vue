@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { enableAutoSync, disableAutoSync, performFullSync } from '@/services/sync'
 
+const authStore = useAuthStore()
 const showIOSPrompt = ref(false)
 
 // Detect if running on iOS Safari and NOT already installed as PWA
@@ -13,9 +16,23 @@ const isIOSSafari = computed(() => {
 })
 
 onMounted(() => {
+  // Initialize Firebase auth listener
+  authStore.initAuthListener()
+  
   // Show iOS install prompt if applicable and not dismissed before
   if (isIOSSafari.value && !localStorage.getItem('iosPromptDismissed')) {
     showIOSPrompt.value = true
+  }
+})
+
+// Watch for auth state changes to enable/disable sync
+watch(() => authStore.userId, (userId) => {
+  if (userId) {
+    enableAutoSync(userId)
+    // Perform initial sync on login
+    performFullSync(userId)
+  } else {
+    disableAutoSync()
   }
 })
 

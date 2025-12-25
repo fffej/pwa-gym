@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import logoImage from '@/assets/lecoach-logo.webp'
+import UserProfile from '@/components/UserProfile.vue'
 
 const router = useRouter()
 
@@ -11,6 +12,11 @@ function navigateTo(route: string) {
 
 <template>
   <div class="home">
+    <!-- User Profile Icon - Top Right -->
+    <div class="top-bar">
+      <UserProfile />
+    </div>
+
     <header class="site-header">
       <img :src="logoImage" alt="Le Coach Fitness" class="site-logo" />
       <p class="site-tagline">Upgrade Your Fitness Journey</p>
@@ -37,16 +43,6 @@ function navigateTo(route: string) {
         <span class="card-subtitle">Manage workout templates</span>
       </button>
 
-      <button class="card card-equipment" @click="navigateTo('/equipment')">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-          </svg>
-        </div>
-        <span class="card-title">Gym Info</span>
-        <span class="card-subtitle">Opening hours & equipment</span>
-      </button>
-
       <button class="card card-progress" @click="navigateTo('/progress')">
         <div class="card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
@@ -55,6 +51,16 @@ function navigateTo(route: string) {
         </div>
         <span class="card-title">Progress</span>
         <span class="card-subtitle">Track your gains</span>
+      </button>
+
+      <button class="card card-equipment" @click="navigateTo('/equipment')">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+        </div>
+        <span class="card-title">Gym Info</span>
+        <span class="card-subtitle">Opening hours & equipment</span>
       </button>
     </div>
   </div>
@@ -66,6 +72,14 @@ function navigateTo(route: string) {
   flex-direction: column;
   min-height: 100vh;
   padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.top-bar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
 }
 
 .site-header {
