@@ -140,13 +140,14 @@ export const useWorkoutStore = defineStore('workout', () => {
     set.completedAt = Date.now()
 
     // Update machine defaults for smart suggestions
+    // Create plain object to avoid storing reactive proxies
     await machineDefaultsDb.updateDefaults({
-      machineId: exercise.machineId,
-      lastWeight: set.weight,
-      lastWeightUnit: set.weightUnit,
-      lastReps: set.reps,
-      lastAttachmentId: exercise.attachmentId,
-      lastGrip: exercise.grip
+      machineId: String(exercise.machineId),
+      lastWeight: Number(set.weight),
+      lastWeightUnit: String(set.weightUnit) as 'kg' | 'lbs',
+      lastReps: Number(set.reps),
+      lastAttachmentId: exercise.attachmentId ? String(exercise.attachmentId) : undefined,
+      lastGrip: exercise.grip ? String(exercise.grip) as GripType : undefined
     })
   }
 
