@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, toRaw } from 'vue'
 import type { Workout, Exercise, WorkoutSet, GripType } from '@/types/workout'
 import { workoutDb, machineDefaultsDb } from '@/services/db'
 import { useSettingsStore } from './settings'
@@ -156,8 +156,11 @@ export const useWorkoutStore = defineStore('workout', () => {
 
     activeWorkout.value.endTime = Date.now()
     
+    // Convert reactive object to plain object for IndexedDB storage
+    const workoutToSave: Workout = JSON.parse(JSON.stringify(toRaw(activeWorkout.value)))
+    
     // Save to IndexedDB
-    await workoutDb.saveWorkout(activeWorkout.value)
+    await workoutDb.saveWorkout(workoutToSave)
     
     const finishedWorkout = activeWorkout.value
     activeWorkout.value = null
