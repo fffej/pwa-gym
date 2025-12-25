@@ -30,12 +30,26 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  overscroll-behavior-x: none;
+}
+
+/* Prevent horizontal scroll/swipe on iOS */
+html {
+  touch-action: pan-y pinch-zoom;
+}
+
 body {
   background: var(--color-bg-primary);
   min-height: 100vh;
   font-family: 'Poppins', system-ui, sans-serif;
+  position: relative;
 }
 
 #app {
   min-height: 100vh;
+  overflow-x: hidden;
 }
