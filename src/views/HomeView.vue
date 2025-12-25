@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useWorkoutStore } from '@/stores/workout'
+import logoImage from '@/assets/lecoach-logo.webp'
 
 const router = useRouter()
 const workoutStore = useWorkoutStore()
@@ -18,7 +19,7 @@ function startWorkout() {
 <template>
   <div class="home">
     <header class="site-header">
-      <h1 class="site-title">Le Coach Fitness</h1>
+      <img :src="logoImage" alt="Le Coach Fitness" class="site-logo" />
       <p class="site-tagline">Upgrade Your Fitness Journey</p>
     </header>
 
@@ -31,16 +32,6 @@ function startWorkout() {
         </div>
         <span class="card-title">Start Workout</span>
         <span class="card-subtitle">Begin tracking your exercises</span>
-      </button>
-
-      <button class="card card-timer" @click="navigateTo('/timer')">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.962 8.962 0 0 0 12 4c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-          </svg>
-        </div>
-        <span class="card-title">Timer</span>
-        <span class="card-subtitle">Rest between sets</span>
       </button>
 
       <button class="card card-equipment" @click="navigateTo('/equipment')">
@@ -63,10 +54,6 @@ function startWorkout() {
         <span class="card-subtitle">Track your gains</span>
       </button>
     </div>
-
-    <footer class="copyright">
-      © Max Foster 2025
-    </footer>
   </div>
 </template>
 
@@ -84,12 +71,9 @@ function startWorkout() {
   padding: 1rem 0;
 }
 
-.site-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  letter-spacing: 0.02em;
+.site-logo {
+  height: 60px;
+  width: auto;
   margin-bottom: 0.5rem;
 }
 
@@ -180,11 +164,6 @@ function startWorkout() {
   color: var(--color-gold);
 }
 
-/* Timer Card */
-.card-timer .card-icon {
-  color: var(--color-accent-coral);
-}
-
 /* Equipment Card */
 .card-equipment .card-icon {
   color: var(--color-gold);
@@ -193,17 +172,6 @@ function startWorkout() {
 /* Progress Card */
 .card-progress .card-icon {
   color: var(--color-accent-teal);
-}
-
-.copyright {
-  text-align: center;
-  padding: 2rem 0 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.75rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 </style>
 

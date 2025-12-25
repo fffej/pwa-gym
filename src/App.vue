@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import logoImage from '@/assets/lecoach-logo.webp'
 
 const showIOSPrompt = ref(false)
 
@@ -45,11 +44,6 @@ function dismissIOSPrompt() {
     </div>
     
     <router-view />
-    
-    <!-- Fixed Logo Footer -->
-    <div class="logo-footer">
-      <img :src="logoImage" alt="Le Coach Logo" class="logo-image" />
-    </div>
   </div>
 </template>
 
@@ -57,7 +51,6 @@ function dismissIOSPrompt() {
 .app-container {
   min-height: 100vh;
   font-family: 'Poppins', system-ui, sans-serif;
-  padding-bottom: 80px;
 }
 
 /* iOS Install Prompt */
@@ -112,26 +105,5 @@ function dismissIOSPrompt() {
 
 .dismiss-btn:hover {
   color: var(--color-text-primary);
-}
-
-/* Fixed Logo Footer */
-.logo-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background: linear-gradient(transparent, var(--color-bg-primary) 30%);
-  pointer-events: none;
-  z-index: 50;
-}
-
-.logo-image {
-  height: 40px;
-  width: auto;
-  opacity: 0.9;
 }
 </style>
