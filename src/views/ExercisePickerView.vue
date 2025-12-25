@@ -301,7 +301,7 @@ function formatMuscle(muscle: string): string {
 }
 
 .header h1 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -336,7 +336,7 @@ function formatMuscle(muscle: string): string {
   border-radius: 8px;
   color: var(--color-text-primary);
   font-size: 0.95rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .search-input::placeholder {
@@ -385,7 +385,7 @@ function formatMuscle(muscle: string): string {
   border-radius: 20px;
   color: var(--color-text-secondary);
   font-size: 0.8rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -452,7 +452,7 @@ function formatMuscle(muscle: string): string {
 
 .machine-name {
   display: block;
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -497,7 +497,7 @@ function formatMuscle(muscle: string): string {
 }
 
 .selected-machine h2 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -515,7 +515,7 @@ function formatMuscle(muscle: string): string {
 }
 
 .config-section h3 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-text-secondary);
@@ -536,7 +536,7 @@ function formatMuscle(muscle: string): string {
   border-radius: 8px;
   color: var(--color-text-secondary);
   font-size: 0.9rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -559,7 +559,7 @@ function formatMuscle(muscle: string): string {
   border: none;
   border-radius: 8px;
   color: var(--color-bg-primary);
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.08em;

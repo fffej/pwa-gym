@@ -92,7 +92,7 @@ function selectRpe(value: number) {
 .rpe-value {
   font-size: 1.25rem;
   font-weight: 600;
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   min-width: 1.5rem;
 }
 

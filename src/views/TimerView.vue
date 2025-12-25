@@ -202,7 +202,7 @@ onUnmounted(() => {
 }
 
 .header h1 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -246,7 +246,7 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 3.5rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -315,7 +315,7 @@ onUnmounted(() => {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .preset-buttons {
@@ -336,7 +336,7 @@ onUnmounted(() => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .preset-btn:disabled {
@@ -370,7 +370,7 @@ onUnmounted(() => {
   color: var(--color-text-primary);
   font-size: 0.9rem;
   text-align: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .custom-input input::placeholder {
@@ -396,7 +396,7 @@ onUnmounted(() => {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }

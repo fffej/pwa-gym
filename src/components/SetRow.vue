@@ -305,7 +305,7 @@ function handleComplete() {
   font-size: 0.95rem;
   font-weight: 500;
   text-align: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   -moz-appearance: textfield;
 }
 

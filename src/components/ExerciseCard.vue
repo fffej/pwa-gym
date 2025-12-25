@@ -121,7 +121,7 @@ function formatGrip(grip: string | undefined): string {
 }
 
 .exercise-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -203,7 +203,7 @@ function formatGrip(grip: string | undefined): string {
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-size: 0.8rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.15s ease;
 }

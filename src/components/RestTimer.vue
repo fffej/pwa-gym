@@ -202,7 +202,7 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -223,7 +223,7 @@ onUnmounted(() => {
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-size: 0.85rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -258,7 +258,7 @@ onUnmounted(() => {
   border: none;
   color: var(--color-text-muted);
   font-size: 0.8rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: color 0.15s ease;
 }

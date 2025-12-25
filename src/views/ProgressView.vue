@@ -67,7 +67,7 @@ const router = useRouter()
 }
 
 .header h1 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -99,7 +99,7 @@ const router = useRouter()
 }
 
 .content h2 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -113,7 +113,7 @@ const router = useRouter()
   font-size: 0.9rem;
   max-width: 280px;
   line-height: 1.7;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 </style>
 
