@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useWorkoutStore } from '@/stores/workout'
+import logoImage from '@/assets/lecoach-logo.webp'
 
 const router = useRouter()
 const workoutStore = useWorkoutStore()
@@ -18,63 +19,41 @@ function startWorkout() {
 <template>
   <div class="home">
     <header class="site-header">
-      <h1 class="site-title">Le Coach Fitness</h1>
+      <img :src="logoImage" alt="Le Coach Fitness" class="site-logo" />
       <p class="site-tagline">Upgrade Your Fitness Journey</p>
     </header>
 
     <div class="cards-container">
       <button class="card card-workout" @click="startWorkout">
         <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.5 6.5h11v11h-11z"/>
-            <path d="M3 12h3M18 12h3M12 3v3M12 18v3"/>
-            <circle cx="12" cy="12" r="2"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
           </svg>
         </div>
         <span class="card-title">Start Workout</span>
         <span class="card-subtitle">Begin tracking your exercises</span>
       </button>
 
-      <button class="card card-timer" @click="navigateTo('/timer')">
-        <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <span class="card-title">Timer</span>
-        <span class="card-subtitle">Rest between sets</span>
-      </button>
-
       <button class="card card-equipment" @click="navigateTo('/equipment')">
         <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6.5 6.5h11v11h-11z"/>
-            <path d="M3 12h3M18 12h3M12 3v3M12 18v3"/>
-            <circle cx="12" cy="12" r="2"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
           </svg>
         </div>
-        <span class="card-title">Gym Equipment</span>
-        <span class="card-subtitle">Browse equipment</span>
+        <span class="card-title">Gym Info</span>
+        <span class="card-subtitle">Opening hours & equipment</span>
       </button>
 
       <button class="card card-progress" @click="navigateTo('/progress')">
         <div class="card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3v18h18"/>
-            <path d="M18 17V9"/>
-            <path d="M13 17V5"/>
-            <path d="M8 17v-3"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/>
           </svg>
         </div>
         <span class="card-title">Progress</span>
         <span class="card-subtitle">Track your gains</span>
       </button>
     </div>
-
-    <footer class="copyright">
-      © Max Foster 2025
-    </footer>
   </div>
 </template>
 
@@ -92,22 +71,18 @@ function startWorkout() {
   padding: 1rem 0;
 }
 
-.site-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--color-gold);
-  letter-spacing: 0.08em;
+.site-logo {
+  height: 60px;
+  width: auto;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .site-tagline {
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--color-text-secondary);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -128,38 +103,20 @@ function startWorkout() {
   justify-content: center;
   gap: 0.75rem;
   padding: 2rem 1.5rem;
-  border: 1px solid rgba(74, 144, 217, 0.2);
-  border-radius: 4px;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Cinzel', serif;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: var(--color-bg-secondary);
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.03);
   position: relative;
   overflow: hidden;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
 .card:hover {
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-2px);
-  border-color: rgba(74, 144, 217, 0.4);
-  background: var(--color-bg-tertiary);
-}
-
-.card:hover::before {
-  opacity: 1;
 }
 
 .card:active {
@@ -174,9 +131,10 @@ function startWorkout() {
 }
 
 .card-title {
-  font-size: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.02em;
   color: var(--color-text-primary);
 }
 
@@ -184,21 +142,18 @@ function startWorkout() {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
   text-transform: none;
-  letter-spacing: 0.05em;
-  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.02em;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
 
 /* Workout Card - Primary Action */
 .card-workout {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-color: rgba(74, 144, 217, 0.4);
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, rgba(74, 144, 217, 0.1) 100%);
+  background: rgba(74, 144, 217, 0.08);
 }
 
 .card-workout:hover {
-  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.25);
-  border-color: var(--color-gold);
+  background: rgba(74, 144, 217, 0.12);
 }
 
 .card-workout .card-icon {
@@ -209,53 +164,14 @@ function startWorkout() {
   color: var(--color-gold);
 }
 
-/* Timer Card */
-.card-timer {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.card-timer:hover {
-  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
-}
-
-.card-timer .card-icon {
-  color: var(--color-accent-coral);
-}
-
 /* Equipment Card */
-.card-equipment {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.card-equipment:hover {
-  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
-}
-
 .card-equipment .card-icon {
   color: var(--color-gold);
 }
 
 /* Progress Card */
-.card-progress {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.card-progress:hover {
-  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
-}
-
 .card-progress .card-icon {
   color: var(--color-accent-teal);
-}
-
-.copyright {
-  text-align: center;
-  padding: 2rem 0 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.75rem;
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 </style>
 

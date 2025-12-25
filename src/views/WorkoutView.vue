@@ -231,7 +231,7 @@ function discardWorkout() {
 }
 
 .header h1 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -243,7 +243,7 @@ function discardWorkout() {
 .duration {
   font-size: 0.85rem;
   color: var(--color-text-muted);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .header-stats {
@@ -261,7 +261,7 @@ function discardWorkout() {
 }
 
 .stat-value {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-gold);
@@ -303,7 +303,7 @@ function discardWorkout() {
 }
 
 .empty-state h2 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -343,7 +343,7 @@ function discardWorkout() {
   border: none;
   border-radius: 8px;
   color: var(--color-bg-primary);
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -398,7 +398,7 @@ function discardWorkout() {
 }
 
 .modal h2 {
-  font-family: 'Cinzel', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -420,7 +420,7 @@ function discardWorkout() {
 .modal-btn {
   padding: 0.875rem 1.5rem;
   border-radius: 6px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;

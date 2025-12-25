@@ -1,8 +1,8 @@
 :root {
-  /* Dark blue theme with black tint */
-  --color-bg-primary: #0a0c10;
-  --color-bg-secondary: #12151c;
-  --color-bg-tertiary: #1a1e28;
+  /* Rich dark blue theme */
+  --color-bg-primary: #0d1b2a;
+  --color-bg-secondary: #152238;
+  --color-bg-tertiary: #1d2d47;
   
   /* Primary accent - vivid blue */
   --color-gold: #4a90d9;
@@ -20,8 +20,8 @@
   --color-accent-sage: #2d3654;
   
   /* Border/outline color */
-  --color-border: rgba(74, 144, 217, 0.15);
-  --color-border-hover: rgba(74, 144, 217, 0.35);
+  --color-border: rgba(74, 144, 217, 0.12);
+  --color-border-hover: rgba(74, 144, 217, 0.25);
 }
 
 * {
@@ -33,7 +33,7 @@
 body {
   background: var(--color-bg-primary);
   min-height: 100vh;
-  font-family: 'Raleway', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 #app {

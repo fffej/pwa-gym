@@ -50,7 +50,7 @@ function dismissIOSPrompt() {
 <style scoped>
 .app-container {
   min-height: 100vh;
-  font-family: 'Raleway', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
 }
 
 /* iOS Install Prompt */
@@ -59,7 +59,7 @@ function dismissIOSPrompt() {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 26, 26, 0.98);
+  background: rgba(13, 27, 42, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 1.25rem 2.5rem 1.25rem 1.25rem;
