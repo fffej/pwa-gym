@@ -1,0 +1,11 @@
+{
+  "regularHours": [
+    { "days": "Mon - Fri", "hours": "6am - 10pm" },
+    { "days": "Sat - Sun", "hours": "8am - 5pm" }
+  ],
+  "specialEvents": [
+    { "date": "2025-12-31", "title": "New Year's Eve", "hours": "6am - 6pm" },
+    { "date": "2025-01-01", "title": "New Year's Day", "hours": "10am - 4pm" }
+  ]
+}
+

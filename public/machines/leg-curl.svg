@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Main frame -->
+  <rect x="80" y="25" width="10" height="70" rx="2" fill="#3670b0"/>
+  <!-- Bench pad (lying position) -->
+  <rect x="15" y="50" width="65" height="10" rx="3" fill="#4a90d9"/>
+  <!-- Leg curl arm -->
+  <rect x="70" y="60" width="5" height="25" rx="2" fill="#3670b0"/>
+  <!-- Ankle roller -->
+  <rect x="55" y="80" width="20" height="8" rx="3" fill="#6aa8f0"/>
+  <!-- Weight stack -->
+  <rect x="75" y="25" width="20" height="35" rx="2" fill="#4a90d9"/>
+  <line x1="77" y1="33" x2="93" y2="33" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="77" y1="41" x2="93" y2="41" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="77" y1="49" x2="93" y2="49" stroke="#1d2d47" stroke-width="2"/>
+  <!-- Support legs -->
+  <rect x="20" y="60" width="5" height="35" rx="1" fill="#3670b0"/>
+  <rect x="55" y="60" width="5" height="15" rx="1" fill="#3670b0"/>
+  <!-- Base -->
+  <rect x="15" y="95" width="80" height="8" rx="2" fill="#3670b0"/>
+</svg>
+

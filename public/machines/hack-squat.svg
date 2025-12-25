@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Main angled rails -->
+  <rect x="30" y="15" width="6" height="80" rx="2" fill="#3670b0" transform="rotate(15 30 15)"/>
+  <rect x="84" y="15" width="6" height="80" rx="2" fill="#3670b0" transform="rotate(15 84 15)"/>
+  <!-- Back pad (angled) -->
+  <rect x="40" y="30" width="10" height="40" rx="3" fill="#4a90d9" transform="rotate(15 40 30)"/>
+  <!-- Shoulder pads -->
+  <rect x="35" y="25" width="20" height="8" rx="2" fill="#6aa8f0"/>
+  <rect x="65" y="25" width="20" height="8" rx="2" fill="#6aa8f0"/>
+  <!-- Foot platform -->
+  <rect x="30" y="85" width="60" height="10" rx="3" fill="#4a90d9"/>
+  <!-- Weight horns -->
+  <circle cx="25" cy="50" r="6" fill="#4a90d9"/>
+  <circle cx="95" cy="50" r="6" fill="#4a90d9"/>
+  <!-- Base -->
+  <rect x="20" y="100" width="80" height="8" rx="2" fill="#3670b0"/>
+</svg>
+

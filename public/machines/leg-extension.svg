@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Main frame -->
+  <rect x="70" y="25" width="10" height="70" rx="2" fill="#3670b0"/>
+  <!-- Seat back -->
+  <rect x="25" y="35" width="8" height="35" rx="2" fill="#4a90d9"/>
+  <!-- Seat -->
+  <rect x="25" y="65" width="45" height="8" rx="2" fill="#4a90d9"/>
+  <!-- Leg pad arm -->
+  <rect x="35" y="73" width="30" height="5" rx="2" fill="#3670b0"/>
+  <!-- Leg pad/roller -->
+  <rect x="60" y="78" width="15" height="8" rx="3" fill="#6aa8f0"/>
+  <!-- Weight stack -->
+  <rect x="65" y="30" width="20" height="35" rx="2" fill="#4a90d9"/>
+  <line x1="67" y1="38" x2="83" y2="38" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="67" y1="46" x2="83" y2="46" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="67" y1="54" x2="83" y2="54" stroke="#1d2d47" stroke-width="2"/>
+  <!-- Base -->
+  <rect x="20" y="95" width="70" height="8" rx="2" fill="#3670b0"/>
+</svg>
+
