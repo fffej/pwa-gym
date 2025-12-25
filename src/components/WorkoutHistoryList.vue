@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { Workout } from '@/types/workout'
 import { formatDuration } from '@/utils/metrics'
 

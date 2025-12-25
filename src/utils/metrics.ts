@@ -4,8 +4,8 @@
  * Functions to calculate various performance metrics from workout data.
  */
 
-import { calculateE1RM, getBestE1RM, type E1RMFormula } from './e1rm'
-import type { Exercise, WorkoutSet, Workout } from '@/types/workout'
+import { getBestE1RM, type E1RMFormula } from './e1rm'
+import type { Exercise, Workout } from '@/types/workout'
 
 /**
  * Calculate total volume for a set of exercises

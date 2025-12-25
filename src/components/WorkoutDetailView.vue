@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { Workout, Exercise } from '@/types/workout'
 import { calculateExerciseVolume, getExerciseMaxWeight, getExerciseBestE1RM } from '@/utils/metrics'
 

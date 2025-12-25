@@ -46,15 +46,16 @@ const stats = computed(() => {
     return { current: 0, peak: 0, average: 0, trend: 0, workoutCount: 0 }
   }
   
-  const values = props.metrics.map(m => m[selectedMetric.value])
-  const current = values[values.length - 1]
+  const values = props.metrics.map(m => m[selectedMetric.value] ?? 0)
+  const current = values[values.length - 1] ?? 0
+  const first = values[0] ?? 0
   const peak = Math.max(...values)
   const average = Math.round(values.reduce((a, b) => a + b, 0) / values.length)
   
   // Calculate trend (percentage change from first to last)
   let trend = 0
-  if (values.length >= 2 && values[0] > 0) {
-    trend = Math.round(((current - values[0]) / values[0]) * 100)
+  if (values.length >= 2 && first > 0) {
+    trend = Math.round(((current - first) / first) * 100)
   }
   
   return {
@@ -167,7 +168,7 @@ function formatValue(value: number): string {
         <h3>Recent Sessions</h3>
         <div class="sessions-list">
           <div 
-            v-for="(metric, index) in [...metrics].reverse().slice(0, 5)" 
+            v-for="metric in [...metrics].reverse().slice(0, 5)" 
             :key="metric.date"
             class="session-row"
           >

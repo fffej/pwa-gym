@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProgressStore } from '@/stores/progress'
 import WorkoutHistoryList from '@/components/WorkoutHistoryList.vue'
@@ -49,16 +49,6 @@ async function handlePrevPage() {
   await progressStore.prevPage()
 }
 
-// Handle back button to navigate through view hierarchy
-function handleMainBack() {
-  if (currentView.value === 'analysis') {
-    handleBackToWorkout()
-  } else if (currentView.value === 'workout') {
-    handleBackToList()
-  } else {
-    router.push('/')
-  }
-}
 </script>
 
 <template>

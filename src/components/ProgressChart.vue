@@ -105,10 +105,12 @@ const xLabels = computed(() => {
   
   // Show first, last, and middle labels
   const indices = [0, Math.floor(props.data.length / 2), props.data.length - 1]
-  return indices.map(i => ({
-    label: props.data[i].label,
-    x: scaleX(i)
-  }))
+  return indices
+    .filter(i => props.data[i] !== undefined)
+    .map(i => ({
+      label: props.data[i]!.label,
+      x: scaleX(i)
+    }))
 })
 
 // Points for dots
