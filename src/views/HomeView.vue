@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useWorkoutStore } from '@/stores/workout'
 
 const router = useRouter()
+const workoutStore = useWorkoutStore()
 
 function navigateTo(route: string) {
   router.push(route)
+}
+
+function startWorkout() {
+  workoutStore.startWorkout()
+  router.push('/workout')
 }
 </script>
 
@@ -16,6 +23,18 @@ function navigateTo(route: string) {
     </header>
 
     <div class="cards-container">
+      <button class="card card-workout" @click="startWorkout">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.5 6.5h11v11h-11z"/>
+            <path d="M3 12h3M18 12h3M12 3v3M12 18v3"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <span class="card-title">Start Workout</span>
+        <span class="card-subtitle">Begin tracking your exercises</span>
+      </button>
+
       <button class="card card-timer" @click="navigateTo('/timer')">
         <div class="card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -109,7 +128,7 @@ function navigateTo(route: string) {
   justify-content: center;
   gap: 0.75rem;
   padding: 2rem 1.5rem;
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -135,7 +154,7 @@ function navigateTo(route: string) {
 
 .card:hover {
   transform: translateY(-2px);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
   background: var(--color-bg-tertiary);
 }
 
@@ -170,13 +189,33 @@ function navigateTo(route: string) {
   font-weight: 400;
 }
 
+/* Workout Card - Primary Action */
+.card-workout {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(74, 144, 217, 0.4);
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, rgba(74, 144, 217, 0.1) 100%);
+}
+
+.card-workout:hover {
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.25);
+  border-color: var(--color-gold);
+}
+
+.card-workout .card-icon {
+  color: var(--color-gold);
+}
+
+.card-workout .card-title {
+  color: var(--color-gold);
+}
+
 /* Timer Card */
 .card-timer {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-timer:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-timer .card-icon {
@@ -189,7 +228,7 @@ function navigateTo(route: string) {
 }
 
 .card-equipment:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-equipment .card-icon {
@@ -202,7 +241,7 @@ function navigateTo(route: string) {
 }
 
 .card-progress:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-progress .card-icon {

@@ -1,0 +1,214 @@
+{
+  "machines": [
+    {
+      "id": "bench-press",
+      "name": "Bench Press",
+      "picture": "/machines/bench-press.svg",
+      "muscles": ["chest", "triceps", "shoulders"],
+      "location": "Main Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 90,
+      "weightIncrement": 2.5
+    },
+    {
+      "id": "incline-bench",
+      "name": "Incline Bench Press",
+      "picture": "/machines/incline-bench.svg",
+      "muscles": ["chest", "shoulders", "triceps"],
+      "location": "Main Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 90,
+      "weightIncrement": 2.5
+    },
+    {
+      "id": "lat-pulldown",
+      "name": "Lat Pulldown",
+      "picture": "/machines/lat-pulldown.svg",
+      "muscles": ["back", "biceps"],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [
+        { "id": "wide-bar", "name": "Wide Bar", "grips": ["pronated", "supinated"] },
+        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] },
+        { "id": "single-handle", "name": "Single Handle", "grips": ["neutral", "supinated"] }
+      ],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100
+    },
+    {
+      "id": "seated-row",
+      "name": "Seated Row",
+      "picture": "/machines/seated-row.svg",
+      "muscles": ["back", "biceps", "shoulders"],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [
+        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] },
+        { "id": "wide-bar", "name": "Wide Bar", "grips": ["pronated"] },
+        { "id": "rope", "name": "Rope", "grips": ["neutral"] }
+      ],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100
+    },
+    {
+      "id": "shoulder-press",
+      "name": "Shoulder Press Machine",
+      "picture": "/machines/shoulder-press.svg",
+      "muscles": ["shoulders", "triceps"],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 80
+    },
+    {
+      "id": "pec-fly",
+      "name": "Pec Fly / Rear Delt",
+      "picture": "/machines/pec-fly.svg",
+      "muscles": ["chest", "shoulders"],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 80
+    },
+    {
+      "id": "leg-press",
+      "name": "Leg Press",
+      "picture": "/machines/leg-press.svg",
+      "muscles": ["quadriceps", "glutes", "hamstrings"],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 120,
+      "weightIncrement": 10
+    },
+    {
+      "id": "leg-extension",
+      "name": "Leg Extension",
+      "picture": "/machines/leg-extension.svg",
+      "muscles": ["quadriceps"],
+      "location": "Leg Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100
+    },
+    {
+      "id": "leg-curl",
+      "name": "Leg Curl",
+      "picture": "/machines/leg-curl.svg",
+      "muscles": ["hamstrings"],
+      "location": "Leg Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 80
+    },
+    {
+      "id": "hack-squat",
+      "name": "Hack Squat",
+      "picture": "/machines/hack-squat.svg",
+      "muscles": ["quadriceps", "glutes"],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 120,
+      "weightIncrement": 10
+    },
+    {
+      "id": "calf-raise",
+      "name": "Calf Raise Machine",
+      "picture": "/machines/calf-raise.svg",
+      "muscles": ["calves"],
+      "location": "Leg Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 45,
+      "weightIncrement": 5,
+      "minWeight": 10,
+      "maxWeight": 150
+    },
+    {
+      "id": "cable-machine",
+      "name": "Cable Machine",
+      "picture": "/machines/cable-machine.svg",
+      "muscles": ["chest", "back", "shoulders", "biceps", "triceps", "core"],
+      "location": "Functional Room",
+      "weightType": "cable",
+      "attachments": [
+        { "id": "straight-bar", "name": "Straight Bar", "grips": ["pronated", "supinated"] },
+        { "id": "ez-bar", "name": "EZ Bar", "grips": ["pronated", "supinated"] },
+        { "id": "rope", "name": "Rope", "grips": ["neutral"] },
+        { "id": "single-handle", "name": "Single Handle", "grips": ["neutral", "pronated", "supinated"] },
+        { "id": "ankle-cuff", "name": "Ankle Cuff", "grips": [] },
+        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] }
+      ],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 2.5,
+      "minWeight": 2.5,
+      "maxWeight": 50
+    },
+    {
+      "id": "smith-machine",
+      "name": "Smith Machine",
+      "picture": "/machines/smith-machine.svg",
+      "muscles": ["chest", "shoulders", "quadriceps", "glutes"],
+      "location": "Functional Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 90,
+      "weightIncrement": 2.5
+    },
+    {
+      "id": "dumbbells",
+      "name": "Dumbbells",
+      "picture": "/machines/dumbbells.svg",
+      "muscles": ["chest", "back", "shoulders", "biceps", "triceps"],
+      "location": "Functional Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 60,
+      "weightIncrement": 2
+    },
+    {
+      "id": "barbell",
+      "name": "Barbell (Free Weight)",
+      "picture": "/machines/barbell.svg",
+      "muscles": ["chest", "back", "shoulders", "biceps", "triceps", "quadriceps", "hamstrings", "glutes"],
+      "location": "Functional Room",
+      "weightType": "plates",
+      "attachments": [],
+      "defaultRestPeriod": 90,
+      "weightIncrement": 2.5
+    },
+    {
+      "id": "lateral-raise-machine",
+      "name": "Lateral Raise Machine",
+      "picture": "/machines/lateral-raise.svg",
+      "muscles": ["shoulders"],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "defaultRestPeriod": 45,
+      "weightIncrement": 2.5,
+      "minWeight": 5,
+      "maxWeight": 50
+    }
+  ]
+}
+

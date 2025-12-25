@@ -53,7 +53,7 @@ const router = useRouter()
   width: 44px;
   height: 44px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-gold);
   cursor: pointer;
@@ -62,7 +62,7 @@ const router = useRouter()
 
 .back-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .header h1 {
@@ -92,7 +92,7 @@ const router = useRouter()
   width: 140px;
   height: 140px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 50%;
   color: var(--color-gold);
 }

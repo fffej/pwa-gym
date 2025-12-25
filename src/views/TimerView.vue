@@ -189,7 +189,7 @@ onUnmounted(() => {
   width: 44px;
   height: 44px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-gold);
   cursor: pointer;
@@ -198,7 +198,7 @@ onUnmounted(() => {
 
 .back-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .header h1 {
@@ -284,7 +284,7 @@ onUnmounted(() => {
   width: 56px;
   height: 56px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   color: var(--color-text-secondary);
 }
 
@@ -293,11 +293,11 @@ onUnmounted(() => {
   height: 80px;
   background: var(--color-gold);
   color: var(--color-bg-primary);
-  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+  box-shadow: 0 4px 20px rgba(74, 144, 217, 0.3);
 }
 
 .play-btn:not(:disabled):hover {
-  box-shadow: 0 6px 25px rgba(201, 169, 98, 0.4);
+  box-shadow: 0 6px 25px rgba(74, 144, 217, 0.4);
 }
 
 .control-spacer {
@@ -329,7 +329,7 @@ onUnmounted(() => {
 .preset-btn {
   padding: 0.75rem 1.25rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-primary);
   font-size: 0.9rem;
@@ -346,12 +346,12 @@ onUnmounted(() => {
 
 .preset-btn:not(:disabled):hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .preset-btn.active {
   border-color: var(--color-gold);
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   color: var(--color-gold);
 }
 
@@ -365,7 +365,7 @@ onUnmounted(() => {
   width: 160px;
   padding: 0.75rem 1rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-primary);
   font-size: 0.9rem;

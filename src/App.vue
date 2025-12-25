@@ -63,7 +63,7 @@ function dismissIOSPrompt() {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 1.25rem 2.5rem 1.25rem 1.25rem;
-  border-top: 1px solid rgba(201, 169, 98, 0.3);
+  border-top: 1px solid rgba(74, 144, 217, 0.3);
   text-align: center;
   color: var(--color-text-secondary);
   z-index: 1000;
