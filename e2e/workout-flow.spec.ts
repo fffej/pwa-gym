@@ -79,14 +79,14 @@ test.describe('Equipment Page', () => {
 })
 
 test.describe('Progress Page', () => {
-  test('progress page loads and shows coming soon heading', async ({ page }) => {
+  test('progress page loads and shows progress heading', async ({ page }) => {
     await page.goto(`${BASE}/progress`)
     
     // Wait for page to load
     await page.waitForLoadState('networkidle')
     
-    // Should show "Coming Soon" in the h2 heading
-    await expect(page.locator('h2')).toContainText('Coming Soon')
+    // Should show "Progress" in the h1 heading
+    await expect(page.locator('h1')).toContainText('Progress')
   })
 
   test('can navigate back from progress page', async ({ page }) => {

@@ -75,6 +75,41 @@ export const workoutDb = {
     return allWorkouts.filter(workout => 
       workout.exercises.some(ex => ex.machineId === machineId)
     )
+  },
+
+  // Get total count of workouts (for pagination)
+  async getWorkoutCount(): Promise<number> {
+    return await db.workouts.count()
+  },
+
+  // Get paginated workouts, sorted by date (newest first)
+  async getWorkoutsPaginated(page: number, limit: number = 10): Promise<Workout[]> {
+    const offset = (page - 1) * limit
+    return await db.workouts
+      .orderBy('startTime')
+      .reverse()
+      .offset(offset)
+      .limit(limit)
+      .toArray()
+  },
+
+  // Get only completed workouts (those with an endTime)
+  async getCompletedWorkouts(): Promise<Workout[]> {
+    const allWorkouts = await db.workouts.orderBy('startTime').reverse().toArray()
+    return allWorkouts.filter(workout => workout.endTime !== undefined)
+  },
+
+  // Get completed workouts with pagination
+  async getCompletedWorkoutsPaginated(page: number, limit: number = 10): Promise<Workout[]> {
+    const offset = (page - 1) * limit
+    const allCompleted = await this.getCompletedWorkouts()
+    return allCompleted.slice(offset, offset + limit)
+  },
+
+  // Get count of completed workouts
+  async getCompletedWorkoutCount(): Promise<number> {
+    const allWorkouts = await db.workouts.toArray()
+    return allWorkouts.filter(workout => workout.endTime !== undefined).length
   }
 }
 
