@@ -123,7 +123,8 @@ function discardWorkout() {
       <div class="modal">
         <h2>End Workout?</h2>
         <p v-if="hasExercises">
-          You've completed {{ workoutStore.totalSetsCompleted }} sets.
+          {{ workout?.exercises.length }} exercise{{ workout?.exercises.length === 1 ? '' : 's' }}, 
+          {{ workoutStore.totalSetsCompleted }} set{{ workoutStore.totalSetsCompleted === 1 ? '' : 's' }} completed.
         </p>
         <p v-else>
           You haven't added any exercises yet.
@@ -133,7 +134,7 @@ function discardWorkout() {
             Continue Workout
           </button>
           <button v-if="hasExercises" class="modal-btn save" @click="finishWorkout">
-            Save & Finish
+            Save Workout
           </button>
           <button class="modal-btn discard" @click="discardWorkout">
             Discard
@@ -202,7 +203,7 @@ function discardWorkout() {
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+  border-bottom: 1px solid rgba(74, 144, 217, 0.1);
 }
 
 .back-btn {
@@ -212,7 +213,7 @@ function discardWorkout() {
   width: 44px;
   height: 44px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-gold);
   cursor: pointer;
@@ -222,7 +223,7 @@ function discardWorkout() {
 
 .back-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .header-info {
@@ -295,7 +296,7 @@ function discardWorkout() {
   width: 120px;
   height: 120px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 50%;
   color: var(--color-gold);
   margin-bottom: 1.5rem;
@@ -349,12 +350,12 @@ function discardWorkout() {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+  box-shadow: 0 4px 20px rgba(74, 144, 217, 0.3);
 }
 
 .add-exercise-btn:hover {
   background: var(--color-gold-light);
-  box-shadow: 0 6px 25px rgba(201, 169, 98, 0.4);
+  box-shadow: 0 6px 25px rgba(74, 144, 217, 0.4);
   transform: translateY(-1px);
 }
 
@@ -388,7 +389,7 @@ function discardWorkout() {
 
 .modal {
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 12px;
   padding: 2rem;
   max-width: 320px;

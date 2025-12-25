@@ -77,67 +77,73 @@ function handleComplete() {
     <div class="set-main">
       <span class="set-number">{{ setNumber }}</span>
       
-      <div class="input-group weight-group">
-        <button 
-          class="stepper-btn"
-          @mousedown="startPress(decrementWeight)"
-          @mouseup="endPress"
-          @mouseleave="endPress"
-          @touchstart.prevent="startPress(decrementWeight)"
-          @touchend="endPress"
-          :disabled="set.isCompleted"
-        >−</button>
-        <div class="value-display">
-          <input 
-            type="number" 
-            :value="set.weight"
-            @change="emit('update', { weight: parseFloat(($event.target as HTMLInputElement).value) || 0 })"
+      <div class="input-column weight-column">
+        <span class="input-label">Weight</span>
+        <div class="input-group">
+          <button 
+            class="stepper-btn"
+            @mousedown="startPress(decrementWeight)"
+            @mouseup="endPress"
+            @mouseleave="endPress"
+            @touchstart.prevent="startPress(decrementWeight)"
+            @touchend="endPress"
             :disabled="set.isCompleted"
-            class="value-input"
-          />
-          <button class="unit-btn" @click="toggleUnit" :disabled="set.isCompleted">
-            {{ set.weightUnit }}
-          </button>
+          >−</button>
+          <div class="value-display">
+            <input 
+              type="number" 
+              :value="set.weight"
+              @change="emit('update', { weight: parseFloat(($event.target as HTMLInputElement).value) || 0 })"
+              :disabled="set.isCompleted"
+              class="value-input"
+            />
+            <button class="unit-btn" @click="toggleUnit" :disabled="set.isCompleted">
+              {{ set.weightUnit }}
+            </button>
+          </div>
+          <button 
+            class="stepper-btn"
+            @mousedown="startPress(incrementWeight)"
+            @mouseup="endPress"
+            @mouseleave="endPress"
+            @touchstart.prevent="startPress(incrementWeight)"
+            @touchend="endPress"
+            :disabled="set.isCompleted"
+          >+</button>
         </div>
-        <button 
-          class="stepper-btn"
-          @mousedown="startPress(incrementWeight)"
-          @mouseup="endPress"
-          @mouseleave="endPress"
-          @touchstart.prevent="startPress(incrementWeight)"
-          @touchend="endPress"
-          :disabled="set.isCompleted"
-        >+</button>
       </div>
 
       <span class="separator">×</span>
 
-      <div class="input-group reps-group">
-        <button 
-          class="stepper-btn"
-          @mousedown="startPress(decrementReps)"
-          @mouseup="endPress"
-          @mouseleave="endPress"
-          @touchstart.prevent="startPress(decrementReps)"
-          @touchend="endPress"
-          :disabled="set.isCompleted"
-        >−</button>
-        <input 
-          type="number" 
-          :value="set.reps"
-          @change="emit('update', { reps: parseInt(($event.target as HTMLInputElement).value) || 1 })"
-          :disabled="set.isCompleted"
-          class="value-input reps-input"
-        />
-        <button 
-          class="stepper-btn"
-          @mousedown="startPress(incrementReps)"
-          @mouseup="endPress"
-          @mouseleave="endPress"
-          @touchstart.prevent="startPress(incrementReps)"
-          @touchend="endPress"
-          :disabled="set.isCompleted"
-        >+</button>
+      <div class="input-column reps-column">
+        <span class="input-label">Reps</span>
+        <div class="input-group">
+          <button 
+            class="stepper-btn"
+            @mousedown="startPress(decrementReps)"
+            @mouseup="endPress"
+            @mouseleave="endPress"
+            @touchstart.prevent="startPress(decrementReps)"
+            @touchend="endPress"
+            :disabled="set.isCompleted"
+          >−</button>
+          <input 
+            type="number" 
+            :value="set.reps"
+            @change="emit('update', { reps: parseInt(($event.target as HTMLInputElement).value) || 1 })"
+            :disabled="set.isCompleted"
+            class="value-input reps-input"
+          />
+          <button 
+            class="stepper-btn"
+            @mousedown="startPress(incrementReps)"
+            @mouseup="endPress"
+            @mouseleave="endPress"
+            @touchstart.prevent="startPress(incrementReps)"
+            @touchend="endPress"
+            :disabled="set.isCompleted"
+          >+</button>
+        </div>
       </div>
 
       <button 
@@ -192,7 +198,7 @@ function handleComplete() {
 <style scoped>
 .set-row {
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.1);
+  border: 1px solid rgba(74, 144, 217, 0.1);
   border-radius: 6px;
   padding: 0.75rem;
   transition: all 0.2s ease;
@@ -216,6 +222,22 @@ function handleComplete() {
   font-weight: 600;
   color: var(--color-text-muted);
   text-align: center;
+  align-self: flex-end;
+  padding-bottom: 0.5rem;
+}
+
+.input-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.input-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  text-align: center;
 }
 
 .input-group {
@@ -224,11 +246,11 @@ function handleComplete() {
   gap: 0.25rem;
 }
 
-.weight-group {
+.weight-column {
   flex: 1.5;
 }
 
-.reps-group {
+.reps-column {
   flex: 1;
 }
 
@@ -239,7 +261,7 @@ function handleComplete() {
   align-items: center;
   justify-content: center;
   background: var(--color-bg-tertiary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-primary);
   font-size: 1.25rem;
@@ -269,7 +291,7 @@ function handleComplete() {
   display: flex;
   align-items: center;
   background: var(--color-bg-tertiary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -307,9 +329,9 @@ function handleComplete() {
 
 .unit-btn {
   padding: 0.4rem 0.35rem;
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   border: none;
-  border-left: 1px solid rgba(201, 169, 98, 0.2);
+  border-left: 1px solid rgba(74, 144, 217, 0.2);
   color: var(--color-gold);
   font-size: 0.7rem;
   font-weight: 600;
@@ -319,7 +341,7 @@ function handleComplete() {
 }
 
 .unit-btn:hover:not(:disabled) {
-  background: rgba(201, 169, 98, 0.25);
+  background: rgba(74, 144, 217, 0.25);
 }
 
 .unit-btn:disabled {
@@ -331,6 +353,8 @@ function handleComplete() {
   color: var(--color-text-muted);
   font-size: 0.875rem;
   padding: 0 0.25rem;
+  align-self: flex-end;
+  padding-bottom: 0.5rem;
 }
 
 .action-btn {
@@ -340,22 +364,23 @@ function handleComplete() {
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-muted);
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
+  align-self: flex-end;
 }
 
 .action-btn:hover {
   background: var(--color-bg-tertiary);
   color: var(--color-text-primary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .rpe-toggle.active {
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
@@ -374,6 +399,7 @@ function handleComplete() {
   justify-content: center;
   color: var(--color-accent-teal);
   flex-shrink: 0;
+  align-self: flex-end;
 }
 
 .delete-btn:hover {
@@ -385,7 +411,7 @@ function handleComplete() {
 .rpe-section {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(201, 169, 98, 0.1);
+  border-top: 1px solid rgba(74, 144, 217, 0.1);
 }
 </style>
 

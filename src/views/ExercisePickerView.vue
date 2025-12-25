@@ -277,7 +277,7 @@ function formatMuscle(muscle: string): string {
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+  border-bottom: 1px solid rgba(74, 144, 217, 0.1);
 }
 
 .back-btn {
@@ -287,7 +287,7 @@ function formatMuscle(muscle: string): string {
   width: 44px;
   height: 44px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-gold);
   cursor: pointer;
@@ -297,7 +297,7 @@ function formatMuscle(muscle: string): string {
 
 .back-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
 }
 
 .header h1 {
@@ -332,7 +332,7 @@ function formatMuscle(muscle: string): string {
   width: 100%;
   padding: 0.875rem 1rem 0.875rem 3rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 8px;
   color: var(--color-text-primary);
   font-size: 0.95rem;
@@ -381,7 +381,7 @@ function formatMuscle(muscle: string): string {
 .filter-chip {
   padding: 0.5rem 0.875rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.15);
+  border: 1px solid rgba(74, 144, 217, 0.15);
   border-radius: 20px;
   color: var(--color-text-secondary);
   font-size: 0.8rem;
@@ -393,11 +393,11 @@ function formatMuscle(muscle: string): string {
 
 .filter-chip:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.3);
+  border-color: rgba(74, 144, 217, 0.3);
 }
 
 .filter-chip.active {
-  background: rgba(201, 169, 98, 0.2);
+  background: rgba(74, 144, 217, 0.2);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
@@ -414,7 +414,7 @@ function formatMuscle(muscle: string): string {
   gap: 1rem;
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.1);
+  border: 1px solid rgba(74, 144, 217, 0.1);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -424,7 +424,7 @@ function formatMuscle(muscle: string): string {
 
 .machine-card:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.3);
+  border-color: rgba(74, 144, 217, 0.3);
 }
 
 .machine-icon {
@@ -433,7 +433,7 @@ function formatMuscle(muscle: string): string {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: rgba(201, 169, 98, 0.1);
+  background: rgba(74, 144, 217, 0.1);
   border-radius: 8px;
   color: var(--color-gold);
   flex-shrink: 0;
@@ -532,7 +532,7 @@ function formatMuscle(muscle: string): string {
 .option-btn {
   padding: 1rem;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.15);
+  border: 1px solid rgba(74, 144, 217, 0.15);
   border-radius: 8px;
   color: var(--color-text-secondary);
   font-size: 0.9rem;
@@ -543,11 +543,11 @@ function formatMuscle(muscle: string): string {
 
 .option-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.3);
+  border-color: rgba(74, 144, 217, 0.3);
 }
 
 .option-btn.active {
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }

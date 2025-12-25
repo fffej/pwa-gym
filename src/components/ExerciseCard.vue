@@ -97,7 +97,7 @@ function formatGrip(grip: string | undefined): string {
 <style scoped>
 .exercise-card {
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.15);
+  border: 1px solid rgba(74, 144, 217, 0.15);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -112,7 +112,7 @@ function formatGrip(grip: string | undefined): string {
 }
 
 .exercise-header:hover {
-  background: rgba(201, 169, 98, 0.05);
+  background: rgba(74, 144, 217, 0.05);
 }
 
 .exercise-info {
@@ -138,7 +138,7 @@ function formatGrip(grip: string | undefined): string {
 
 .meta-tag {
   padding: 0.2rem 0.5rem;
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   border-radius: 4px;
   font-size: 0.7rem;
   color: var(--color-gold);
@@ -189,7 +189,7 @@ function formatGrip(grip: string | undefined): string {
   gap: 0.75rem;
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(201, 169, 98, 0.1);
+  border-top: 1px solid rgba(74, 144, 217, 0.1);
 }
 
 .add-set-btn,
@@ -199,7 +199,7 @@ function formatGrip(grip: string | undefined): string {
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   background: transparent;
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-size: 0.8rem;
@@ -209,7 +209,7 @@ function formatGrip(grip: string | undefined): string {
 }
 
 .add-set-btn:hover {
-  background: rgba(201, 169, 98, 0.1);
+  background: rgba(74, 144, 217, 0.1);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }

@@ -128,7 +128,7 @@ function startWorkout() {
   justify-content: center;
   gap: 0.75rem;
   padding: 2rem 1.5rem;
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -154,7 +154,7 @@ function startWorkout() {
 
 .card:hover {
   transform: translateY(-2px);
-  border-color: rgba(201, 169, 98, 0.4);
+  border-color: rgba(74, 144, 217, 0.4);
   background: var(--color-bg-tertiary);
 }
 
@@ -192,12 +192,12 @@ function startWorkout() {
 /* Workout Card - Primary Action */
 .card-workout {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-color: rgba(201, 169, 98, 0.4);
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, rgba(201, 169, 98, 0.1) 100%);
+  border-color: rgba(74, 144, 217, 0.4);
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, rgba(74, 144, 217, 0.1) 100%);
 }
 
 .card-workout:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.25);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.25);
   border-color: var(--color-gold);
 }
 
@@ -215,7 +215,7 @@ function startWorkout() {
 }
 
 .card-timer:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-timer .card-icon {
@@ -228,7 +228,7 @@ function startWorkout() {
 }
 
 .card-equipment:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-equipment .card-icon {
@@ -241,7 +241,7 @@ function startWorkout() {
 }
 
 .card-progress:hover {
-  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+  box-shadow: 0 8px 30px rgba(74, 144, 217, 0.15);
 }
 
 .card-progress .card-icon {

@@ -1,16 +1,27 @@
 :root {
-  --color-bg-primary: #1a1a1a;
-  --color-bg-secondary: #242424;
-  --color-bg-tertiary: #2d2d2d;
-  --color-gold: #c9a962;
-  --color-gold-light: #d4bc7a;
-  --color-gold-dark: #a68b4a;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #b0b0b0;
-  --color-text-muted: #6b6b6b;
+  /* Dark blue theme with black tint */
+  --color-bg-primary: #0a0c10;
+  --color-bg-secondary: #12151c;
+  --color-bg-tertiary: #1a1e28;
+  
+  /* Primary accent - vivid blue */
+  --color-gold: #4a90d9;
+  --color-gold-light: #6aa8f0;
+  --color-gold-dark: #3670b0;
+  
+  /* Text colors */
+  --color-text-primary: #e8ecf4;
+  --color-text-secondary: #9ba4b8;
+  --color-text-muted: #5a6478;
+  
+  /* Accent colors */
   --color-accent-coral: #e07a5f;
-  --color-accent-teal: #81b29a;
-  --color-accent-sage: #3d405b;
+  --color-accent-teal: #5ecc97;
+  --color-accent-sage: #2d3654;
+  
+  /* Border/outline color */
+  --color-border: rgba(74, 144, 217, 0.15);
+  --color-border-hover: rgba(74, 144, 217, 0.35);
 }
 
 * {

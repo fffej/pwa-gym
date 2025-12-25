@@ -112,7 +112,7 @@ function selectRpe(value: number) {
   min-width: 0;
   padding: 0.5rem 0;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.15);
+  border: 1px solid rgba(74, 144, 217, 0.15);
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-size: 0.75rem;
@@ -123,11 +123,11 @@ function selectRpe(value: number) {
 
 .rpe-btn:hover {
   background: var(--color-bg-tertiary);
-  border-color: rgba(201, 169, 98, 0.3);
+  border-color: rgba(74, 144, 217, 0.3);
 }
 
 .rpe-btn.active {
-  background: rgba(201, 169, 98, 0.2);
+  background: rgba(74, 144, 217, 0.2);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
@@ -140,7 +140,7 @@ function selectRpe(value: number) {
 }
 
 .rpe-btn:nth-child(n+5):nth-child(-n+7).active {
-  background: rgba(201, 169, 98, 0.2);
+  background: rgba(74, 144, 217, 0.2);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }

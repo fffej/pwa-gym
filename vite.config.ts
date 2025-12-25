@@ -20,8 +20,8 @@ export default defineConfig({
         name: 'Le Coach Fitness',
         short_name: 'Le Coach',
         description: 'A top-tier independent gym app',
-        theme_color: '#1a1a1a',
-        background_color: '#1a1a1a',
+        theme_color: '#0a0c10',
+        background_color: '#0a0c10',
         display: 'standalone',
         icons: [
           {

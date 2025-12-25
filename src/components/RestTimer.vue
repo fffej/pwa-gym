@@ -132,7 +132,7 @@ onUnmounted(() => {
 <style scoped>
 .rest-timer {
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
@@ -219,7 +219,7 @@ onUnmounted(() => {
 .control-btn {
   padding: 0.5rem 1rem;
   background: var(--color-bg-tertiary);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(74, 144, 217, 0.2);
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-size: 0.85rem;
@@ -229,7 +229,7 @@ onUnmounted(() => {
 }
 
 .control-btn:hover {
-  background: rgba(201, 169, 98, 0.15);
+  background: rgba(74, 144, 217, 0.15);
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
