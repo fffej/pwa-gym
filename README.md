@@ -1,13 +1,15 @@
 # PWA Gym
 
-A simple Progressive Web App built with Vue 3, TypeScript, and Vite.
+A Progressive Web App for tracking gym workouts, built with Vue 3, TypeScript, and Vite.
 
 ## Features
 
-- Displays "Hello world" with an interactive counter
-- Counter persists to localStorage (works offline)
+- Track workouts with exercises and sets
+- Browse gym equipment with usage instructions
+- Rest timer with customizable duration
+- Smart defaults based on previous workouts
+- Offline support with IndexedDB storage
 - Installable as a PWA on mobile and desktop
-- Automatic deployment to GitHub Pages on merge to main
 
 ## Development
 
@@ -24,6 +26,45 @@ npm run build
 # Preview production build
 npm run preview
 ```
+
+## Testing
+
+The project includes comprehensive unit and end-to-end tests.
+
+### Unit Tests (Vitest)
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once
+npm run test:run
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+Unit tests cover:
+- **Store logic** - Workout, machines, and settings stores
+- **Calculations** - Weight conversion, volume calculations, timer formatting
+- **Data validation** - machines.json schema and type validation
+
+### End-to-End Tests (Playwright)
+
+```bash
+# Run E2E tests (requires build first)
+npm run build
+npm run test:e2e
+```
+
+E2E tests cover:
+- **Route accessibility** - All pages load without errors
+- **Navigation flows** - Links and back buttons work correctly
+- **Link integrity** - No broken internal links
+
+### CI/CD
+
+Tests run automatically on every push to `main` via GitHub Actions. The build and deployment only proceed if all tests pass.
 
 ## Deployment
 
@@ -42,5 +83,10 @@ Your app will be available at: `https://<username>.github.io/pwa-gym/`
 - **Vue 3** - Frontend framework
 - **TypeScript** - Type safety
 - **Vite** - Build tool
+- **Pinia** - State management
+- **Vue Router** - Client-side routing
+- **Dexie** - IndexedDB wrapper for offline storage
 - **vite-plugin-pwa** - PWA support with service worker
-- **GitHub Actions** - CI/CD for deployment
+- **Vitest** - Unit testing
+- **Playwright** - End-to-end testing
+- **GitHub Actions** - CI/CD for testing and deployment
