@@ -10,6 +10,16 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/workout',
+      name: 'workout',
+      component: () => import('../views/WorkoutView.vue')
+    },
+    {
+      path: '/workout/add-exercise',
+      name: 'add-exercise',
+      component: () => import('../views/ExercisePickerView.vue')
+    },
+    {
       path: '/timer',
       name: 'timer',
       component: () => import('../views/TimerView.vue')
@@ -28,4 +38,5 @@ const router = createRouter({
 })
 
 export default router
+
 
