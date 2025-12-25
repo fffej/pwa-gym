@@ -188,23 +188,24 @@ onUnmounted(() => {
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  border-radius: 4px;
+  color: var(--color-gold);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-bg-tertiary);
+  border-color: rgba(201, 169, 98, 0.4);
 }
 
 .header h1 {
-  font-family: 'Bebas Neue', 'Oswald', 'Segoe UI', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0;
@@ -231,11 +232,11 @@ onUnmounted(() => {
 }
 
 .ring-bg {
-  stroke: rgba(255, 255, 255, 0.1);
+  stroke: var(--color-bg-tertiary);
 }
 
 .ring-progress {
-  stroke: #ff6b6b;
+  stroke: var(--color-gold);
   stroke-linecap: round;
   transition: stroke-dashoffset 0.3s ease;
 }
@@ -245,10 +246,10 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 4rem;
-  font-weight: 700;
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
   letter-spacing: 0.05em;
 }
 
@@ -276,22 +277,27 @@ onUnmounted(() => {
 }
 
 .control-btn:not(:disabled):hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .reset-btn {
   width: 56px;
   height: 56px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  color: var(--color-text-secondary);
 }
 
 .play-btn {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(238, 90, 36, 0.4);
+  background: var(--color-gold);
+  color: var(--color-bg-primary);
+  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+}
+
+.play-btn:not(:disabled):hover {
+  box-shadow: 0 6px 25px rgba(201, 169, 98, 0.4);
 }
 
 .control-spacer {
@@ -303,10 +309,13 @@ onUnmounted(() => {
 }
 
 .presets-label {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
   margin-bottom: 1rem;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Raleway', sans-serif;
 }
 
 .preset-buttons {
@@ -319,14 +328,15 @@ onUnmounted(() => {
 
 .preset-btn {
   padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid transparent;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  font-family: 'Raleway', sans-serif;
 }
 
 .preset-btn:disabled {
@@ -335,12 +345,14 @@ onUnmounted(() => {
 }
 
 .preset-btn:not(:disabled):hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-bg-tertiary);
+  border-color: rgba(201, 169, 98, 0.4);
 }
 
 .preset-btn.active {
-  border-color: #ff6b6b;
-  background: rgba(255, 107, 107, 0.2);
+  border-color: var(--color-gold);
+  background: rgba(201, 169, 98, 0.15);
+  color: var(--color-gold);
 }
 
 .custom-input {
@@ -352,21 +364,22 @@ onUnmounted(() => {
 .custom-input input {
   width: 160px;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
   text-align: center;
+  font-family: 'Raleway', sans-serif;
 }
 
 .custom-input input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-muted);
 }
 
 .custom-input input:focus {
   outline: none;
-  border-color: #ff6b6b;
+  border-color: var(--color-gold);
 }
 
 .custom-input input:disabled {
@@ -375,14 +388,17 @@ onUnmounted(() => {
 
 .set-btn {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  background: var(--color-gold);
   border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
+  border-radius: 4px;
+  color: var(--color-bg-primary);
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: all 0.2s;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .set-btn:disabled {
@@ -391,7 +407,7 @@ onUnmounted(() => {
 }
 
 .set-btn:not(:disabled):hover {
-  transform: translateY(-2px);
+  background: var(--color-gold-light);
 }
 </style>
 

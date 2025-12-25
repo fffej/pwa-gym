@@ -50,7 +50,7 @@ function dismissIOSPrompt() {
 <style scoped>
 .app-container {
   min-height: 100vh;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Raleway', system-ui, sans-serif;
 }
 
 /* iOS Install Prompt */
@@ -59,15 +59,15 @@ function dismissIOSPrompt() {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(30, 30, 50, 0.95);
+  background: rgba(26, 26, 26, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 1.25rem 2.5rem 1.25rem 1.25rem;
-  border-top: 1px solid rgba(100, 255, 218, 0.3);
+  border-top: 1px solid rgba(201, 169, 98, 0.3);
   text-align: center;
-  color: #e0e0e0;
+  color: var(--color-text-secondary);
   z-index: 1000;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .ios-prompt p {
@@ -82,12 +82,12 @@ function dismissIOSPrompt() {
 .ios-prompt .share-icon {
   display: inline-flex;
   align-items: center;
-  color: #64ffda;
+  color: var(--color-gold);
   vertical-align: middle;
 }
 
 .ios-prompt strong {
-  color: #64ffda;
+  color: var(--color-gold);
 }
 
 .dismiss-btn {
@@ -96,7 +96,7 @@ function dismissIOSPrompt() {
   right: 0.5rem;
   background: none;
   border: none;
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
@@ -104,6 +104,6 @@ function dismissIOSPrompt() {
 }
 
 .dismiss-btn:hover {
-  color: #e0e0e0;
+  color: var(--color-text-primary);
 }
 </style>

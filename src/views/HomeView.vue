@@ -10,6 +10,11 @@ function navigateTo(route: string) {
 
 <template>
   <div class="home">
+    <header class="site-header">
+      <h1 class="site-title">Le Coach Fitness</h1>
+      <p class="site-tagline">Upgrade Your Fitness Journey</p>
+    </header>
+
     <div class="cards-container">
       <button class="card card-timer" @click="navigateTo('/timer')">
         <div class="card-icon">
@@ -62,11 +67,36 @@ function navigateTo(route: string) {
   padding: 2rem 1.5rem;
 }
 
+.site-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 1rem 0;
+}
+
+.site-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.site-tagline {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 .cards-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
@@ -79,83 +109,114 @@ function navigateTo(route: string) {
   justify-content: center;
   gap: 0.75rem;
   padding: 2rem 1.5rem;
-  border: none;
-  border-radius: 16px;
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  border-radius: 4px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  font-family: 'Bebas Neue', 'Oswald', 'Segoe UI', system-ui, sans-serif;
+  transition: all 0.3s ease;
+  font-family: 'Cinzel', serif;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  background: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
+  border-color: rgba(201, 169, 98, 0.4);
+  background: var(--color-bg-tertiary);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:active {
-  transform: translateY(-2px);
+  transform: translateY(0);
 }
 
 .card-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-gold);
 }
 
 .card-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-text-primary);
 }
 
 .card-subtitle {
-  font-size: 0.875rem;
-  opacity: 0.8;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
   text-transform: none;
-  letter-spacing: 0.02em;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
 }
 
-/* Timer Card - Vibrant coral/orange */
+/* Timer Card */
 .card-timer {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(238, 90, 36, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-timer:hover {
-  box-shadow: 0 12px 40px rgba(238, 90, 36, 0.5);
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
 }
 
-/* Equipment Card - Electric blue */
+.card-timer .card-icon {
+  color: var(--color-accent-coral);
+}
+
+/* Equipment Card */
 .card-equipment {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: #0a2540;
-  box-shadow: 0 8px 32px rgba(79, 172, 254, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-equipment:hover {
-  box-shadow: 0 12px 40px rgba(79, 172, 254, 0.5);
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
 }
 
-/* Progress Card - Emerald green */
+.card-equipment .card-icon {
+  color: var(--color-gold);
+}
+
+/* Progress Card */
 .card-progress {
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-  color: #0a2e1a;
-  box-shadow: 0 8px 32px rgba(56, 239, 125, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-progress:hover {
-  box-shadow: 0 12px 40px rgba(56, 239, 125, 0.5);
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.15);
+}
+
+.card-progress .card-icon {
+  color: var(--color-accent-teal);
 }
 
 .copyright {
   text-align: center;
-  padding: 1.5rem 0 0.5rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.875rem;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  letter-spacing: 0.05em;
+  padding: 2rem 0 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 </style>
 

@@ -11,11 +11,11 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'PWA Gym',
-        short_name: 'PWA Gym',
-        description: 'A simple PWA counter app',
-        theme_color: '#1a1a2e',
-        background_color: '#1a1a2e',
+        name: 'Le Coach Fitness',
+        short_name: 'Le Coach',
+        description: 'A top-tier independent gym app',
+        theme_color: '#1a1a1a',
+        background_color: '#1a1a1a',
         display: 'standalone',
         icons: [
           {

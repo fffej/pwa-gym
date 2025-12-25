@@ -53,23 +53,24 @@ const router = useRouter()
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  border-radius: 4px;
+  color: var(--color-gold);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-bg-tertiary);
+  border-color: rgba(201, 169, 98, 0.4);
 }
 
 .header h1 {
-  font-family: 'Bebas Neue', 'Oswald', 'Segoe UI', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0;
@@ -91,26 +92,28 @@ const router = useRouter()
   justify-content: center;
   width: 140px;
   height: 140px;
-  background: linear-gradient(135deg, rgba(17, 153, 142, 0.2) 0%, rgba(56, 239, 125, 0.2) 100%);
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(201, 169, 98, 0.2);
   border-radius: 50%;
-  color: #38ef7d;
+  color: var(--color-accent-teal);
 }
 
 .content h2 {
-  font-family: 'Bebas Neue', 'Oswald', 'Segoe UI', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0;
 }
 
 .content p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
   max-width: 280px;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-family: 'Raleway', sans-serif;
 }
 </style>
 

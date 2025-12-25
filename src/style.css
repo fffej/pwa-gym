@@ -1,3 +1,18 @@
+:root {
+  --color-bg-primary: #1a1a1a;
+  --color-bg-secondary: #242424;
+  --color-bg-tertiary: #2d2d2d;
+  --color-gold: #c9a962;
+  --color-gold-light: #d4bc7a;
+  --color-gold-dark: #a68b4a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted: #6b6b6b;
+  --color-accent-coral: #e07a5f;
+  --color-accent-teal: #81b29a;
+  --color-accent-sage: #3d405b;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,8 +20,9 @@
 }
 
 body {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: var(--color-bg-primary);
   min-height: 100vh;
+  font-family: 'Raleway', system-ui, sans-serif;
 }
 
 #app {
