@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Main frame -->
+  <rect x="55" y="15" width="10" height="80" rx="2" fill="#3670b0"/>
+  <!-- Top bar -->
+  <rect x="25" y="15" width="70" height="6" rx="2" fill="#4a90d9"/>
+  <!-- Pull bar -->
+  <rect x="30" y="35" width="60" height="5" rx="2" fill="#6aa8f0"/>
+  <!-- Cable -->
+  <line x1="60" y1="21" x2="60" y2="35" stroke="#6aa8f0" stroke-width="2"/>
+  <!-- Weight stack -->
+  <rect x="50" y="55" width="20" height="35" rx="2" fill="#4a90d9"/>
+  <line x1="52" y1="62" x2="68" y2="62" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="52" y1="70" x2="68" y2="70" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="52" y1="78" x2="68" y2="78" stroke="#1d2d47" stroke-width="2"/>
+  <!-- Seat -->
+  <rect x="35" y="85" width="50" height="6" rx="2" fill="#4a90d9"/>
+  <!-- Base -->
+  <rect x="25" y="95" width="70" height="8" rx="2" fill="#3670b0"/>
+</svg>
+

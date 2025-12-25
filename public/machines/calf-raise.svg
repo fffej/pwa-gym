@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Main frame -->
+  <rect x="55" y="15" width="10" height="80" rx="2" fill="#3670b0"/>
+  <!-- Shoulder pads -->
+  <rect x="30" y="25" width="25" height="8" rx="2" fill="#6aa8f0"/>
+  <rect x="65" y="25" width="25" height="8" rx="2" fill="#6aa8f0"/>
+  <!-- Weight stack -->
+  <rect x="50" y="40" width="20" height="40" rx="2" fill="#4a90d9"/>
+  <line x1="52" y1="48" x2="68" y2="48" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="52" y1="56" x2="68" y2="56" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="52" y1="64" x2="68" y2="64" stroke="#1d2d47" stroke-width="2"/>
+  <line x1="52" y1="72" x2="68" y2="72" stroke="#1d2d47" stroke-width="2"/>
+  <!-- Calf block/platform -->
+  <rect x="35" y="90" width="50" height="8" rx="2" fill="#4a90d9"/>
+  <!-- Step edge -->
+  <rect x="40" y="85" width="40" height="5" rx="1" fill="#6aa8f0"/>
+  <!-- Base -->
+  <rect x="25" y="100" width="70" height="6" rx="2" fill="#3670b0"/>
+</svg>
+

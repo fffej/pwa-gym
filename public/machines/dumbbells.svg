@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="12" fill="#1d2d47"/>
+  <!-- Top dumbbell -->
+  <!-- Left weight -->
+  <rect x="20" y="35" width="18" height="20" rx="3" fill="#4a90d9"/>
+  <!-- Handle -->
+  <rect x="38" y="40" width="44" height="10" rx="3" fill="#6aa8f0"/>
+  <!-- Right weight -->
+  <rect x="82" y="35" width="18" height="20" rx="3" fill="#4a90d9"/>
+  
+  <!-- Bottom dumbbell -->
+  <!-- Left weight -->
+  <rect x="20" y="65" width="18" height="20" rx="3" fill="#4a90d9"/>
+  <!-- Handle -->
+  <rect x="38" y="70" width="44" height="10" rx="3" fill="#6aa8f0"/>
+  <!-- Right weight -->
+  <rect x="82" y="65" width="18" height="20" rx="3" fill="#4a90d9"/>
+  
+  <!-- Weight markings -->
+  <text x="29" y="48" font-family="Arial" font-size="8" fill="#1d2d47" font-weight="bold">20</text>
+  <text x="91" y="48" font-family="Arial" font-size="8" fill="#1d2d47" font-weight="bold">20</text>
+  <text x="29" y="78" font-family="Arial" font-size="8" fill="#1d2d47" font-weight="bold">20</text>
+  <text x="91" y="78" font-family="Arial" font-size="8" fill="#1d2d47" font-weight="bold">20</text>
+</svg>
+
