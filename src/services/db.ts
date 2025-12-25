@@ -27,6 +27,14 @@ class GymDatabase extends Dexie {
       machineDefaults: 'machineId',
       plans: 'id, name'
     })
+
+    // Version 3: Add updatedAt for sync
+    this.version(3).stores({
+      workouts: 'id, date, startTime, updatedAt',
+      settings: '++id',
+      machineDefaults: 'machineId, updatedAt',
+      plans: 'id, name, updatedAt'
+    })
   }
 }
 
@@ -52,7 +60,7 @@ const defaultSettings: UserSettings = {
 export const workoutDb = {
   // Save a workout (create or update)
   async saveWorkout(workout: Workout): Promise<void> {
-    await db.workouts.put(workout)
+    await db.workouts.put({ ...workout, updatedAt: Date.now() })
   },
 
   // Get a workout by ID
@@ -137,7 +145,7 @@ export const settingsDb = {
   // Update user settings
   async updateSettings(settings: Partial<UserSettings>): Promise<void> {
     const current = await this.getSettings()
-    await db.settings.put({ ...current, ...settings }, 1)
+    await db.settings.put({ ...current, ...settings, updatedAt: Date.now() }, 1)
   }
 }
 
@@ -150,7 +158,7 @@ export const machineDefaultsDb = {
 
   // Update defaults for a machine (called after completing a set)
   async updateDefaults(defaults: MachineDefaults): Promise<void> {
-    await db.machineDefaults.put(defaults)
+    await db.machineDefaults.put({ ...defaults, updatedAt: Date.now() })
   },
 
   // Get all machine defaults
@@ -173,7 +181,7 @@ export const plansDb = {
 
   // Save a plan (create or update)
   async savePlan(plan: Plan): Promise<void> {
-    await db.plans.put(plan)
+    await db.plans.put({ ...plan, updatedAt: Date.now() })
   },
 
   // Delete a plan
@@ -188,7 +196,9 @@ export const plansDb = {
 
   // Seed plans (for initial setup with default plans)
   async seedPlans(plans: Plan[]): Promise<void> {
-    await db.plans.bulkPut(plans)
+    const now = Date.now()
+    const plansWithTimestamp = plans.map(plan => ({ ...plan, updatedAt: now }))
+    await db.plans.bulkPut(plansWithTimestamp)
   }
 }
 

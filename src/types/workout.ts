@@ -86,6 +86,7 @@ export interface Workout {
   endTime?: number
   exercises: Exercise[]
   notes?: string
+  updatedAt?: number // For sync conflict resolution
 }
 
 // User settings/preferences
@@ -93,6 +94,7 @@ export interface UserSettings {
   defaultWeightUnit: WeightUnit
   defaultRestPeriod: number
   availablePlates: { weight: number; unit: WeightUnit }[]
+  updatedAt?: number // For sync conflict resolution
 }
 
 // For tracking last used values per machine (smart defaults)
@@ -103,6 +105,7 @@ export interface MachineDefaults {
   lastReps: number
   lastAttachmentId?: string
   lastGrip?: GripType
+  updatedAt?: number // For sync conflict resolution
 }
 
 // An exercise within a plan (template without set data)
@@ -118,5 +121,6 @@ export interface Plan {
   name: string
   description?: string
   exercises: PlanExercise[]
+  updatedAt?: number // For sync conflict resolution
 }
 

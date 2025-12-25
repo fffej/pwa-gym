@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import logoImage from '@/assets/lecoach-logo.webp'
+import UserProfile from '@/components/UserProfile.vue'
 
 const router = useRouter()
 
@@ -11,6 +12,11 @@ function navigateTo(route: string) {
 
 <template>
   <div class="home">
+    <!-- User Profile Icon - Top Right -->
+    <div class="top-bar">
+      <UserProfile />
+    </div>
+
     <header class="site-header">
       <img :src="logoImage" alt="Le Coach Fitness" class="site-logo" />
       <p class="site-tagline">Upgrade Your Fitness Journey</p>
@@ -66,6 +72,14 @@ function navigateTo(route: string) {
   flex-direction: column;
   min-height: 100vh;
   padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.top-bar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
 }
 
 .site-header {
