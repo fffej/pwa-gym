@@ -4,21 +4,27 @@ import { test, expect } from '@playwright/test'
 const BASE = '/pwa-gym'
 
 test.describe('Workout Creation Flow', () => {
-  test('can start a new workout from home', async ({ page }) => {
+  test('can start a new workout from home via start from scratch', async ({ page }) => {
     await page.goto(`${BASE}/`)
     
-    // Click Start Workout
+    // Click Start Workout - now navigates to workout start page
     await page.click('.card-workout')
+    await expect(page).toHaveURL(/\/workout\/start/)
+    
+    // Click Start from Scratch
+    await page.click('.scratch-card')
     
     // Should be on workout page
-    await expect(page).toHaveURL(/\/workout/)
+    await expect(page).toHaveURL(/\/workout$/)
   })
 
   test('can navigate to add exercise from workout', async ({ page }) => {
-    // Start workout first
+    // Start workout first via the new flow
     await page.goto(`${BASE}/`)
     await page.click('.card-workout')
-    await expect(page).toHaveURL(/\/workout/)
+    await expect(page).toHaveURL(/\/workout\/start/)
+    await page.click('.scratch-card')
+    await expect(page).toHaveURL(/\/workout$/)
     
     // Look for add exercise button and click it
     const addExerciseBtn = page.locator('button:has-text("Add Exercise"), [class*="add"]').first()
@@ -41,10 +47,12 @@ test.describe('Workout Creation Flow', () => {
 
 test.describe('Workout Page Elements', () => {
   test.beforeEach(async ({ page }) => {
-    // Start a workout before each test
+    // Start a workout before each test (via start from scratch)
     await page.goto(`${BASE}/`)
     await page.click('.card-workout')
-    await expect(page).toHaveURL(/\/workout/)
+    await expect(page).toHaveURL(/\/workout\/start/)
+    await page.click('.scratch-card')
+    await expect(page).toHaveURL(/\/workout$/)
   })
 
   test('workout page has expected structure', async ({ page }) => {
