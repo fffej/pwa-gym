@@ -9,7 +9,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 90,
-      "weightIncrement": 2.5
+      "weightIncrement": 2.5,
+      "usage": "Lie flat on the bench with feet firmly on the floor. Grip the bar slightly wider than shoulder-width. Lower the bar to mid-chest, then press up until arms are extended. Keep your back flat and core engaged throughout.",
+      "videoUrl": ""
     },
     {
       "id": "incline-bench",
@@ -20,7 +22,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 90,
-      "weightIncrement": 2.5
+      "weightIncrement": 2.5,
+      "usage": "Set the bench to 30-45 degrees. Lie back with feet flat on the floor. Grip the bar slightly wider than shoulder-width. Lower to upper chest, then press up. This variation emphasises the upper chest and front deltoids.",
+      "videoUrl": ""
     },
     {
       "id": "lat-pulldown",
@@ -37,7 +41,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 100
+      "maxWeight": 100,
+      "usage": "Sit with thighs secured under the pads. Grasp the bar with a wide overhand grip. Pull the bar down to your upper chest while squeezing your shoulder blades together. Control the weight back up slowly. Avoid leaning too far back.",
+      "videoUrl": ""
     },
     {
       "id": "seated-row",
@@ -54,7 +60,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 100
+      "maxWeight": 100,
+      "usage": "Sit with feet on the platform and knees slightly bent. Keep your back straight and pull the handle towards your lower chest/upper abdomen. Squeeze your shoulder blades together at the end of the movement. Return with control.",
+      "videoUrl": ""
     },
     {
       "id": "shoulder-press",
@@ -67,7 +75,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 80
+      "maxWeight": 80,
+      "usage": "Adjust the seat so handles are at shoulder height. Sit with your back firmly against the pad. Press the handles upward until arms are extended but not locked. Lower with control. Keep your core engaged throughout.",
+      "videoUrl": ""
     },
     {
       "id": "pec-fly",
@@ -80,7 +90,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 80
+      "maxWeight": 80,
+      "usage": "For pec fly: Sit facing out with arms extended at chest height. Bring handles together in front of your chest with a slight bend in elbows. For rear delt: Face the machine and reverse the movement, pulling handles apart.",
+      "videoUrl": ""
     },
     {
       "id": "leg-press",
@@ -91,7 +103,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 120,
-      "weightIncrement": 10
+      "weightIncrement": 10,
+      "usage": "Sit with your back flat against the pad. Place feet shoulder-width apart on the platform. Release the safety handles. Lower the weight by bending your knees to 90 degrees, then press back up without locking your knees.",
+      "videoUrl": ""
     },
     {
       "id": "leg-extension",
@@ -104,7 +118,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 100
+      "maxWeight": 100,
+      "usage": "Adjust the back pad and ankle pad to fit your body. Sit with your back against the pad and ankles behind the roller. Extend your legs until straight, squeezing your quads at the top. Lower with control.",
+      "videoUrl": ""
     },
     {
       "id": "leg-curl",
@@ -117,7 +133,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
-      "maxWeight": 80
+      "maxWeight": 80,
+      "usage": "Lie face down with ankles under the roller pad. Keep your hips pressed into the bench. Curl your legs up towards your glutes, squeezing your hamstrings at the top. Lower slowly with control.",
+      "videoUrl": ""
     },
     {
       "id": "hack-squat",
@@ -128,7 +146,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 120,
-      "weightIncrement": 10
+      "weightIncrement": 10,
+      "usage": "Position your back against the pad and shoulders under the supports. Place feet shoulder-width apart on the platform. Release the safety handles. Lower until thighs are parallel to the platform, then drive back up.",
+      "videoUrl": ""
     },
     {
       "id": "calf-raise",
@@ -141,7 +161,9 @@
       "defaultRestPeriod": 45,
       "weightIncrement": 5,
       "minWeight": 10,
-      "maxWeight": 150
+      "maxWeight": 150,
+      "usage": "Stand with shoulders under the pads and balls of your feet on the platform edge. Lower your heels below the platform for a full stretch. Rise up onto your toes as high as possible, squeezing your calves at the top.",
+      "videoUrl": ""
     },
     {
       "id": "cable-machine",
@@ -161,7 +183,9 @@
       "defaultRestPeriod": 60,
       "weightIncrement": 2.5,
       "minWeight": 2.5,
-      "maxWeight": 50
+      "maxWeight": 50,
+      "usage": "This versatile machine allows countless exercises. Adjust the pulley height for your exercise. Select an appropriate attachment. Maintain controlled movements throughout the full range of motion. Common exercises: cable flies, tricep pushdowns, face pulls, bicep curls.",
+      "videoUrl": ""
     },
     {
       "id": "smith-machine",
@@ -172,7 +196,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 90,
-      "weightIncrement": 2.5
+      "weightIncrement": 2.5,
+      "usage": "The guided bar path provides stability for various exercises. Rotate the bar to unhook from the safety catches. Perform your exercise with controlled movement. Rotate to re-rack. Great for squats, lunges, bench press, and shoulder press.",
+      "videoUrl": ""
     },
     {
       "id": "dumbbells",
@@ -183,7 +209,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 60,
-      "weightIncrement": 2
+      "weightIncrement": 2,
+      "usage": "Select appropriate weight from the rack (2kg - 50kg available). Use for a wide variety of exercises including curls, presses, rows, and raises. Always control the weight through the full range of motion. Return dumbbells to the correct spot on the rack.",
+      "videoUrl": ""
     },
     {
       "id": "barbell",
@@ -194,7 +222,9 @@
       "weightType": "plates",
       "attachments": [],
       "defaultRestPeriod": 90,
-      "weightIncrement": 2.5
+      "weightIncrement": 2.5,
+      "usage": "The Olympic barbell weighs 20kg. Add weight plates as needed and secure with collars. Essential for compound movements like deadlifts, squats, bench press, and rows. Use a spotter for heavy lifts. Re-rack weights after use.",
+      "videoUrl": ""
     },
     {
       "id": "lateral-raise-machine",
@@ -207,8 +237,9 @@
       "defaultRestPeriod": 45,
       "weightIncrement": 2.5,
       "minWeight": 5,
-      "maxWeight": 50
+      "maxWeight": 50,
+      "usage": "Adjust the seat height so the pivot point aligns with your shoulders. Place your arms against the pads. Raise your arms out to the sides until parallel with the floor. Lower with control. Keep a slight bend in your elbows.",
+      "videoUrl": ""
     }
   ]
 }
-
