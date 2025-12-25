@@ -1,11 +1,12 @@
 import Dexie, { type Table } from 'dexie'
-import type { Workout, UserSettings, MachineDefaults } from '@/types/workout'
+import type { Workout, UserSettings, MachineDefaults, Plan } from '@/types/workout'
 
 // Database class extending Dexie
 class GymDatabase extends Dexie {
   workouts!: Table<Workout, string>
   settings!: Table<UserSettings, number>
   machineDefaults!: Table<MachineDefaults, string>
+  plans!: Table<Plan, string>
 
   constructor() {
     super('GymDatabase')
@@ -17,6 +18,14 @@ class GymDatabase extends Dexie {
       settings: '++id',
       // Machine defaults keyed by machineId
       machineDefaults: 'machineId'
+    })
+
+    // Version 2: Add plans table
+    this.version(2).stores({
+      workouts: 'id, date, startTime',
+      settings: '++id',
+      machineDefaults: 'machineId',
+      plans: 'id, name'
     })
   }
 }
@@ -147,6 +156,39 @@ export const machineDefaultsDb = {
   // Get all machine defaults
   async getAllDefaults(): Promise<MachineDefaults[]> {
     return await db.machineDefaults.toArray()
+  }
+}
+
+// Plan operations
+export const plansDb = {
+  // Get all plans
+  async getAllPlans(): Promise<Plan[]> {
+    return await db.plans.toArray()
+  },
+
+  // Get a plan by ID
+  async getPlan(id: string): Promise<Plan | undefined> {
+    return await db.plans.get(id)
+  },
+
+  // Save a plan (create or update)
+  async savePlan(plan: Plan): Promise<void> {
+    await db.plans.put(plan)
+  },
+
+  // Delete a plan
+  async deletePlan(id: string): Promise<void> {
+    await db.plans.delete(id)
+  },
+
+  // Get count of plans
+  async getPlanCount(): Promise<number> {
+    return await db.plans.count()
+  },
+
+  // Seed plans (for initial setup with default plans)
+  async seedPlans(plans: Plan[]): Promise<void> {
+    await db.plans.bulkPut(plans)
   }
 }
 

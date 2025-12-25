@@ -1,0 +1,67 @@
+{
+  "plans": [
+    {
+      "id": "upper",
+      "name": "Upper Body",
+      "description": "Complete upper body workout targeting chest, back, shoulders and arms",
+      "exercises": [
+        { "machineId": "bench-press" },
+        { "machineId": "lat-pulldown", "attachmentId": "wide-bar", "grip": "pronated" },
+        { "machineId": "shoulder-press" },
+        { "machineId": "seated-row", "attachmentId": "v-bar", "grip": "neutral" },
+        { "machineId": "pec-fly" },
+        { "machineId": "cable-machine", "attachmentId": "rope", "grip": "neutral" }
+      ]
+    },
+    {
+      "id": "lower",
+      "name": "Lower Body",
+      "description": "Full lower body workout for quads, hamstrings, glutes and calves",
+      "exercises": [
+        { "machineId": "leg-press" },
+        { "machineId": "leg-extension" },
+        { "machineId": "leg-curl" },
+        { "machineId": "hack-squat" },
+        { "machineId": "calf-raise" }
+      ]
+    },
+    {
+      "id": "push",
+      "name": "Push Day",
+      "description": "Chest, shoulders and triceps focused workout",
+      "exercises": [
+        { "machineId": "bench-press" },
+        { "machineId": "incline-bench" },
+        { "machineId": "shoulder-press" },
+        { "machineId": "pec-fly" },
+        { "machineId": "lateral-raise-machine" },
+        { "machineId": "cable-machine", "attachmentId": "rope", "grip": "neutral" }
+      ]
+    },
+    {
+      "id": "pull",
+      "name": "Pull Day",
+      "description": "Back and biceps focused workout",
+      "exercises": [
+        { "machineId": "lat-pulldown", "attachmentId": "wide-bar", "grip": "pronated" },
+        { "machineId": "seated-row", "attachmentId": "v-bar", "grip": "neutral" },
+        { "machineId": "lat-pulldown", "attachmentId": "v-bar", "grip": "neutral" },
+        { "machineId": "seated-row", "attachmentId": "rope", "grip": "neutral" },
+        { "machineId": "cable-machine", "attachmentId": "ez-bar", "grip": "supinated" }
+      ]
+    },
+    {
+      "id": "legs",
+      "name": "Legs Day",
+      "description": "Intensive leg workout with compound and isolation movements",
+      "exercises": [
+        { "machineId": "hack-squat" },
+        { "machineId": "leg-press" },
+        { "machineId": "leg-extension" },
+        { "machineId": "leg-curl" },
+        { "machineId": "calf-raise" }
+      ]
+    }
+  ]
+}
+

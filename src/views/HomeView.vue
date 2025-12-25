@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useWorkoutStore } from '@/stores/workout'
 import logoImage from '@/assets/lecoach-logo.webp'
 
 const router = useRouter()
-const workoutStore = useWorkoutStore()
 
 function navigateTo(route: string) {
   router.push(route)
-}
-
-function startWorkout() {
-  workoutStore.startWorkout()
-  router.push('/workout')
 }
 </script>
 
@@ -24,7 +17,7 @@ function startWorkout() {
     </header>
 
     <div class="cards-container">
-      <button class="card card-workout" @click="startWorkout">
+      <button class="card card-workout" @click="navigateTo('/workout/start')">
         <div class="card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
             <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
@@ -32,6 +25,16 @@ function startWorkout() {
         </div>
         <span class="card-title">Start Workout</span>
         <span class="card-subtitle">Begin tracking your exercises</span>
+      </button>
+
+      <button class="card card-plans" @click="navigateTo('/plans')">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          </svg>
+        </div>
+        <span class="card-title">Plans</span>
+        <span class="card-subtitle">Manage workout templates</span>
       </button>
 
       <button class="card card-equipment" @click="navigateTo('/equipment')">
@@ -162,6 +165,11 @@ function startWorkout() {
 
 .card-workout .card-title {
   color: var(--color-gold);
+}
+
+/* Plans Card */
+.card-plans .card-icon {
+  color: var(--color-accent-coral);
 }
 
 /* Equipment Card */

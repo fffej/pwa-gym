@@ -105,3 +105,18 @@ export interface MachineDefaults {
   lastGrip?: GripType
 }
 
+// An exercise within a plan (template without set data)
+export interface PlanExercise {
+  machineId: string
+  attachmentId?: string
+  grip?: GripType
+}
+
+// A workout plan/template
+export interface Plan {
+  id: string
+  name: string
+  description?: string
+  exercises: PlanExercise[]
+}
+

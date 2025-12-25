@@ -15,9 +15,29 @@ const router = createRouter({
       component: () => import('../views/WorkoutView.vue')
     },
     {
+      path: '/workout/start',
+      name: 'workout-start',
+      component: () => import('../views/WorkoutStartView.vue')
+    },
+    {
       path: '/workout/add-exercise',
       name: 'add-exercise',
       component: () => import('../views/ExercisePickerView.vue')
+    },
+    {
+      path: '/plans',
+      name: 'plans',
+      component: () => import('../views/PlansView.vue')
+    },
+    {
+      path: '/plans/new',
+      name: 'plan-new',
+      component: () => import('../views/PlanEditorView.vue')
+    },
+    {
+      path: '/plans/:id',
+      name: 'plan-edit',
+      component: () => import('../views/PlanEditorView.vue')
     },
     {
       path: '/timer',
