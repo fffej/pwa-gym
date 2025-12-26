@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import type { WorkoutSet, WeightUnit } from '@/types/workout'
 import RPESlider from './RPESlider.vue'
 
@@ -15,50 +15,64 @@ const emit = defineEmits<{
   'delete': []
 }>()
 
-const showRpe = ref(false)
-const increment = computed(() => props.weightIncrement ?? 2.5)
+// Edit mode states
+const editingWeight = ref(false)
+const editingReps = ref(false)
+const weightInputRef = ref<HTMLInputElement | null>(null)
+const repsInputRef = ref<HTMLInputElement | null>(null)
 
-// Long press handling for fast increment
-let pressTimer: number | null = null
-let pressInterval: number | null = null
+// Temporary edit values
+const tempWeight = ref(props.set.weight)
+const tempReps = ref(props.set.reps)
 
-function startPress(action: () => void) {
-  action()
-  pressTimer = window.setTimeout(() => {
-    pressInterval = window.setInterval(action, 100)
-  }, 400)
+async function startEditWeight() {
+  if (props.set.isCompleted) return
+  tempWeight.value = props.set.weight
+  editingWeight.value = true
+  await nextTick()
+  weightInputRef.value?.focus()
+  weightInputRef.value?.select()
 }
 
-function endPress() {
-  if (pressTimer) {
-    clearTimeout(pressTimer)
-    pressTimer = null
+async function startEditReps() {
+  if (props.set.isCompleted) return
+  tempReps.value = props.set.reps
+  editingReps.value = true
+  await nextTick()
+  repsInputRef.value?.focus()
+  repsInputRef.value?.select()
+}
+
+function finishEditWeight() {
+  const newWeight = parseFloat(String(tempWeight.value)) || 0
+  emit('update', { weight: Math.max(0, newWeight) })
+  editingWeight.value = false
+}
+
+function finishEditReps() {
+  const newReps = parseInt(String(tempReps.value)) || 1
+  emit('update', { reps: Math.max(1, newReps) })
+  editingReps.value = false
+}
+
+function handleWeightKeydown(e: KeyboardEvent) {
+  if (e.key === 'Enter') {
+    finishEditWeight()
+  } else if (e.key === 'Escape') {
+    editingWeight.value = false
   }
-  if (pressInterval) {
-    clearInterval(pressInterval)
-    pressInterval = null
+}
+
+function handleRepsKeydown(e: KeyboardEvent) {
+  if (e.key === 'Enter') {
+    finishEditReps()
+  } else if (e.key === 'Escape') {
+    editingReps.value = false
   }
-}
-
-function incrementWeight() {
-  emit('update', { weight: props.set.weight + increment.value })
-}
-
-function decrementWeight() {
-  const newWeight = Math.max(0, props.set.weight - increment.value)
-  emit('update', { weight: newWeight })
-}
-
-function incrementReps() {
-  emit('update', { reps: props.set.reps + 1 })
-}
-
-function decrementReps() {
-  const newReps = Math.max(1, props.set.reps - 1)
-  emit('update', { reps: newReps })
 }
 
 function toggleUnit() {
+  if (props.set.isCompleted) return
   const newUnit: WeightUnit = props.set.weightUnit === 'kg' ? 'lbs' : 'kg'
   emit('update', { weightUnit: newUnit })
 }
@@ -74,125 +88,81 @@ function handleComplete() {
 
 <template>
   <div class="set-row" :class="{ completed: set.isCompleted }">
+    <!-- Main row: set number, weight × reps, complete button -->
     <div class="set-main">
       <span class="set-number">{{ setNumber }}</span>
       
-      <div class="input-column weight-column">
-        <span class="input-label">Weight</span>
-        <div class="input-group">
-          <button 
-            class="stepper-btn"
-            @mousedown="startPress(decrementWeight)"
-            @mouseup="endPress"
-            @mouseleave="endPress"
-            @touchstart.prevent="startPress(decrementWeight)"
-            @touchend="endPress"
-            :disabled="set.isCompleted"
-          >−</button>
-          <div class="value-display">
-            <input 
-              type="number" 
-              :value="set.weight"
-              @change="emit('update', { weight: parseFloat(($event.target as HTMLInputElement).value) || 0 })"
-              :disabled="set.isCompleted"
-              class="value-input"
-            />
-            <button class="unit-btn" @click="toggleUnit" :disabled="set.isCompleted">
-              {{ set.weightUnit }}
-            </button>
-          </div>
-          <button 
-            class="stepper-btn"
-            @mousedown="startPress(incrementWeight)"
-            @mouseup="endPress"
-            @mouseleave="endPress"
-            @touchstart.prevent="startPress(incrementWeight)"
-            @touchend="endPress"
-            :disabled="set.isCompleted"
-          >+</button>
-        </div>
+      <!-- Weight display/edit -->
+      <div class="value-cell weight-cell" @click="startEditWeight">
+        <template v-if="editingWeight">
+          <input 
+            ref="weightInputRef"
+            v-model="tempWeight"
+            type="number"
+            inputmode="decimal"
+            class="inline-input weight-input"
+            @blur="finishEditWeight"
+            @keydown="handleWeightKeydown"
+          />
+        </template>
+        <template v-else>
+          <span class="value-text">{{ set.weight }}</span>
+        </template>
+        <button 
+          class="unit-badge" 
+          @click.stop="toggleUnit"
+          :disabled="set.isCompleted"
+        >
+          {{ set.weightUnit }}
+        </button>
       </div>
 
       <span class="separator">×</span>
 
-      <div class="input-column reps-column">
-        <span class="input-label">Reps</span>
-        <div class="input-group">
-          <button 
-            class="stepper-btn"
-            @mousedown="startPress(decrementReps)"
-            @mouseup="endPress"
-            @mouseleave="endPress"
-            @touchstart.prevent="startPress(decrementReps)"
-            @touchend="endPress"
-            :disabled="set.isCompleted"
-          >−</button>
+      <!-- Reps display/edit -->
+      <div class="value-cell reps-cell" @click="startEditReps">
+        <template v-if="editingReps">
           <input 
-            type="number" 
-            :value="set.reps"
-            @change="emit('update', { reps: parseInt(($event.target as HTMLInputElement).value) || 1 })"
-            :disabled="set.isCompleted"
-            class="value-input reps-input"
+            ref="repsInputRef"
+            v-model="tempReps"
+            type="number"
+            inputmode="numeric"
+            class="inline-input reps-input"
+            @blur="finishEditReps"
+            @keydown="handleRepsKeydown"
           />
-          <button 
-            class="stepper-btn"
-            @mousedown="startPress(incrementReps)"
-            @mouseup="endPress"
-            @mouseleave="endPress"
-            @touchstart.prevent="startPress(incrementReps)"
-            @touchend="endPress"
-            :disabled="set.isCompleted"
-          >+</button>
-        </div>
+        </template>
+        <template v-else>
+          <span class="value-text">{{ set.reps }}</span>
+          <span class="value-label">reps</span>
+        </template>
       </div>
-    </div>
 
-    <div class="set-actions">
-      <button 
-        class="action-btn rpe-toggle" 
-        :class="{ active: showRpe || set.rpe !== undefined }"
-        @click="showRpe = !showRpe"
-        title="RPE"
-      >
-        <span v-if="set.rpe !== undefined">{{ set.rpe }}</span>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 20h9"/>
-          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-        </svg>
-      </button>
-
+      <!-- Complete button -->
       <button 
         v-if="!set.isCompleted"
-        class="action-btn complete-btn"
+        class="complete-btn"
         @click="handleComplete"
         title="Complete set"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </button>
       <div v-else class="completed-check">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
         </svg>
       </div>
-
-      <button 
-        v-if="!set.isCompleted"
-        class="action-btn delete-btn"
-        @click="emit('delete')"
-        title="Delete set"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 6h18"/>
-          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-        </svg>
-      </button>
     </div>
 
-    <div v-if="showRpe" class="rpe-section">
-      <RPESlider :model-value="set.rpe" @update:model-value="updateRpe" />
+    <!-- RPE Slider - always visible -->
+    <div class="rpe-row">
+      <RPESlider 
+        :model-value="set.rpe" 
+        :disabled="set.isCompleted"
+        @update:model-value="updateRpe" 
+      />
     </div>
   </div>
 </template>
@@ -201,15 +171,15 @@ function handleComplete() {
 .set-row {
   background: var(--color-bg-secondary);
   border: 1px solid rgba(74, 144, 217, 0.1);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0.75rem;
   transition: all 0.2s ease;
 }
 
 .set-row.completed {
   opacity: 0.7;
-  background: rgba(129, 178, 154, 0.1);
-  border-color: rgba(129, 178, 154, 0.3);
+  background: rgba(129, 178, 154, 0.08);
+  border-color: rgba(129, 178, 154, 0.25);
 }
 
 .set-main {
@@ -218,210 +188,159 @@ function handleComplete() {
   gap: 0.5rem;
 }
 
-.set-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid rgba(74, 144, 217, 0.08);
-}
-
 .set-number {
-  min-width: 1.5rem;
-  font-size: 0.875rem;
+  min-width: 1.25rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-text-muted);
   text-align: center;
-  align-self: flex-end;
-  padding-bottom: 0.5rem;
 }
 
-.input-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.input-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-.input-group {
+.value-cell {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-}
-
-.weight-column {
-  flex: 1.5;
-}
-
-.reps-column {
-  flex: 1;
-}
-
-.stepper-btn {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.6rem;
   background: var(--color-bg-tertiary);
-  border: 1px solid rgba(74, 144, 217, 0.2);
-  border-radius: 4px;
-  color: var(--color-text-primary);
-  font-size: 1.25rem;
-  font-weight: 300;
+  border: 1px solid rgba(74, 144, 217, 0.15);
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
-  user-select: none;
-  -webkit-user-select: none;
+  min-height: 40px;
 }
 
-.stepper-btn:hover:not(:disabled) {
-  background: var(--color-gold);
-  color: var(--color-bg-primary);
+.set-row:not(.completed) .value-cell:hover {
   border-color: var(--color-gold);
+  background: rgba(74, 144, 217, 0.08);
 }
 
-.stepper-btn:active:not(:disabled) {
-  transform: scale(0.95);
+.set-row.completed .value-cell {
+  cursor: default;
 }
 
-.stepper-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.weight-cell {
+  min-width: 85px;
 }
 
-.value-display {
-  display: flex;
-  align-items: center;
-  background: var(--color-bg-tertiary);
-  border: 1px solid rgba(74, 144, 217, 0.2);
-  border-radius: 4px;
-  overflow: hidden;
+.reps-cell {
+  min-width: 70px;
 }
 
-.value-input {
-  width: 50px;
-  padding: 0.4rem 0.25rem;
-  background: transparent;
-  border: none;
+.value-text {
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--color-text-primary);
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-align: center;
   font-family: 'Poppins', sans-serif;
-  -moz-appearance: textfield;
 }
 
-.value-input::-webkit-outer-spin-button,
-.value-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.value-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: lowercase;
 }
 
-.value-input:focus {
-  outline: none;
-}
-
-.value-input:disabled {
-  opacity: 0.7;
-}
-
-.reps-input {
-  width: 36px;
-}
-
-.unit-btn {
-  padding: 0.4rem 0.35rem;
+.unit-badge {
+  padding: 0.2rem 0.4rem;
   background: rgba(74, 144, 217, 0.15);
   border: none;
-  border-left: 1px solid rgba(74, 144, 217, 0.2);
+  border-radius: 4px;
   color: var(--color-gold);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
-.unit-btn:hover:not(:disabled) {
+.unit-badge:hover:not(:disabled) {
   background: rgba(74, 144, 217, 0.25);
 }
 
-.unit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.unit-badge:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.inline-input {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  -moz-appearance: textfield;
+  text-align: left;
+}
+
+.inline-input::-webkit-outer-spin-button,
+.inline-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inline-input:focus {
+  outline: none;
+}
+
+.weight-input {
+  max-width: 50px;
+}
+
+.reps-input {
+  max-width: 40px;
 }
 
 .separator {
   color: var(--color-text-muted);
-  font-size: 0.875rem;
-  padding: 0 0.25rem;
-  align-self: flex-end;
-  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0 0.15rem;
 }
 
-.action-btn {
-  width: 32px;
-  height: 32px;
+.complete-btn {
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid rgba(74, 144, 217, 0.2);
-  border-radius: 4px;
-  color: var(--color-text-muted);
+  background: rgba(129, 178, 154, 0.15);
+  border: 2px solid var(--color-accent-teal);
+  border-radius: 50%;
+  color: var(--color-accent-teal);
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
-}
-
-.action-btn:hover {
-  background: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
-  border-color: rgba(74, 144, 217, 0.4);
-}
-
-.rpe-toggle.active {
-  background: rgba(74, 144, 217, 0.15);
-  border-color: var(--color-gold);
-  color: var(--color-gold);
+  margin-left: auto;
 }
 
 .complete-btn:hover {
-  background: rgba(129, 178, 154, 0.2);
-  border-color: var(--color-accent-teal);
-  color: var(--color-accent-teal);
+  background: var(--color-accent-teal);
+  color: var(--color-bg-primary);
+  transform: scale(1.05);
+}
+
+.complete-btn:active {
+  transform: scale(0.95);
 }
 
 .completed-check {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(129, 178, 154, 0.2);
+  border-radius: 50%;
   color: var(--color-accent-teal);
   flex-shrink: 0;
+  margin-left: auto;
 }
 
-.delete-btn:hover {
-  background: rgba(224, 122, 95, 0.2);
-  border-color: var(--color-accent-coral);
-  color: var(--color-accent-coral);
-}
-
-.rpe-section {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(74, 144, 217, 0.1);
+.rpe-row {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(74, 144, 217, 0.08);
 }
 </style>
-
