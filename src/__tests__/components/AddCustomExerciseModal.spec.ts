@@ -488,5 +488,128 @@ describe('AddCustomExerciseModal', () => {
       expect(firstId).not.toBe(secondId)
     })
   })
+
+  describe('edit mode', () => {
+    const existingExercise = {
+      id: 'custom-existing-123',
+      name: 'Existing Exercise',
+      muscles: ['chest', 'triceps'] as any[],
+      requiredAttachment: 'wide-bar',
+      isCustom: true
+    }
+
+    it('shows "Edit Exercise" title in edit mode', () => {
+      const wrapper = mount(AddCustomExerciseModal, {
+        props: { ...defaultProps, existingExercise },
+        global: {
+          stubs: {
+            teleport: true
+          }
+        }
+      })
+
+      expect(wrapper.find('#modal-title').text()).toBe('Edit Exercise')
+    })
+
+    it('pre-populates form with existing exercise data', async () => {
+      const wrapper = mount(AddCustomExerciseModal, {
+        props: { ...defaultProps, isOpen: false, existingExercise },
+        global: {
+          stubs: {
+            teleport: true
+          }
+        }
+      })
+
+      // Open modal
+      await wrapper.setProps({ isOpen: true })
+
+      // Verify name is pre-filled
+      const nameInput = wrapper.find('#exercise-name')
+      expect((nameInput.element as HTMLInputElement).value).toBe('Existing Exercise')
+
+      // Verify muscles are selected
+      const activeChips = wrapper.findAll('.muscle-chip.active')
+      expect(activeChips.length).toBe(2)
+
+      // Verify attachment is selected
+      const attachmentSelect = wrapper.find('#attachment')
+      expect((attachmentSelect.element as HTMLSelectElement).value).toBe('wide-bar')
+    })
+
+    it('shows "Save Changes" button text in edit mode', () => {
+      const wrapper = mount(AddCustomExerciseModal, {
+        props: { ...defaultProps, existingExercise },
+        global: {
+          stubs: {
+            teleport: true
+          }
+        }
+      })
+
+      const submitBtn = wrapper.find('button[type="submit"]')
+      expect(submitBtn.text()).toBe('Save Changes')
+    })
+
+    it('calls updateCustomExercise on edit submission', async () => {
+      const mockUpdateCustomExercise = vi.fn().mockResolvedValue(undefined)
+      vi.mocked(useMachinesStore).mockReturnValue({
+        updateCustomExercise: mockUpdateCustomExercise
+      } as any)
+
+      const wrapper = mount(AddCustomExerciseModal, {
+        props: { ...defaultProps, isOpen: false, existingExercise },
+        global: {
+          stubs: {
+            teleport: true
+          }
+        }
+      })
+
+      // Open modal
+      await wrapper.setProps({ isOpen: true })
+
+      // Modify the name
+      await wrapper.find('#exercise-name').setValue('Updated Exercise Name')
+
+      // Submit
+      await wrapper.find('form').trigger('submit')
+      await flushPromises()
+
+      // Verify updateCustomExercise was called (not addCustomExercise)
+      expect(mockUpdateCustomExercise).toHaveBeenCalledTimes(1)
+      expect(mockUpdateCustomExercise).toHaveBeenCalledWith(
+        'bench-press',
+        expect.objectContaining({
+          id: 'custom-existing-123', // Keeps original ID
+          name: 'Updated Exercise Name',
+          isCustom: true
+        })
+      )
+    })
+
+    it('preserves original ID when updating', async () => {
+      const mockUpdateCustomExercise = vi.fn().mockResolvedValue(undefined)
+      vi.mocked(useMachinesStore).mockReturnValue({
+        updateCustomExercise: mockUpdateCustomExercise
+      } as any)
+
+      const wrapper = mount(AddCustomExerciseModal, {
+        props: { ...defaultProps, isOpen: false, existingExercise },
+        global: {
+          stubs: {
+            teleport: true
+          }
+        }
+      })
+
+      await wrapper.setProps({ isOpen: true })
+      await wrapper.find('form').trigger('submit')
+      await flushPromises()
+
+      const call = mockUpdateCustomExercise.mock.calls[0]!
+      expect(call[1].id).toBe('custom-existing-123')
+    })
+  })
 })
 

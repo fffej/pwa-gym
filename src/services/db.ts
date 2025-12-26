@@ -68,7 +68,8 @@ const defaultSettings: UserSettings = {
     { weight: 15, unit: 'kg' },
     { weight: 20, unit: 'kg' },
     { weight: 25, unit: 'kg' }
-  ]
+  ],
+  timerBehavior: 'auto'
 }
 
 // Workout operations

@@ -43,8 +43,9 @@ function formatGrip(grip: string | undefined): string {
   <div class="exercise-card">
     <div class="exercise-header" @click="isCollapsed = !isCollapsed">
       <div class="exercise-info">
-        <h3 class="exercise-name">{{ exercise.machineName }}</h3>
+        <h3 class="exercise-name">{{ exercise.exerciseName }}</h3>
         <div class="exercise-meta">
+          <span class="meta-tag machine-tag">{{ exercise.machineName }}</span>
           <span v-if="attachmentName" class="meta-tag">{{ attachmentName }}</span>
           <span v-if="exercise.grip" class="meta-tag">{{ formatGrip(exercise.grip) }}</span>
           <span class="sets-count">{{ completedSets }}/{{ totalSets }} sets</span>
@@ -144,6 +145,12 @@ function formatGrip(grip: string | undefined): string {
   color: var(--color-gold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.meta-tag.machine-tag {
+  background: rgba(129, 178, 154, 0.15);
+  color: var(--color-accent-teal);
+  text-transform: none;
 }
 
 .sets-count {

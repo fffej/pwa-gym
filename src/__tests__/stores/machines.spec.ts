@@ -218,4 +218,24 @@ describe('Machines Store', () => {
       })
     })
   })
+
+  describe('custom exercise operations', () => {
+    // Note: These tests verify the store has the methods available
+    // Full integration tests with IndexedDB would require a proper mock setup
+    
+    it('store has addCustomExercise method', () => {
+      const store = useMachinesStore()
+      expect(typeof store.addCustomExercise).toBe('function')
+    })
+
+    it('store has removeCustomExercise method', () => {
+      const store = useMachinesStore()
+      expect(typeof store.removeCustomExercise).toBe('function')
+    })
+
+    it('store has updateCustomExercise method', () => {
+      const store = useMachinesStore()
+      expect(typeof store.updateCustomExercise).toBe('function')
+    })
+  })
 })

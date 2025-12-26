@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useSettingsStore } from '@/stores/settings'
 import { useSyncStatus } from '@/services/sync'
+import type { TimerBehavior } from '@/types/workout'
 
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
 const { status: syncStatus, isOnline } = useSyncStatus()
 const showDropdown = ref(false)
+
+onMounted(async () => {
+  await settingsStore.loadSettings()
+})
 
 const syncStatusText = computed(() => {
   if (!isOnline.value) return 'Offline'
@@ -36,6 +43,10 @@ function closeDropdown() {
 async function handleSignOut() {
   await authStore.signOut()
   closeDropdown()
+}
+
+async function setTimerBehavior(behavior: TimerBehavior) {
+  await settingsStore.setTimerBehavior(behavior)
 }
 </script>
 
@@ -75,6 +86,27 @@ async function handleSignOut() {
             <span>{{ syncStatusText }}</span>
           </div>
           <div class="dropdown-divider"></div>
+          <div class="settings-section">
+            <span class="settings-label">Rest Timer</span>
+            <div class="timer-options">
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'auto' }"
+                @click="setTimerBehavior('auto')"
+              >Auto</button>
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'manual' }"
+                @click="setTimerBehavior('manual')"
+              >Manual</button>
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'disabled' }"
+                @click="setTimerBehavior('disabled')"
+              >Off</button>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
           <button class="dropdown-item sign-out" @click="handleSignOut">
             Sign out
           </button>
@@ -86,11 +118,46 @@ async function handleSignOut() {
     </div>
     
     <!-- Signed out state -->
-    <button v-else class="sign-in-icon-btn" @click="authStore.signInWithGoogle" title="Sign in with Google">
-      <svg class="sign-in-icon" viewBox="0 0 24 24" width="24" height="24">
-        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-      </svg>
-    </button>
+    <div v-else class="profile-wrapper">
+      <button class="sign-in-icon-btn" @click="toggleDropdown" title="Settings">
+        <svg class="sign-in-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+        </svg>
+      </button>
+      
+      <!-- Dropdown menu for non-authenticated users -->
+      <Transition name="dropdown">
+        <div v-if="showDropdown" class="dropdown-menu">
+          <div class="settings-section">
+            <span class="settings-label">Rest Timer</span>
+            <div class="timer-options">
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'auto' }"
+                @click="setTimerBehavior('auto')"
+              >Auto</button>
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'manual' }"
+                @click="setTimerBehavior('manual')"
+              >Manual</button>
+              <button 
+                class="timer-option" 
+                :class="{ active: settingsStore.settings.timerBehavior === 'disabled' }"
+                @click="setTimerBehavior('disabled')"
+              >Off</button>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" @click="authStore.signInWithGoogle">
+            Sign in with Google
+          </button>
+        </div>
+      </Transition>
+      
+      <!-- Backdrop to close dropdown -->
+      <div v-if="showDropdown" class="dropdown-backdrop" @click="closeDropdown"></div>
+    </div>
     
     <!-- Error display -->
     <div v-if="authStore.error" class="auth-error-toast">
@@ -311,6 +378,52 @@ async function handleSignOut() {
 
 .dropdown-item.sign-out:hover {
   color: #fca5a5;
+}
+
+/* Settings section */
+.settings-section {
+  padding: 0.6rem 1rem;
+}
+
+.settings-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.timer-options {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 0.15rem;
+}
+
+.timer-option {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.timer-option:hover {
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timer-option.active {
+  background: var(--color-gold);
+  color: #000;
 }
 
 /* Sign in button */

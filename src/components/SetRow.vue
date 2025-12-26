@@ -145,7 +145,9 @@ function handleComplete() {
           >+</button>
         </div>
       </div>
+    </div>
 
+    <div class="set-actions">
       <button 
         class="action-btn rpe-toggle" 
         :class="{ active: showRpe || set.rpe !== undefined }"
@@ -214,6 +216,16 @@ function handleComplete() {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.set-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(74, 144, 217, 0.08);
 }
 
 .set-number {
@@ -370,7 +382,6 @@ function handleComplete() {
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
-  align-self: flex-end;
 }
 
 .action-btn:hover {
@@ -399,7 +410,6 @@ function handleComplete() {
   justify-content: center;
   color: var(--color-accent-teal);
   flex-shrink: 0;
-  align-self: flex-end;
 }
 
 .delete-btn:hover {

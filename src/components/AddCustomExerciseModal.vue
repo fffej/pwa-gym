@@ -8,6 +8,7 @@ const props = defineProps<{
   machineName: string
   attachments: Attachment[]
   isOpen: boolean
+  existingExercise?: MachineExercise // For edit mode
 }>()
 
 const emit = defineEmits<{
@@ -16,6 +17,9 @@ const emit = defineEmits<{
 }>()
 
 const machinesStore = useMachinesStore()
+
+// Edit mode detection
+const isEditMode = computed(() => !!props.existingExercise)
 
 // Form state
 const exerciseName = ref('')
@@ -34,12 +38,25 @@ const isValid = computed(() =>
   exerciseName.value.trim().length > 0 && selectedMuscles.value.length > 0
 )
 
-// Reset form when modal opens/closes
-watch(() => props.isOpen, (isOpen) => {
-  if (isOpen) {
-    resetForm()
-  }
-})
+// Reset or populate form when modal opens
+watch(
+  () => [props.isOpen, props.existingExercise] as const,
+  ([isOpen, existingExercise]) => {
+    if (isOpen) {
+      if (existingExercise) {
+        // Edit mode: populate with existing data
+        exerciseName.value = existingExercise.name
+        selectedMuscles.value = [...existingExercise.muscles]
+        selectedAttachmentId.value = existingExercise.requiredAttachment ?? null
+        isSaving.value = false
+      } else {
+        // Add mode: reset form
+        resetForm()
+      }
+    }
+  },
+  { immediate: true }
+)
 
 function resetForm() {
   exerciseName.value = ''
@@ -78,14 +95,18 @@ async function handleSubmit() {
 
   try {
     const exercise: MachineExercise = {
-      id: generateId(),
+      id: isEditMode.value ? props.existingExercise!.id : generateId(),
       name: exerciseName.value.trim(),
       muscles: [...selectedMuscles.value],
       requiredAttachment: selectedAttachmentId.value ?? undefined,
       isCustom: true
     }
 
-    await machinesStore.addCustomExercise(props.machineId, exercise)
+    if (isEditMode.value) {
+      await machinesStore.updateCustomExercise(props.machineId, exercise)
+    } else {
+      await machinesStore.addCustomExercise(props.machineId, exercise)
+    }
     
     emit('saved', exercise)
     emit('close')
@@ -119,7 +140,7 @@ function handleKeydown(e: KeyboardEvent) {
     >
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <header class="modal-header">
-          <h2 id="modal-title">Add Exercise</h2>
+          <h2 id="modal-title">{{ isEditMode ? 'Edit Exercise' : 'Add Exercise' }}</h2>
           <button class="close-btn" @click="handleCancel" aria-label="Close">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/>
@@ -130,7 +151,7 @@ function handleKeydown(e: KeyboardEvent) {
 
         <div class="modal-body">
           <p class="machine-context">
-            Adding to <strong>{{ machineName }}</strong>
+            {{ isEditMode ? 'Editing exercise on' : 'Adding to' }} <strong>{{ machineName }}</strong>
           </p>
 
           <form @submit.prevent="handleSubmit">
@@ -196,7 +217,7 @@ function handleKeydown(e: KeyboardEvent) {
                 class="btn-primary" 
                 :disabled="!isValid || isSaving"
               >
-                {{ isSaving ? 'Saving...' : 'Add Exercise' }}
+                {{ isSaving ? 'Saving...' : (isEditMode ? 'Save Changes' : 'Add Exercise') }}
               </button>
             </div>
           </form>
@@ -214,7 +235,7 @@ function handleKeydown(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 1100;
   padding: 1rem;
 }
 
@@ -410,4 +431,5 @@ function handleKeydown(e: KeyboardEvent) {
   border-color: rgba(74, 144, 217, 0.3);
 }
 </style>
+
 

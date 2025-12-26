@@ -188,6 +188,27 @@ export const useMachinesStore = defineStore('machines', () => {
     }
   }
 
+  // Update a custom exercise
+  async function updateCustomExercise(machineId: string, exercise: MachineExercise): Promise<void> {
+    if (currentUserId.value) {
+      // For Firestore: remove old and add updated version
+      await userCustomizationsApi.removeCustomExercise(currentUserId.value, machineId, exercise.id)
+      await userCustomizationsApi.addCustomExercise(currentUserId.value, machineId, exercise)
+      customizations.value = await userCustomizationsApi.fetchAllCustomizations(currentUserId.value)
+    } else {
+      const existing = await machineCustomizationsDb.getCustomization(machineId)
+      if (existing) {
+        const index = existing.customExercises.findIndex(e => e.id === exercise.id)
+        if (index >= 0) {
+          existing.customExercises[index] = { ...exercise, isCustom: true }
+          existing.updatedAt = Date.now()
+          await machineCustomizationsDb.saveCustomization(existing)
+          customizations.value = await machineCustomizationsDb.getAllCustomizations()
+        }
+      }
+    }
+  }
+
   // Add a custom attachment
   async function addCustomAttachment(machineId: string, attachment: Attachment): Promise<void> {
     if (currentUserId.value) {
@@ -270,6 +291,7 @@ export const useMachinesStore = defineStore('machines', () => {
     // Customization actions
     addCustomExercise,
     removeCustomExercise,
+    updateCustomExercise,
     addCustomAttachment,
     removeCustomAttachment,
     updateMachineOverrides

@@ -63,6 +63,31 @@ describe('Settings Store', () => {
       const store = useSettingsStore()
       expect(store.settings.defaultRestPeriod).toBe(60)
     })
+
+    it('has correct default timer behavior (auto)', () => {
+      const store = useSettingsStore()
+      expect(store.settings.timerBehavior).toBe('auto')
+    })
+  })
+
+  describe('timer behavior setting', () => {
+    it('defaults to auto', () => {
+      const store = useSettingsStore()
+      expect(store.settings.timerBehavior).toBe('auto')
+    })
+
+    it('timerBehavior setting is included in settings object', () => {
+      const store = useSettingsStore()
+      expect(store.settings).toHaveProperty('timerBehavior')
+      expect(['auto', 'manual', 'disabled']).toContain(store.settings.timerBehavior)
+    })
+
+    it('timerBehavior is a valid TimerBehavior type', () => {
+      const store = useSettingsStore()
+      // Type check - timerBehavior should be one of the valid values
+      const validValues = ['auto', 'manual', 'disabled']
+      expect(validValues).toContain(store.settings.timerBehavior)
+    })
   })
 })
 

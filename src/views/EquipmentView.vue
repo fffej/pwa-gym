@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useMachinesStore } from '@/stores/machines'
 import AddCustomExerciseModal from '@/components/AddCustomExerciseModal.vue'
 import openingHoursData from '@/data/opening-hours.json'
-import type { Machine } from '@/types/workout'
+import type { Machine, MachineExercise } from '@/types/workout'
 
 const router = useRouter()
 const machinesStore = useMachinesStore()
@@ -30,8 +30,9 @@ const openingHours = ref<OpeningHours>(openingHoursData)
 // Selected machine for modal
 const selectedMachine = ref<Machine | null>(null)
 
-// Add exercise modal state
+// Add/Edit exercise modal state
 const showAddExerciseModal = ref(false)
+const exerciseToEdit = ref<MachineExercise | undefined>(undefined)
 
 function openMachineModal(machine: Machine) {
   selectedMachine.value = machine
@@ -42,17 +43,32 @@ function closeMachineModal() {
 }
 
 function openAddExerciseModal() {
+  exerciseToEdit.value = undefined
+  showAddExerciseModal.value = true
+}
+
+function openEditExerciseModal(exercise: MachineExercise) {
+  exerciseToEdit.value = exercise
   showAddExerciseModal.value = true
 }
 
 function closeAddExerciseModal() {
   showAddExerciseModal.value = false
+  exerciseToEdit.value = undefined
 }
 
 function onExerciseSaved() {
   // The machines store is reactive, so the UI will update automatically
   // Just close the add exercise modal
   closeAddExerciseModal()
+}
+
+async function deleteCustomExercise(exercise: MachineExercise) {
+  if (!selectedMachineWithCustoms.value) return
+  
+  if (confirm(`Are you sure you want to delete "${exercise.name}"? This will also affect historical workout records.`)) {
+    await machinesStore.removeCustomExercise(selectedMachineWithCustoms.value.id, exercise.id)
+  }
 }
 
 // Close modal on escape key
@@ -250,26 +266,33 @@ function getYouTubeEmbedUrl(url: string): string | null {
           </div>
 
           <div class="modal-body">
-            <!-- Muscles targeted -->
-            <div class="modal-section">
-              <h3 class="modal-section-title">Muscles Targeted</h3>
-              <div class="modal-muscles">
-                <span v-for="muscle in getMachineMuscles(selectedMachineWithCustoms)" :key="muscle" class="modal-muscle-tag">
-                  {{ muscle }}
-                </span>
-              </div>
-            </div>
-
             <!-- Available Exercises -->
             <div class="modal-section">
               <h3 class="modal-section-title">Available Exercises</h3>
               <div class="exercises-list">
                 <div v-for="exercise in selectedMachineWithCustoms.exercises" :key="exercise.id" class="exercise-item">
-                  <div class="exercise-header">
-                    <span class="exercise-name">{{ exercise.name }}</span>
-                    <span v-if="exercise.isCustom" class="custom-badge">Custom</span>
+                  <div class="exercise-content">
+                    <div class="exercise-header">
+                      <span class="exercise-name">{{ exercise.name }}</span>
+                      <span v-if="exercise.isCustom" class="custom-badge">Custom</span>
+                    </div>
+                    <span class="exercise-muscles">{{ exercise.muscles.join(', ') }}</span>
                   </div>
-                  <span class="exercise-muscles">{{ exercise.muscles.join(', ') }}</span>
+                  <div v-if="exercise.isCustom" class="exercise-actions">
+                    <button class="exercise-action-btn edit-btn" @click="openEditExerciseModal(exercise)" title="Edit exercise">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      </svg>
+                    </button>
+                    <button class="exercise-action-btn delete-btn" @click="deleteCustomExercise(exercise)" title="Delete exercise">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
               
@@ -346,13 +369,14 @@ function getYouTubeEmbedUrl(url: string): string | null {
       </div>
     </Teleport>
 
-    <!-- Add Custom Exercise Modal -->
+    <!-- Add/Edit Custom Exercise Modal -->
     <AddCustomExerciseModal
       v-if="selectedMachineWithCustoms"
       :machine-id="selectedMachineWithCustoms.id"
       :machine-name="selectedMachineWithCustoms.name"
       :attachments="selectedMachineWithCustoms.attachments"
       :is-open="showAddExerciseModal"
+      :existing-exercise="exerciseToEdit"
       @close="closeAddExerciseModal"
       @saved="onExerciseSaved"
     />
@@ -834,14 +858,55 @@ function getYouTubeEmbedUrl(url: string): string | null {
   border-radius: 8px;
   padding: 0.75rem 1rem;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.exercise-content {
+  flex: 1;
+  display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
 }
 
 .exercise-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.exercise-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.exercise-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid rgba(74, 144, 217, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.exercise-action-btn.edit-btn:hover {
+  background: rgba(74, 144, 217, 0.1);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.exercise-action-btn.delete-btn:hover {
+  background: rgba(224, 122, 95, 0.1);
+  border-color: var(--color-accent-coral);
+  color: var(--color-accent-coral);
 }
 
 .exercise-name {

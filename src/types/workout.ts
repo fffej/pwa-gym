@@ -116,11 +116,15 @@ export interface Workout {
   updatedAt?: number // For sync conflict resolution
 }
 
+// Timer behavior options
+export type TimerBehavior = 'auto' | 'manual' | 'disabled'
+
 // User settings/preferences
 export interface UserSettings {
   defaultWeightUnit: WeightUnit
   defaultRestPeriod: number
   availablePlates: { weight: number; unit: WeightUnit }[]
+  timerBehavior: TimerBehavior
   updatedAt?: number // For sync conflict resolution
 }
 

@@ -1,20 +1,26 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { UserSettings, WeightUnit } from '@/types/workout'
+import type { UserSettings, WeightUnit, TimerBehavior } from '@/types/workout'
 import { settingsDb } from '@/services/db'
 
 export const useSettingsStore = defineStore('settings', () => {
   const settings = ref<UserSettings>({
     defaultWeightUnit: 'kg',
     defaultRestPeriod: 60,
-    availablePlates: []
+    availablePlates: [],
+    timerBehavior: 'auto'
   })
   const isLoaded = ref(false)
 
   // Load settings from IndexedDB
   async function loadSettings() {
     if (isLoaded.value) return
-    settings.value = await settingsDb.getSettings()
+    const loaded = await settingsDb.getSettings()
+    // Ensure timerBehavior has a default if loading old data
+    settings.value = {
+      ...loaded,
+      timerBehavior: loaded.timerBehavior ?? 'auto'
+    }
     isLoaded.value = true
   }
 
@@ -28,6 +34,12 @@ export const useSettingsStore = defineStore('settings', () => {
   async function setDefaultRestPeriod(seconds: number) {
     settings.value.defaultRestPeriod = seconds
     await settingsDb.updateSettings({ defaultRestPeriod: seconds })
+  }
+
+  // Update timer behavior
+  async function setTimerBehavior(behavior: TimerBehavior) {
+    settings.value.timerBehavior = behavior
+    await settingsDb.updateSettings({ timerBehavior: behavior })
   }
 
   // Convert weight between units
@@ -44,6 +56,7 @@ export const useSettingsStore = defineStore('settings', () => {
     loadSettings,
     setWeightUnit,
     setDefaultRestPeriod,
+    setTimerBehavior,
     convertWeight
   }
 })
