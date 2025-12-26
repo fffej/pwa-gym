@@ -58,6 +58,12 @@ function handleUpdateSet(exerciseId: string, setId: string, updates: Record<stri
 async function handleCompleteSet(exerciseId: string, setId: string) {
   await workoutStore.completeSet(exerciseId, setId)
   
+  // Check timer behavior setting
+  const timerBehavior = settingsStore.settings.timerBehavior
+  if (timerBehavior === 'disabled') {
+    return // Don't show timer at all
+  }
+  
   // Get the exercise and check if we should show rest timer
   const exercise = workoutStore.getExercise(exerciseId)
   if (exercise) {
@@ -112,7 +118,7 @@ function discardWorkout() {
     <div v-if="showRestTimer" class="rest-timer-overlay">
       <RestTimer 
         :duration="restDuration" 
-        :auto-start="true"
+        :auto-start="settingsStore.settings.timerBehavior === 'auto'"
         @complete="dismissRestTimer"
         @dismiss="dismissRestTimer"
       />
@@ -172,14 +178,14 @@ function discardWorkout() {
       </div>
     </div>
 
-    <!-- Add Exercise Button -->
+    <!-- Add Machine Button -->
     <div class="bottom-actions">
       <button class="add-exercise-btn" @click="goToExercisePicker">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="12" y1="5" x2="12" y2="19"/>
           <line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
-        Add Exercise
+        Add Machine
       </button>
     </div>
   </div>

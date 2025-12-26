@@ -35,11 +35,23 @@ describe('machines.json data integrity', () => {
       })
     })
 
-    it('every machine has a muscles array', () => {
+    it('every machine has an exercises array', () => {
       machines.forEach(machine => {
-        expect(machine.muscles, `Machine ${machine.id} missing muscles`).toBeDefined()
-        expect(Array.isArray(machine.muscles)).toBe(true)
-        expect(machine.muscles.length).toBeGreaterThan(0)
+        expect(machine.exercises, `Machine ${machine.id} missing exercises`).toBeDefined()
+        expect(Array.isArray(machine.exercises)).toBe(true)
+        expect(machine.exercises.length).toBeGreaterThan(0)
+      })
+    })
+
+    it('every exercise has required fields', () => {
+      machines.forEach(machine => {
+        machine.exercises.forEach(exercise => {
+          expect(exercise.id, `Exercise in ${machine.id} missing id`).toBeDefined()
+          expect(exercise.name, `Exercise in ${machine.id} missing name`).toBeDefined()
+          expect(exercise.muscles, `Exercise in ${machine.id} missing muscles`).toBeDefined()
+          expect(Array.isArray(exercise.muscles)).toBe(true)
+          expect(exercise.muscles.length).toBeGreaterThan(0)
+        })
       })
     })
 
@@ -75,13 +87,15 @@ describe('machines.json data integrity', () => {
   })
 
   describe('muscle group values', () => {
-    it('all muscle groups match MuscleGroup type', () => {
+    it('all exercise muscle groups match MuscleGroup type', () => {
       machines.forEach(machine => {
-        machine.muscles.forEach(muscle => {
-          expect(
-            validMuscleGroups.includes(muscle as MuscleGroup),
-            `Machine ${machine.id} has invalid muscle group: ${muscle}`
-          ).toBe(true)
+        machine.exercises.forEach(exercise => {
+          exercise.muscles.forEach(muscle => {
+            expect(
+              validMuscleGroups.includes(muscle as MuscleGroup),
+              `Machine ${machine.id}, exercise ${exercise.id} has invalid muscle group: ${muscle}`
+            ).toBe(true)
+          })
         })
       })
     })
@@ -124,9 +138,36 @@ describe('machines.json data integrity', () => {
     })
   })
 
+  describe('exercise required attachments', () => {
+    it('requiredAttachment references valid attachment IDs', () => {
+      machines.forEach(machine => {
+        machine.exercises.forEach(exercise => {
+          if (exercise.requiredAttachment) {
+            const attachmentExists = machine.attachments.some(a => a.id === exercise.requiredAttachment)
+            expect(
+              attachmentExists,
+              `Machine ${machine.id}, exercise ${exercise.id} references invalid attachment: ${exercise.requiredAttachment}`
+            ).toBe(true)
+          }
+        })
+      })
+    })
+  })
+
   describe('unique identifiers', () => {
     it('all machine IDs are unique', () => {
       const ids = machines.map(m => m.id)
+      const uniqueIds = new Set(ids)
+      expect(ids.length).toBe(uniqueIds.size)
+    })
+
+    it('all exercise IDs are unique across all machines', () => {
+      const ids: string[] = []
+      machines.forEach(machine => {
+        machine.exercises.forEach(exercise => {
+          ids.push(exercise.id)
+        })
+      })
       const uniqueIds = new Set(ids)
       expect(ids.length).toBe(uniqueIds.size)
     })
@@ -163,4 +204,3 @@ describe('machines.json data integrity', () => {
     })
   })
 })
-

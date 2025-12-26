@@ -204,12 +204,15 @@ test.describe('Plan Editor', () => {
     await page.fill('#plan-name', 'Reorder Exercise Plan')
     
     // Add two exercises
+    // First: Shoulder Press Machine (has 1 exercise, auto-adds)
     await page.click('.add-exercise-btn')
     await page.locator('.machine-item:has-text("Shoulder Press")').click()
     
+    // Second: Bench Press (has 2 exercises, need to select one)
     await page.click('.add-exercise-btn')
-    // Use first() to get only the exact "Bench Press", not "Incline Bench Press"
     await page.locator('.machine-item').filter({ hasText: /^Bench Press/ }).first().click()
+    // Select the first exercise from Bench Press
+    await page.locator('.machine-item:has-text("Flat Bench Press")').click()
     
     await expect(page.locator('.exercise-item')).toHaveCount(2)
     
@@ -219,11 +222,11 @@ test.describe('Plan Editor', () => {
     // Move first exercise down
     await page.locator('.exercise-item').first().locator('.action-btn').nth(1).click() // down button
     
-    // Now first exercise should be Bench Press
-    await expect(page.locator('.exercise-item').first()).toContainText('Bench Press')
+    // Now first exercise should be Flat Bench Press
+    await expect(page.locator('.exercise-item').first()).toContainText('Flat Bench Press')
   })
 
-  test('can select attachments and grips for cable machine', async ({ page }) => {
+  test('can add cable machine exercise with required attachment', async ({ page }) => {
     await page.goto(`${BASE}/plans/new`)
     
     await page.fill('#plan-name', 'Cable Exercise Plan')
@@ -232,17 +235,14 @@ test.describe('Plan Editor', () => {
     await page.click('.add-exercise-btn')
     await page.locator('.machine-item:has-text("Cable Machine")').click()
     
-    // Should show attachment selection
-    await expect(page.locator('.config-section h5:has-text("Select Attachment")')).toBeVisible()
+    // Cable Machine has multiple exercises, so we need to select one
+    // Select Tricep Pushdown which requires rope attachment
+    await page.locator('.machine-item:has-text("Tricep Pushdown")').first().click()
     
-    // Select rope attachment
-    await page.locator('.option-btn:has-text("Rope")').click()
-    
-    // Click add to plan
-    await page.click('.picker-add-btn')
-    
-    // Exercise should be added with the attachment
+    // The exercise should be auto-added with the required attachment (rope)
+    // since rope only has one grip (neutral), it auto-adds
     await expect(page.locator('.exercise-item')).toHaveCount(1)
+    await expect(page.locator('.exercise-item')).toContainText('Tricep Pushdown')
     await expect(page.locator('.exercise-item')).toContainText('Rope')
   })
 })

@@ -4,7 +4,10 @@
       "id": "bench-press",
       "name": "Bench Press",
       "picture": "/machines/bench-press.svg",
-      "muscles": ["chest", "triceps", "shoulders"],
+      "exercises": [
+        { "id": "bench-press-flat", "name": "Flat Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "bench-press-close-grip", "name": "Close Grip Bench Press", "muscles": ["triceps", "chest"] }
+      ],
       "location": "Main Room",
       "weightType": "plates",
       "attachments": [],
@@ -17,7 +20,9 @@
       "id": "incline-bench",
       "name": "Incline Bench Press",
       "picture": "/machines/incline-bench.svg",
-      "muscles": ["chest", "shoulders", "triceps"],
+      "exercises": [
+        { "id": "incline-bench-press", "name": "Incline Bench Press", "muscles": ["chest", "shoulders", "triceps"] }
+      ],
       "location": "Main Room",
       "weightType": "plates",
       "attachments": [],
@@ -30,7 +35,12 @@
       "id": "lat-pulldown",
       "name": "Lat Pulldown",
       "picture": "/machines/lat-pulldown.svg",
-      "muscles": ["back", "biceps"],
+      "exercises": [
+        { "id": "lat-pulldown-wide", "name": "Wide Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "wide-bar" },
+        { "id": "lat-pulldown-close", "name": "Close Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
+        { "id": "lat-pulldown-single", "name": "Single Arm Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "single-handle" },
+        { "id": "lat-pulldown-reverse", "name": "Reverse Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "wide-bar" }
+      ],
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [
@@ -49,7 +59,11 @@
       "id": "seated-row",
       "name": "Seated Row",
       "picture": "/machines/seated-row.svg",
-      "muscles": ["back", "biceps", "shoulders"],
+      "exercises": [
+        { "id": "seated-row-close", "name": "Close Grip Seated Row", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
+        { "id": "seated-row-wide", "name": "Wide Grip Seated Row", "muscles": ["back", "shoulders"], "requiredAttachment": "wide-bar" },
+        { "id": "seated-row-rope", "name": "Rope Seated Row", "muscles": ["back", "biceps"], "requiredAttachment": "rope" }
+      ],
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [
@@ -68,7 +82,9 @@
       "id": "shoulder-press",
       "name": "Shoulder Press Machine",
       "picture": "/machines/shoulder-press.svg",
-      "muscles": ["shoulders", "triceps"],
+      "exercises": [
+        { "id": "shoulder-press-standard", "name": "Shoulder Press", "muscles": ["shoulders", "triceps"] }
+      ],
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
@@ -83,7 +99,10 @@
       "id": "pec-fly",
       "name": "Pec Fly / Rear Delt",
       "picture": "/machines/pec-fly.svg",
-      "muscles": ["chest", "shoulders"],
+      "exercises": [
+        { "id": "pec-fly-chest", "name": "Pec Fly", "muscles": ["chest"] },
+        { "id": "pec-fly-rear-delt", "name": "Rear Delt Fly", "muscles": ["shoulders", "back"] }
+      ],
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
@@ -98,7 +117,12 @@
       "id": "leg-press",
       "name": "Leg Press",
       "picture": "/machines/leg-press.svg",
-      "muscles": ["quadriceps", "glutes", "hamstrings"],
+      "exercises": [
+        { "id": "leg-press-standard", "name": "Leg Press", "muscles": ["quadriceps", "glutes", "hamstrings"] },
+        { "id": "leg-press-calf-raise", "name": "Calf Raise (Leg Press)", "muscles": ["calves"] },
+        { "id": "leg-press-single-leg", "name": "Single Leg Press", "muscles": ["quadriceps", "glutes"] },
+        { "id": "leg-press-wide", "name": "Wide Stance Leg Press", "muscles": ["quadriceps", "glutes", "hamstrings"] }
+      ],
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
@@ -111,7 +135,10 @@
       "id": "leg-extension",
       "name": "Leg Extension",
       "picture": "/machines/leg-extension.svg",
-      "muscles": ["quadriceps"],
+      "exercises": [
+        { "id": "leg-extension-standard", "name": "Leg Extension", "muscles": ["quadriceps"] },
+        { "id": "leg-extension-single", "name": "Single Leg Extension", "muscles": ["quadriceps"] }
+      ],
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
@@ -126,7 +153,10 @@
       "id": "leg-curl",
       "name": "Leg Curl",
       "picture": "/machines/leg-curl.svg",
-      "muscles": ["hamstrings"],
+      "exercises": [
+        { "id": "leg-curl-standard", "name": "Leg Curl", "muscles": ["hamstrings"] },
+        { "id": "leg-curl-single", "name": "Single Leg Curl", "muscles": ["hamstrings"] }
+      ],
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
@@ -141,7 +171,10 @@
       "id": "hack-squat",
       "name": "Hack Squat",
       "picture": "/machines/hack-squat.svg",
-      "muscles": ["quadriceps", "glutes"],
+      "exercises": [
+        { "id": "hack-squat-standard", "name": "Hack Squat", "muscles": ["quadriceps", "glutes"] },
+        { "id": "hack-squat-calf-raise", "name": "Calf Raise (Hack Squat)", "muscles": ["calves"] }
+      ],
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
@@ -154,7 +187,10 @@
       "id": "calf-raise",
       "name": "Calf Raise Machine",
       "picture": "/machines/calf-raise.svg",
-      "muscles": ["calves"],
+      "exercises": [
+        { "id": "calf-raise-standing", "name": "Standing Calf Raise", "muscles": ["calves"] },
+        { "id": "calf-raise-single", "name": "Single Leg Calf Raise", "muscles": ["calves"] }
+      ],
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
@@ -169,7 +205,23 @@
       "id": "cable-machine",
       "name": "Cable Machine",
       "picture": "/machines/cable-machine.svg",
-      "muscles": ["chest", "back", "shoulders", "biceps", "triceps", "core"],
+      "exercises": [
+        { "id": "cable-fly", "name": "Cable Fly", "muscles": ["chest"], "requiredAttachment": "single-handle" },
+        { "id": "cable-crossover", "name": "Cable Crossover", "muscles": ["chest"], "requiredAttachment": "single-handle" },
+        { "id": "cable-tricep-pushdown", "name": "Tricep Pushdown", "muscles": ["triceps"], "requiredAttachment": "rope" },
+        { "id": "cable-tricep-pushdown-bar", "name": "Tricep Pushdown (Bar)", "muscles": ["triceps"], "requiredAttachment": "straight-bar" },
+        { "id": "cable-bicep-curl", "name": "Cable Bicep Curl", "muscles": ["biceps"], "requiredAttachment": "straight-bar" },
+        { "id": "cable-hammer-curl", "name": "Cable Hammer Curl", "muscles": ["biceps"], "requiredAttachment": "rope" },
+        { "id": "cable-face-pull", "name": "Face Pull", "muscles": ["shoulders", "back"], "requiredAttachment": "rope" },
+        { "id": "cable-lat-pulldown", "name": "Cable Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "wide-bar" },
+        { "id": "cable-row", "name": "Cable Row", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
+        { "id": "cable-woodchop", "name": "Wood Chop", "muscles": ["core"], "requiredAttachment": "single-handle" },
+        { "id": "cable-pallof-press", "name": "Pallof Press", "muscles": ["core"], "requiredAttachment": "single-handle" },
+        { "id": "cable-kickback", "name": "Glute Kickback", "muscles": ["glutes"], "requiredAttachment": "ankle-cuff" },
+        { "id": "cable-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
+        { "id": "cable-front-raise", "name": "Cable Front Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
+        { "id": "cable-upright-row", "name": "Cable Upright Row", "muscles": ["shoulders", "back"], "requiredAttachment": "straight-bar" }
+      ],
       "location": "Functional Room",
       "weightType": "cable",
       "attachments": [
@@ -178,7 +230,8 @@
         { "id": "rope", "name": "Rope", "grips": ["neutral"] },
         { "id": "single-handle", "name": "Single Handle", "grips": ["neutral", "pronated", "supinated"] },
         { "id": "ankle-cuff", "name": "Ankle Cuff", "grips": [] },
-        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] }
+        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] },
+        { "id": "wide-bar", "name": "Wide Bar", "grips": ["pronated", "supinated"] }
       ],
       "defaultRestPeriod": 60,
       "weightIncrement": 2.5,
@@ -191,7 +244,18 @@
       "id": "smith-machine",
       "name": "Smith Machine",
       "picture": "/machines/smith-machine.svg",
-      "muscles": ["chest", "shoulders", "quadriceps", "glutes"],
+      "exercises": [
+        { "id": "smith-squat", "name": "Smith Machine Squat", "muscles": ["quadriceps", "glutes"] },
+        { "id": "smith-bench-press", "name": "Smith Machine Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "smith-incline-press", "name": "Smith Machine Incline Press", "muscles": ["chest", "shoulders", "triceps"] },
+        { "id": "smith-shoulder-press", "name": "Smith Machine Shoulder Press", "muscles": ["shoulders", "triceps"] },
+        { "id": "smith-row", "name": "Smith Machine Row", "muscles": ["back", "biceps"] },
+        { "id": "smith-lunge", "name": "Smith Machine Lunge", "muscles": ["quadriceps", "glutes"] },
+        { "id": "smith-calf-raise", "name": "Smith Machine Calf Raise", "muscles": ["calves"] },
+        { "id": "smith-hip-thrust", "name": "Smith Machine Hip Thrust", "muscles": ["glutes", "hamstrings"] },
+        { "id": "smith-romanian-deadlift", "name": "Smith Machine Romanian Deadlift", "muscles": ["hamstrings", "glutes", "back"] },
+        { "id": "smith-shrug", "name": "Smith Machine Shrug", "muscles": ["shoulders", "back"] }
+      ],
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
@@ -204,7 +268,24 @@
       "id": "dumbbells",
       "name": "Dumbbells",
       "picture": "/machines/dumbbells.svg",
-      "muscles": ["chest", "back", "shoulders", "biceps", "triceps"],
+      "exercises": [
+        { "id": "dumbbell-bench-press", "name": "Dumbbell Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "dumbbell-incline-press", "name": "Dumbbell Incline Press", "muscles": ["chest", "shoulders", "triceps"] },
+        { "id": "dumbbell-fly", "name": "Dumbbell Fly", "muscles": ["chest"] },
+        { "id": "dumbbell-shoulder-press", "name": "Dumbbell Shoulder Press", "muscles": ["shoulders", "triceps"] },
+        { "id": "dumbbell-lateral-raise", "name": "Dumbbell Lateral Raise", "muscles": ["shoulders"] },
+        { "id": "dumbbell-front-raise", "name": "Dumbbell Front Raise", "muscles": ["shoulders"] },
+        { "id": "dumbbell-rear-delt-fly", "name": "Dumbbell Rear Delt Fly", "muscles": ["shoulders", "back"] },
+        { "id": "dumbbell-bicep-curl", "name": "Dumbbell Bicep Curl", "muscles": ["biceps"] },
+        { "id": "dumbbell-hammer-curl", "name": "Dumbbell Hammer Curl", "muscles": ["biceps", "forearms"] },
+        { "id": "dumbbell-tricep-extension", "name": "Dumbbell Tricep Extension", "muscles": ["triceps"] },
+        { "id": "dumbbell-kickback", "name": "Dumbbell Tricep Kickback", "muscles": ["triceps"] },
+        { "id": "dumbbell-row", "name": "Dumbbell Row", "muscles": ["back", "biceps"] },
+        { "id": "dumbbell-shrug", "name": "Dumbbell Shrug", "muscles": ["shoulders", "back"] },
+        { "id": "dumbbell-lunge", "name": "Dumbbell Lunge", "muscles": ["quadriceps", "glutes"] },
+        { "id": "dumbbell-goblet-squat", "name": "Dumbbell Goblet Squat", "muscles": ["quadriceps", "glutes"] },
+        { "id": "dumbbell-romanian-deadlift", "name": "Dumbbell Romanian Deadlift", "muscles": ["hamstrings", "glutes", "back"] }
+      ],
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
@@ -217,7 +298,20 @@
       "id": "barbell",
       "name": "Barbell (Free Weight)",
       "picture": "/machines/barbell.svg",
-      "muscles": ["chest", "back", "shoulders", "biceps", "triceps", "quadriceps", "hamstrings", "glutes"],
+      "exercises": [
+        { "id": "barbell-squat", "name": "Barbell Squat", "muscles": ["quadriceps", "glutes", "hamstrings"] },
+        { "id": "barbell-deadlift", "name": "Barbell Deadlift", "muscles": ["back", "glutes", "hamstrings", "quadriceps"] },
+        { "id": "barbell-bench-press", "name": "Barbell Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "barbell-overhead-press", "name": "Barbell Overhead Press", "muscles": ["shoulders", "triceps"] },
+        { "id": "barbell-row", "name": "Barbell Row", "muscles": ["back", "biceps"] },
+        { "id": "barbell-romanian-deadlift", "name": "Barbell Romanian Deadlift", "muscles": ["hamstrings", "glutes", "back"] },
+        { "id": "barbell-front-squat", "name": "Barbell Front Squat", "muscles": ["quadriceps", "core"] },
+        { "id": "barbell-hip-thrust", "name": "Barbell Hip Thrust", "muscles": ["glutes", "hamstrings"] },
+        { "id": "barbell-curl", "name": "Barbell Curl", "muscles": ["biceps"] },
+        { "id": "barbell-skull-crusher", "name": "Barbell Skull Crusher", "muscles": ["triceps"] },
+        { "id": "barbell-shrug", "name": "Barbell Shrug", "muscles": ["shoulders", "back"] },
+        { "id": "barbell-lunge", "name": "Barbell Lunge", "muscles": ["quadriceps", "glutes"] }
+      ],
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
@@ -230,7 +324,9 @@
       "id": "lateral-raise-machine",
       "name": "Lateral Raise Machine",
       "picture": "/machines/lateral-raise.svg",
-      "muscles": ["shoulders"],
+      "exercises": [
+        { "id": "lateral-raise-machine-standard", "name": "Lateral Raise", "muscles": ["shoulders"] }
+      ],
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
