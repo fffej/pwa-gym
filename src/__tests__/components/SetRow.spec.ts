@@ -148,7 +148,16 @@ describe('SetRow', () => {
       expect(wrapper.find('.completed-check').exists()).toBe(true)
     })
 
-    it('does not allow editing weight when completed', async () => {
+    it('shows edit button when set is completed', () => {
+      const completedSet: WorkoutSet = { ...mockSet, isCompleted: true }
+      const wrapper = mount(SetRow, {
+        props: { set: completedSet, setNumber: 1 }
+      })
+
+      expect(wrapper.find('.edit-btn').exists()).toBe(true)
+    })
+
+    it('does not allow editing weight when completed (before clicking edit)', async () => {
       const completedSet: WorkoutSet = { ...mockSet, isCompleted: true }
       const wrapper = mount(SetRow, {
         props: { set: completedSet, setNumber: 1 }
@@ -159,7 +168,7 @@ describe('SetRow', () => {
       expect(wrapper.find('.weight-cell .inline-input').exists()).toBe(false)
     })
 
-    it('does not allow editing reps when completed', async () => {
+    it('does not allow editing reps when completed (before clicking edit)', async () => {
       const completedSet: WorkoutSet = { ...mockSet, isCompleted: true }
       const wrapper = mount(SetRow, {
         props: { set: completedSet, setNumber: 1 }
@@ -168,6 +177,23 @@ describe('SetRow', () => {
       // Click should not trigger edit mode
       await wrapper.find('.reps-cell').trigger('click')
       expect(wrapper.find('.reps-cell .inline-input').exists()).toBe(false)
+    })
+
+    it('allows editing after clicking the edit button on completed set', async () => {
+      const completedSet: WorkoutSet = { ...mockSet, isCompleted: true }
+      const wrapper = mount(SetRow, {
+        props: { set: completedSet, setNumber: 1 }
+      })
+
+      // Click edit button to enable editing
+      await wrapper.find('.edit-btn').trigger('click')
+
+      // Edit button should now be hidden
+      expect(wrapper.find('.edit-btn').exists()).toBe(false)
+
+      // Now clicking weight should work
+      await wrapper.find('.weight-cell').trigger('click')
+      expect(wrapper.find('.weight-cell .inline-input').exists()).toBe(true)
     })
   })
 

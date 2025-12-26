@@ -18,6 +18,7 @@ const emit = defineEmits<{
 // Edit mode states
 const editingWeight = ref(false)
 const editingReps = ref(false)
+const isEditingCompleted = ref(false)
 const weightInputRef = ref<HTMLInputElement | null>(null)
 const repsInputRef = ref<HTMLInputElement | null>(null)
 
@@ -25,8 +26,15 @@ const repsInputRef = ref<HTMLInputElement | null>(null)
 const tempWeight = ref(props.set.weight)
 const tempReps = ref(props.set.reps)
 
+// Whether the set is currently editable (not completed, or editing a completed set)
+const isEditable = computed(() => !props.set.isCompleted || isEditingCompleted.value)
+
+function enableEditing() {
+  isEditingCompleted.value = true
+}
+
 async function startEditWeight() {
-  if (props.set.isCompleted) return
+  if (!isEditable.value) return
   tempWeight.value = props.set.weight
   editingWeight.value = true
   await nextTick()
@@ -35,7 +43,7 @@ async function startEditWeight() {
 }
 
 async function startEditReps() {
-  if (props.set.isCompleted) return
+  if (!isEditable.value) return
   tempReps.value = props.set.reps
   editingReps.value = true
   await nextTick()
@@ -72,7 +80,7 @@ function handleRepsKeydown(e: KeyboardEvent) {
 }
 
 function toggleUnit() {
-  if (props.set.isCompleted) return
+  if (!isEditable.value) return
   const newUnit: WeightUnit = props.set.weightUnit === 'kg' ? 'lbs' : 'kg'
   emit('update', { weightUnit: newUnit })
 }
@@ -87,13 +95,13 @@ function handleComplete() {
 </script>
 
 <template>
-  <div class="set-row" :class="{ completed: set.isCompleted }">
+  <div class="set-row" :class="{ completed: set.isCompleted, editing: isEditingCompleted }">
     <!-- Main row: set number, weight × reps, complete button -->
     <div class="set-main">
       <span class="set-number">{{ setNumber }}</span>
       
       <!-- Weight display/edit -->
-      <div class="value-cell weight-cell" @click="startEditWeight">
+      <div class="value-cell weight-cell" :class="{ editable: isEditable }" @click="startEditWeight">
         <template v-if="editingWeight">
           <input 
             ref="weightInputRef"
@@ -111,7 +119,7 @@ function handleComplete() {
         <button 
           class="unit-badge" 
           @click.stop="toggleUnit"
-          :disabled="set.isCompleted"
+          :disabled="!isEditable"
         >
           {{ set.weightUnit }}
         </button>
@@ -120,7 +128,7 @@ function handleComplete() {
       <span class="separator">×</span>
 
       <!-- Reps display/edit -->
-      <div class="value-cell reps-cell" @click="startEditReps">
+      <div class="value-cell reps-cell" :class="{ editable: isEditable }" @click="startEditReps">
         <template v-if="editingReps">
           <input 
             ref="repsInputRef"
@@ -137,6 +145,19 @@ function handleComplete() {
           <span class="value-label">reps</span>
         </template>
       </div>
+
+      <!-- Edit button for completed sets -->
+      <button 
+        v-if="set.isCompleted && !isEditingCompleted"
+        class="edit-btn"
+        @click="enableEditing"
+        title="Edit set"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+          <path d="m15 5 4 4"/>
+        </svg>
+      </button>
 
       <!-- Complete button -->
       <button 
@@ -160,7 +181,7 @@ function handleComplete() {
     <div class="rpe-row">
       <RPESlider 
         :model-value="set.rpe" 
-        :disabled="set.isCompleted"
+        :disabled="!isEditable"
         @update:model-value="updateRpe" 
       />
     </div>
@@ -209,12 +230,12 @@ function handleComplete() {
   min-height: 40px;
 }
 
-.set-row:not(.completed) .value-cell:hover {
+.value-cell.editable:hover {
   border-color: var(--color-gold);
   background: rgba(74, 144, 217, 0.08);
 }
 
-.set-row.completed .value-cell {
+.value-cell:not(.editable) {
   cursor: default;
 }
 
@@ -299,6 +320,28 @@ function handleComplete() {
   padding: 0 0.15rem;
 }
 
+.edit-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(74, 144, 217, 0.25);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.edit-btn:hover {
+  background: rgba(74, 144, 217, 0.15);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
 .complete-btn {
   width: 44px;
   height: 44px;
@@ -312,7 +355,6 @@ function handleComplete() {
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .complete-btn:hover {
@@ -335,7 +377,12 @@ function handleComplete() {
   border-radius: 50%;
   color: var(--color-accent-teal);
   flex-shrink: 0;
-  margin-left: auto;
+}
+
+/* When editing a completed set, restore full opacity and show editing state */
+.set-row.completed.editing {
+  opacity: 1;
+  border-color: var(--color-gold);
 }
 
 .rpe-row {
