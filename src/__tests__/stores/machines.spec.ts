@@ -25,6 +25,24 @@ describe('Machines Store', () => {
     })
   })
 
+  describe('getExerciseById', () => {
+    it('returns correct exercise for valid ID', () => {
+      const store = useMachinesStore()
+      const exercise = store.getExerciseById('bench-press-flat')
+      
+      expect(exercise).toBeDefined()
+      expect(exercise?.id).toBe('bench-press-flat')
+      expect(exercise?.name).toBe('Flat Bench Press')
+    })
+
+    it('returns undefined for non-existent ID', () => {
+      const store = useMachinesStore()
+      const exercise = store.getExerciseById('non-existent-exercise')
+      
+      expect(exercise).toBeUndefined()
+    })
+  })
+
   describe('getMachinesByLocation', () => {
     it('filters machines by Main Room location', () => {
       const store = useMachinesStore()
@@ -52,28 +70,50 @@ describe('Machines Store', () => {
   })
 
   describe('getMachinesByMuscle', () => {
-    it('filters machines targeting chest', () => {
+    it('filters machines with exercises targeting chest', () => {
       const store = useMachinesStore()
       const machines = store.getMachinesByMuscle('chest')
       
       expect(machines.length).toBeGreaterThan(0)
-      expect(machines.every(m => m.muscles.includes('chest'))).toBe(true)
+      // Check that at least one exercise targets chest
+      expect(machines.every(m => m.exercises.some(e => e.muscles.includes('chest')))).toBe(true)
     })
 
-    it('filters machines targeting quadriceps', () => {
+    it('filters machines with exercises targeting quadriceps', () => {
       const store = useMachinesStore()
       const machines = store.getMachinesByMuscle('quadriceps')
       
       expect(machines.length).toBeGreaterThan(0)
-      expect(machines.every(m => m.muscles.includes('quadriceps'))).toBe(true)
+      expect(machines.every(m => m.exercises.some(e => e.muscles.includes('quadriceps')))).toBe(true)
     })
 
-    it('filters machines targeting back', () => {
+    it('filters machines with exercises targeting back', () => {
       const store = useMachinesStore()
       const machines = store.getMachinesByMuscle('back')
       
       expect(machines.length).toBeGreaterThan(0)
-      expect(machines.every(m => m.muscles.includes('back'))).toBe(true)
+      expect(machines.every(m => m.exercises.some(e => e.muscles.includes('back')))).toBe(true)
+    })
+  })
+
+  describe('getExercisesByMuscle', () => {
+    it('filters exercises targeting chest', () => {
+      const store = useMachinesStore()
+      const exercises = store.getExercisesByMuscle('chest')
+      
+      expect(exercises.length).toBeGreaterThan(0)
+      expect(exercises.every(e => e.muscles.includes('chest'))).toBe(true)
+    })
+
+    it('includes machine info with exercises', () => {
+      const store = useMachinesStore()
+      const exercises = store.getExercisesByMuscle('chest')
+      
+      expect(exercises.length).toBeGreaterThan(0)
+      exercises.forEach(e => {
+        expect(e.machineId).toBeDefined()
+        expect(e.machineName).toBeDefined()
+      })
     })
   })
 
@@ -92,12 +132,11 @@ describe('Machines Store', () => {
       expect(results.some(m => m.name.toLowerCase().includes('bench'))).toBe(true)
     })
 
-    it('finds machines by muscle group', () => {
+    it('finds machines by exercise name', () => {
       const store = useMachinesStore()
-      const results = store.searchMachines('chest')
+      const results = store.searchMachines('Tricep Pushdown')
       
       expect(results.length).toBeGreaterThan(0)
-      expect(results.some(m => m.muscles.includes('chest'))).toBe(true)
     })
 
     it('returns empty array for no matches', () => {
@@ -116,6 +155,23 @@ describe('Machines Store', () => {
     })
   })
 
+  describe('searchExercises', () => {
+    it('finds exercise by name', () => {
+      const store = useMachinesStore()
+      const results = store.searchExercises('Flat Bench Press')
+      
+      expect(results.some(e => e.name === 'Flat Bench Press')).toBe(true)
+    })
+
+    it('finds exercises by muscle group', () => {
+      const store = useMachinesStore()
+      const results = store.searchExercises('chest')
+      
+      expect(results.length).toBeGreaterThan(0)
+      expect(results.some(e => e.muscles.includes('chest'))).toBe(true)
+    })
+  })
+
   describe('computed properties', () => {
     it('locations returns all unique locations', () => {
       const store = useMachinesStore()
@@ -126,7 +182,7 @@ describe('Machines Store', () => {
       expect(store.locations.length).toBe(3)
     })
 
-    it('muscleGroups returns unique muscle groups', () => {
+    it('muscleGroups returns unique muscle groups from exercises', () => {
       const store = useMachinesStore()
       
       expect(store.muscleGroups.length).toBeGreaterThan(0)
@@ -135,6 +191,18 @@ describe('Machines Store', () => {
       expect(store.muscleGroups).toContain('back')
       expect(store.muscleGroups).toContain('quadriceps')
     })
+
+    it('allExercises returns flattened list with machine info', () => {
+      const store = useMachinesStore()
+      
+      expect(store.allExercises.length).toBeGreaterThan(0)
+      store.allExercises.forEach(e => {
+        expect(e.id).toBeDefined()
+        expect(e.name).toBeDefined()
+        expect(e.machineId).toBeDefined()
+        expect(e.machineName).toBeDefined()
+      })
+    })
   })
 
   describe('machines data', () => {
@@ -142,6 +210,12 @@ describe('Machines Store', () => {
       const store = useMachinesStore()
       expect(store.machines.length).toBeGreaterThan(0)
     })
+
+    it('each machine has exercises', () => {
+      const store = useMachinesStore()
+      store.machines.forEach(m => {
+        expect(m.exercises.length).toBeGreaterThan(0)
+      })
+    })
   })
 })
-

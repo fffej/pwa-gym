@@ -30,7 +30,8 @@ export const useWorkoutStore = defineStore('workout', () => {
 
   // Add an exercise to the active workout
   async function addExercise(
-    machineId: string, 
+    machineId: string,
+    exerciseId: string,
     attachmentId?: string, 
     grip?: GripType
   ): Promise<Exercise | null> {
@@ -38,11 +39,15 @@ export const useWorkoutStore = defineStore('workout', () => {
 
     const machinesStore = useMachinesStore()
     const settingsStore = useSettingsStore()
+    
     const machine = machinesStore.getMachineById(machineId)
     if (!machine) return null
 
-    // Get smart defaults from previous usage
-    const defaults = await machineDefaultsDb.getDefaults(machineId)
+    const machineExercise = machine.exercises.find(e => e.id === exerciseId)
+    if (!machineExercise) return null
+
+    // Get smart defaults from previous usage (check exercise-specific first, then machine-level)
+    const defaults = await machineDefaultsDb.getDefaults(machineId, exerciseId)
     const defaultWeight = defaults?.lastWeight ?? 0
     const defaultUnit = defaults?.lastWeightUnit ?? settingsStore.settings.defaultWeightUnit
     const defaultReps = defaults?.lastReps ?? 10
@@ -50,8 +55,10 @@ export const useWorkoutStore = defineStore('workout', () => {
     const exercise: Exercise = {
       id: generateId(),
       machineId,
+      exerciseId,
       machineName: machine.name,
-      attachmentId: attachmentId ?? defaults?.lastAttachmentId,
+      exerciseName: machineExercise.name,
+      attachmentId: attachmentId ?? defaults?.lastAttachmentId ?? machineExercise.requiredAttachment,
       grip: grip ?? defaults?.lastGrip,
       sets: [{
         id: generateId(),
@@ -139,10 +146,10 @@ export const useWorkoutStore = defineStore('workout', () => {
     set.isCompleted = true
     set.completedAt = Date.now()
 
-    // Update machine defaults for smart suggestions
-    // Create plain object to avoid storing reactive proxies
+    // Update machine defaults for smart suggestions (include exerciseId)
     await machineDefaultsDb.updateDefaults({
       machineId: String(exercise.machineId),
+      exerciseId: String(exercise.exerciseId),
       lastWeight: Number(set.weight),
       lastWeightUnit: String(set.weightUnit) as 'kg' | 'lbs',
       lastReps: Number(set.reps),
@@ -218,4 +225,3 @@ export const useWorkoutStore = defineStore('workout', () => {
     totalVolume
   }
 })
-

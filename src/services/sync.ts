@@ -7,8 +7,8 @@ import {
   writeBatch
 } from 'firebase/firestore'
 import { firestore } from './firebase'
-import { db, settingsDb } from './db'
-import type { Workout, UserSettings, MachineDefaults, Plan } from '@/types/workout'
+import { db, settingsDb, machineCustomizationsDb } from './db'
+import type { Workout, UserSettings, MachineDefaults, Plan, UserMachineCustomization } from '@/types/workout'
 
 // Sync status
 export type SyncStatus = 'idle' | 'syncing' | 'error' | 'offline'
@@ -170,6 +170,19 @@ async function syncPlans(userId: string): Promise<void> {
   )
 }
 
+// Sync machine customizations
+async function syncMachineCustomizations(userId: string): Promise<void> {
+  await syncCollection<UserMachineCustomization>(
+    userId,
+    'machineCustomizations',
+    () => machineCustomizationsDb.getAllCustomizations(),
+    (customization) => customization.machineId,
+    async (customization) => {
+      await machineCustomizationsDb.saveCustomization(customization)
+    }
+  )
+}
+
 // Perform full bidirectional sync
 export async function performFullSync(userId: string): Promise<boolean> {
   if (!isOnline.value) {
@@ -186,7 +199,8 @@ export async function performFullSync(userId: string): Promise<boolean> {
       syncWorkouts(userId),
       syncSettings(userId),
       syncMachineDefaults(userId),
-      syncPlans(userId)
+      syncPlans(userId),
+      syncMachineCustomizations(userId)
     ])
     
     lastSyncTime.value = Date.now()
@@ -256,6 +270,20 @@ export async function pushPlan(userId: string, plan: Plan): Promise<boolean> {
   }
 }
 
+// Push a machine customization to Firestore
+export async function pushMachineCustomization(userId: string, customization: UserMachineCustomization): Promise<boolean> {
+  if (!isOnline.value) return false
+  
+  try {
+    const docRef = doc(firestore, getUserCollectionPath(userId, 'machineCustomizations'), customization.machineId)
+    await setDoc(docRef, customization)
+    return true
+  } catch (error) {
+    console.error('Failed to push machine customization:', error)
+    return false
+  }
+}
+
 // Auto-sync on reconnection
 let autoSyncUserId: string | null = null
 
@@ -280,4 +308,3 @@ if (typeof window !== 'undefined') {
     }
   })
 }
-

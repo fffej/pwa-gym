@@ -32,12 +32,18 @@ async function startWithPlan(plan: Plan) {
   for (const planExercise of plan.exercises) {
     await workoutStore.addExercise(
       planExercise.machineId,
+      planExercise.exerciseId,
       planExercise.attachmentId,
       planExercise.grip
     )
   }
   
   router.push('/workout')
+}
+
+function getExerciseName(planExercise: { machineId: string; exerciseId: string }): string {
+  const exercise = machinesStore.getExerciseById(planExercise.exerciseId)
+  return exercise?.name ?? getMachineName(planExercise.machineId)
 }
 
 function getMachineName(machineId: string): string {
@@ -51,7 +57,7 @@ function getExerciseCount(plan: Plan): string {
 }
 
 function getExercisePreview(plan: Plan): string {
-  const names = plan.exercises.slice(0, 3).map(e => getMachineName(e.machineId))
+  const names = plan.exercises.slice(0, 3).map(e => getExerciseName(e))
   if (plan.exercises.length > 3) {
     return names.join(', ') + '...'
   }
@@ -360,4 +366,5 @@ function getExercisePreview(plan: Plan): string {
   text-decoration: underline;
 }
 </style>
+
 

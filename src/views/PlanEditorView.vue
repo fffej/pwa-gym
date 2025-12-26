@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { usePlansStore } from '@/stores/plans'
 import { useMachinesStore } from '@/stores/machines'
-import type { PlanExercise, Machine, GripType } from '@/types/workout'
+import type { PlanExercise, Machine, MachineExercise, GripType } from '@/types/workout'
 
 const router = useRouter()
 const route = useRoute()
@@ -23,16 +23,13 @@ const hasChanges = ref(false)
 const showMachinePicker = ref(false)
 const searchQuery = ref('')
 const selectedMachine = ref<Machine | null>(null)
+const selectedExercise = ref<MachineExercise | null>(null)
 const selectedAttachmentId = ref<string | null>(null)
 const selectedGrip = ref<GripType | null>(null)
 
 const filteredMachines = computed(() => {
   if (!searchQuery.value) return machinesStore.machines
-  const query = searchQuery.value.toLowerCase()
-  return machinesStore.machines.filter(m =>
-    m.name.toLowerCase().includes(query) ||
-    m.muscles.some(muscle => muscle.toLowerCase().includes(query))
-  )
+  return machinesStore.searchMachines(searchQuery.value)
 })
 
 const hasAttachments = computed(() =>
@@ -80,6 +77,18 @@ function getMachineName(machineId: string): string {
   return machine?.name ?? machineId
 }
 
+function getExerciseName(exerciseId: string): string {
+  const exercise = machinesStore.getExerciseById(exerciseId)
+  return exercise?.name ?? exerciseId
+}
+
+function getMachineMuscles(machine: Machine): string {
+  // Collect unique muscles from all exercises
+  const muscles = new Set<string>()
+  machine.exercises.forEach(ex => ex.muscles.forEach(m => muscles.add(m)))
+  return Array.from(muscles).slice(0, 2).map(formatMuscle).join(', ')
+}
+
 function getAttachmentName(machineId: string, attachmentId?: string): string {
   if (!attachmentId) return ''
   const machine = machinesStore.getMachineById(machineId)
@@ -96,6 +105,7 @@ function openMachinePicker() {
   showMachinePicker.value = true
   searchQuery.value = ''
   selectedMachine.value = null
+  selectedExercise.value = null
   selectedAttachmentId.value = null
   selectedGrip.value = null
 }
@@ -103,16 +113,38 @@ function openMachinePicker() {
 function closeMachinePicker() {
   showMachinePicker.value = false
   selectedMachine.value = null
+  selectedExercise.value = null
   selectedAttachmentId.value = null
   selectedGrip.value = null
 }
 
 function selectMachine(machine: Machine) {
   selectedMachine.value = machine
+  selectedExercise.value = null
   selectedAttachmentId.value = null
   selectedGrip.value = null
   
-  if (machine.attachments.length === 0) {
+  // If machine has only one exercise and no attachments, add directly
+  if (machine.exercises.length === 1 && machine.attachments.length === 0) {
+    selectedExercise.value = machine.exercises[0] ?? null
+    addExercise()
+  }
+}
+
+function selectExerciseFromMachine(exercise: MachineExercise) {
+  selectedExercise.value = exercise
+  
+  // If exercise requires a specific attachment, auto-select it
+  if (exercise.requiredAttachment) {
+    selectedAttachmentId.value = exercise.requiredAttachment
+    const attachment = selectedMachine.value?.attachments.find(a => a.id === exercise.requiredAttachment)
+    if (attachment && attachment.grips.length === 1) {
+      selectedGrip.value = attachment.grips[0] ?? null
+      addExercise()
+    } else if (!attachment || attachment.grips.length === 0) {
+      addExercise()
+    }
+  } else if (selectedMachine.value && selectedMachine.value.attachments.length === 0) {
     addExercise()
   }
 }
@@ -128,10 +160,11 @@ function selectAttachment(attachmentId: string) {
 }
 
 function addExercise() {
-  if (!selectedMachine.value) return
+  if (!selectedMachine.value || !selectedExercise.value) return
   
   const exercise: PlanExercise = {
     machineId: selectedMachine.value.id,
+    exerciseId: selectedExercise.value.id,
     attachmentId: selectedAttachmentId.value ?? undefined,
     grip: selectedGrip.value ?? undefined
   }
@@ -243,7 +276,8 @@ function formatMuscle(muscle: string): string {
             <div class="exercise-info">
               <span class="exercise-number">{{ index + 1 }}</span>
               <div class="exercise-details">
-                <span class="exercise-name">{{ getMachineName(exercise.machineId) }}</span>
+                <span class="exercise-name">{{ getExerciseName(exercise.exerciseId) }}</span>
+                <span class="exercise-machine">{{ getMachineName(exercise.machineId) }}</span>
                 <span v-if="exercise.attachmentId || exercise.grip" class="exercise-config">
                   {{ getAttachmentName(exercise.machineId, exercise.attachmentId) }}
                   <template v-if="exercise.attachmentId && exercise.grip"> · </template>
@@ -308,7 +342,7 @@ function formatMuscle(muscle: string): string {
     <div v-if="showMachinePicker" class="modal-overlay" @click="closeMachinePicker">
       <div class="modal picker-modal" @click.stop>
         <div class="picker-header">
-          <h3>{{ selectedMachine ? 'Configure Exercise' : 'Select Exercise' }}</h3>
+          <h3>{{ !selectedMachine ? 'Select Machine' : !selectedExercise ? 'Select Exercise' : 'Configure' }}</h3>
           <button class="close-btn" @click="closeMachinePicker">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"/>
@@ -340,7 +374,34 @@ function formatMuscle(muscle: string): string {
               @click="selectMachine(machine)"
             >
               <span class="machine-name">{{ machine.name }}</span>
-              <span class="machine-muscles">{{ machine.muscles.slice(0, 2).map(formatMuscle).join(', ') }}</span>
+              <span class="machine-muscles">{{ getMachineMuscles(machine) }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Exercise Selection -->
+        <div v-else-if="!selectedExercise" class="picker-content">
+          <div class="selected-machine-info">
+            <h4>{{ selectedMachine.name }}</h4>
+            <p>{{ getMachineMuscles(selectedMachine) }}</p>
+          </div>
+
+          <h5 class="picker-section-title">Select Exercise</h5>
+          <div class="exercises-picker-list">
+            <button
+              v-for="exercise in selectedMachine.exercises"
+              :key="exercise.id"
+              class="machine-item"
+              @click="selectExerciseFromMachine(exercise)"
+            >
+              <span class="machine-name">{{ exercise.name }}</span>
+              <span class="machine-muscles">{{ exercise.muscles.slice(0, 2).map(formatMuscle).join(', ') }}</span>
+            </button>
+          </div>
+
+          <div class="picker-actions">
+            <button class="picker-back-btn" @click="selectedMachine = null">
+              Back
             </button>
           </div>
         </div>
@@ -348,11 +409,11 @@ function formatMuscle(muscle: string): string {
         <!-- Attachment/Grip Selection -->
         <div v-else class="picker-content">
           <div class="selected-machine-info">
-            <h4>{{ selectedMachine.name }}</h4>
-            <p>{{ selectedMachine.muscles.map(formatMuscle).join(', ') }}</p>
+            <h4>{{ selectedExercise.name }}</h4>
+            <p>{{ selectedMachine.name }}</p>
           </div>
 
-          <div v-if="hasAttachments" class="config-section">
+          <div v-if="hasAttachments && !selectedExercise.requiredAttachment" class="config-section">
             <h5>Select Attachment</h5>
             <div class="option-grid">
               <button
@@ -383,12 +444,12 @@ function formatMuscle(muscle: string): string {
           </div>
 
           <div class="picker-actions">
-            <button class="picker-back-btn" @click="selectedMachine = null">
+            <button class="picker-back-btn" @click="selectedExercise = null">
               Back
             </button>
             <button
               class="picker-add-btn"
-              :disabled="hasAttachments && selectedAttachmentId === null"
+              :disabled="hasAttachments && !selectedExercise.requiredAttachment && selectedAttachmentId === null"
               @click="addExercise"
             >
               Add to Plan
@@ -806,6 +867,29 @@ function formatMuscle(muscle: string): string {
 .machine-muscles {
   font-size: 0.75rem;
   color: var(--color-text-muted);
+}
+
+.exercise-machine {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.picker-section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 0.05em;
+}
+
+.exercises-picker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 40vh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
 }
 
 .selected-machine-info {

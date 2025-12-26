@@ -1,5 +1,5 @@
 import Dexie, { type Table } from 'dexie'
-import type { Workout, UserSettings, MachineDefaults, Plan } from '@/types/workout'
+import type { Workout, UserSettings, MachineDefaults, Plan, UserMachineCustomization } from '@/types/workout'
 
 // Database class extending Dexie
 class GymDatabase extends Dexie {
@@ -7,6 +7,7 @@ class GymDatabase extends Dexie {
   settings!: Table<UserSettings, number>
   machineDefaults!: Table<MachineDefaults, string>
   plans!: Table<Plan, string>
+  machineCustomizations!: Table<UserMachineCustomization, string>
 
   constructor() {
     super('GymDatabase')
@@ -34,6 +35,20 @@ class GymDatabase extends Dexie {
       settings: '++id',
       machineDefaults: 'machineId, updatedAt',
       plans: 'id, name, updatedAt'
+    })
+
+    // Version 4: Add machineCustomizations, new exercise model (clears old data)
+    this.version(4).stores({
+      workouts: 'id, date, startTime, updatedAt',
+      settings: '++id',
+      machineDefaults: 'machineId, updatedAt',
+      plans: 'id, name, updatedAt',
+      machineCustomizations: 'machineId, updatedAt'
+    }).upgrade(tx => {
+      // Clear old data since we're changing the data model
+      tx.table('workouts').clear()
+      tx.table('machineDefaults').clear()
+      tx.table('plans').clear()
     })
   }
 }
@@ -94,6 +109,14 @@ export const workoutDb = {
     )
   },
 
+  // Get workouts containing a specific exercise
+  async getWorkoutsWithExercise(exerciseId: string): Promise<Workout[]> {
+    const allWorkouts = await db.workouts.toArray()
+    return allWorkouts.filter(workout => 
+      workout.exercises.some(ex => ex.exerciseId === exerciseId)
+    )
+  },
+
   // Get total count of workouts (for pagination)
   async getWorkoutCount(): Promise<number> {
     return await db.workouts.count()
@@ -151,8 +174,15 @@ export const settingsDb = {
 
 // Machine defaults operations (for smart defaults)
 export const machineDefaultsDb = {
-  // Get defaults for a machine
-  async getDefaults(machineId: string): Promise<MachineDefaults | undefined> {
+  // Get defaults for a machine/exercise combination
+  async getDefaults(machineId: string, exerciseId?: string): Promise<MachineDefaults | undefined> {
+    if (exerciseId) {
+      // Try to find exercise-specific defaults first
+      const all = await db.machineDefaults.toArray()
+      const exerciseDefault = all.find(d => d.machineId === machineId && d.exerciseId === exerciseId)
+      if (exerciseDefault) return exerciseDefault
+    }
+    // Fall back to machine-level defaults
     return await db.machineDefaults.get(machineId)
   },
 
@@ -164,6 +194,29 @@ export const machineDefaultsDb = {
   // Get all machine defaults
   async getAllDefaults(): Promise<MachineDefaults[]> {
     return await db.machineDefaults.toArray()
+  }
+}
+
+// Machine customizations operations
+export const machineCustomizationsDb = {
+  // Get customizations for a specific machine
+  async getCustomization(machineId: string): Promise<UserMachineCustomization | undefined> {
+    return await db.machineCustomizations.get(machineId)
+  },
+
+  // Get all customizations
+  async getAllCustomizations(): Promise<UserMachineCustomization[]> {
+    return await db.machineCustomizations.toArray()
+  },
+
+  // Save a customization
+  async saveCustomization(customization: UserMachineCustomization): Promise<void> {
+    await db.machineCustomizations.put({ ...customization, updatedAt: Date.now() })
+  },
+
+  // Delete a customization
+  async deleteCustomization(machineId: string): Promise<void> {
+    await db.machineCustomizations.delete(machineId)
   }
 }
 
@@ -203,4 +256,3 @@ export const plansDb = {
 }
 
 export default db
-

@@ -6,11 +6,21 @@ import openingHoursData from '@/data/opening-hours.json'
 
 const router = useRouter()
 
+interface MachineExercise {
+  id: string
+  name: string
+  muscles: string[]
+  description?: string
+  requiredAttachment?: string
+  videoUrl?: string
+  isCustom?: boolean
+}
+
 interface Machine {
   id: string
   name: string
   picture: string
-  muscles: string[]
+  exercises: MachineExercise[]
   location: string
   weightType: string
   attachments: { id: string; name: string; grips: string[] }[]
@@ -20,6 +30,12 @@ interface Machine {
   maxWeight?: number
   usage?: string
   videoUrl?: string
+}
+
+function getMachineMuscles(machine: Machine): string[] {
+  const muscles = new Set<string>()
+  machine.exercises.forEach(ex => ex.muscles.forEach(m => muscles.add(m)))
+  return Array.from(muscles)
 }
 
 interface OpeningHours {
@@ -198,7 +214,7 @@ function getYouTubeEmbedUrl(url: string): string | null {
             <div class="equipment-info">
               <h4 class="equipment-name">{{ machine.name }}</h4>
               <div class="equipment-muscles">
-                <span v-for="muscle in machine.muscles" :key="muscle" class="muscle-tag">
+                <span v-for="muscle in getMachineMuscles(machine)" :key="muscle" class="muscle-tag">
                   {{ muscle }}
                 </span>
               </div>
@@ -234,9 +250,20 @@ function getYouTubeEmbedUrl(url: string): string | null {
             <div class="modal-section">
               <h3 class="modal-section-title">Muscles Targeted</h3>
               <div class="modal-muscles">
-                <span v-for="muscle in selectedMachine.muscles" :key="muscle" class="modal-muscle-tag">
+                <span v-for="muscle in getMachineMuscles(selectedMachine)" :key="muscle" class="modal-muscle-tag">
                   {{ muscle }}
                 </span>
+              </div>
+            </div>
+
+            <!-- Available Exercises -->
+            <div v-if="selectedMachine.exercises.length > 0" class="modal-section">
+              <h3 class="modal-section-title">Available Exercises</h3>
+              <div class="exercises-list">
+                <div v-for="exercise in selectedMachine.exercises" :key="exercise.id" class="exercise-item">
+                  <span class="exercise-name">{{ exercise.name }}</span>
+                  <span class="exercise-muscles">{{ exercise.muscles.join(', ') }}</span>
+                </div>
               </div>
             </div>
 
@@ -767,6 +794,33 @@ function getYouTubeEmbedUrl(url: string): string | null {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exercise-item {
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exercise-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.exercise-muscles {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
 }
 
 .attachment-name {

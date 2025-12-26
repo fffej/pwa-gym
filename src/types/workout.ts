@@ -39,19 +39,44 @@ export interface Attachment {
   grips: GripType[]
 }
 
-// Machine/Equipment configuration (from JSON)
+// Exercise within a machine (NEW)
+export interface MachineExercise {
+  id: string
+  name: string
+  muscles: MuscleGroup[]
+  description?: string
+  requiredAttachment?: string  // ID of required attachment
+  videoUrl?: string
+  isCustom?: boolean  // true for user-added exercises
+}
+
+// Machine/Equipment configuration
 export interface Machine {
   id: string
   name: string
   picture: string
-  muscles: MuscleGroup[]
   location: RoomLocation
   weightType: WeightType
+  exercises: MachineExercise[]  // Exercises available on this machine
   attachments: Attachment[]
   defaultRestPeriod?: number
   weightIncrement?: number
   minWeight?: number
   maxWeight?: number
+  usage?: string
+  videoUrl?: string
+}
+
+// User customizations per machine (NEW)
+export interface UserMachineCustomization {
+  machineId: string
+  customExercises: MachineExercise[]
+  customAttachments: Attachment[]
+  overrides: {
+    defaultRestPeriod?: number
+    weightIncrement?: number
+  }
+  updatedAt: number
 }
 
 // A single set within an exercise
@@ -71,7 +96,9 @@ export interface WorkoutSet {
 export interface Exercise {
   id: string
   machineId: string
+  exerciseId: string  // References MachineExercise.id
   machineName: string
+  exerciseName: string  // Name of the specific exercise
   attachmentId?: string
   grip?: GripType
   sets: WorkoutSet[]
@@ -97,9 +124,10 @@ export interface UserSettings {
   updatedAt?: number // For sync conflict resolution
 }
 
-// For tracking last used values per machine (smart defaults)
+// For tracking last used values per machine/exercise (smart defaults)
 export interface MachineDefaults {
   machineId: string
+  exerciseId?: string  // Track defaults per exercise
   lastWeight: number
   lastWeightUnit: WeightUnit
   lastReps: number
@@ -111,6 +139,7 @@ export interface MachineDefaults {
 // An exercise within a plan (template without set data)
 export interface PlanExercise {
   machineId: string
+  exerciseId: string  // References MachineExercise.id
   attachmentId?: string
   grip?: GripType
 }
@@ -123,4 +152,3 @@ export interface Plan {
   exercises: PlanExercise[]
   updatedAt?: number // For sync conflict resolution
 }
-

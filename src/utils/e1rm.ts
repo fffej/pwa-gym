@@ -88,3 +88,4 @@ export function getBestE1RM(
   return Math.max(...sets.map(set => calculateE1RM(set.weight, set.reps, formula)))
 }
 
+
