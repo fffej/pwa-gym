@@ -90,7 +90,12 @@ function updateRpe(rpe: number | undefined) {
 }
 
 function handleComplete() {
-  emit('complete')
+  // If we were editing a completed set, just exit edit mode
+  if (isEditingCompleted.value) {
+    isEditingCompleted.value = false
+  } else {
+    emit('complete')
+  }
 }
 </script>
 
@@ -146,34 +151,39 @@ function handleComplete() {
         </template>
       </div>
 
-      <!-- Edit button for completed sets -->
-      <button 
-        v-if="set.isCompleted && !isEditingCompleted"
-        class="edit-btn"
-        @click="enableEditing"
-        title="Edit set"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-          <path d="m15 5 4 4"/>
-        </svg>
-      </button>
+      <!-- Action buttons container - always on far right -->
+      <div class="action-buttons">
+        <!-- Edit button for completed sets (not in edit mode) -->
+        <button 
+          v-if="set.isCompleted && !isEditingCompleted"
+          class="edit-btn"
+          @click="enableEditing"
+          title="Edit set"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+            <path d="m15 5 4 4"/>
+          </svg>
+        </button>
 
-      <!-- Complete button -->
-      <button 
-        v-if="!set.isCompleted"
-        class="complete-btn"
-        @click="handleComplete"
-        title="Complete set"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      </button>
-      <div v-else class="completed-check">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-        </svg>
+        <!-- Complete button: shown for incomplete sets OR when editing a completed set -->
+        <button 
+          v-if="!set.isCompleted || isEditingCompleted"
+          class="complete-btn"
+          @click="handleComplete"
+          :title="isEditingCompleted ? 'Done editing' : 'Complete set'"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </button>
+        
+        <!-- Static completed check: only when completed and NOT editing -->
+        <div v-if="set.isCompleted && !isEditingCompleted" class="completed-check">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -320,6 +330,14 @@ function handleComplete() {
   padding: 0 0.15rem;
 }
 
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .edit-btn {
   width: 36px;
   height: 36px;
@@ -333,7 +351,6 @@ function handleComplete() {
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .edit-btn:hover {
