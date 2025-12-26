@@ -315,10 +315,6 @@ function getYouTubeEmbedUrl(url: string): string | null {
                   <span class="detail-label">Max Weight</span>
                   <span class="detail-value">{{ selectedMachineWithCustoms.maxWeight }}kg</span>
                 </div>
-                <div class="detail-item">
-                  <span class="detail-label">Rest Period</span>
-                  <span class="detail-value">{{ selectedMachineWithCustoms.defaultRestPeriod }}s</span>
-                </div>
               </div>
             </div>
 

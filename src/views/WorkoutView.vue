@@ -1,22 +1,61 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorkoutStore } from '@/stores/workout'
-import { useSettingsStore } from '@/stores/settings'
 import ExerciseCard from '@/components/ExerciseCard.vue'
-import RestTimer from '@/components/RestTimer.vue'
 
 const router = useRouter()
 const workoutStore = useWorkoutStore()
-const settingsStore = useSettingsStore()
 
-const showRestTimer = ref(false)
-const restDuration = ref(60)
 const showFinishConfirm = ref(false)
 
+// Rest stopwatch state
+const showRestModal = ref(false)
+const restElapsed = ref(0)
+const isRestRunning = ref(false)
+let restInterval: number | null = null
+
+// Stopwatch display format
+const restDisplay = computed(() => {
+  const mins = Math.floor(restElapsed.value / 60)
+  const secs = restElapsed.value % 60
+  return `${mins}:${secs.toString().padStart(2, '0')}`
+})
+
+function startRest() {
+  isRestRunning.value = true
+  restInterval = window.setInterval(() => {
+    restElapsed.value++
+  }, 1000)
+}
+
+function pauseRest() {
+  isRestRunning.value = false
+  if (restInterval) {
+    clearInterval(restInterval)
+    restInterval = null
+  }
+}
+
+function resetRest() {
+  pauseRest()
+  restElapsed.value = 0
+}
+
+function openRestModal() {
+  showRestModal.value = true
+  resetRest()
+  startRest()
+}
+
+// Cleanup on unmount
+onUnmounted(() => {
+  if (restInterval) {
+    clearInterval(restInterval)
+  }
+})
+
 onMounted(async () => {
-  await settingsStore.loadSettings()
-  
   // If no active workout, redirect to home
   if (!workoutStore.isWorkoutActive) {
     router.push('/')
@@ -57,30 +96,10 @@ function handleUpdateSet(exerciseId: string, setId: string, updates: Record<stri
 
 async function handleCompleteSet(exerciseId: string, setId: string) {
   await workoutStore.completeSet(exerciseId, setId)
-  
-  // Check timer behavior setting
-  const timerBehavior = settingsStore.settings.timerBehavior
-  if (timerBehavior === 'disabled') {
-    return // Don't show timer at all
-  }
-  
-  // Get the exercise and check if we should show rest timer
-  const exercise = workoutStore.getExercise(exerciseId)
-  if (exercise) {
-    const set = exercise.sets.find(s => s.id === setId)
-    if (set) {
-      restDuration.value = set.restPeriod
-      showRestTimer.value = true
-    }
-  }
 }
 
 function handleRemoveExercise(exerciseId: string) {
   workoutStore.removeExercise(exerciseId)
-}
-
-function dismissRestTimer() {
-  showRestTimer.value = false
 }
 
 async function finishWorkout() {
@@ -111,18 +130,14 @@ function discardWorkout() {
           <span class="stat-value">{{ workoutStore.totalSetsCompleted }}</span>
           <span class="stat-label">Sets</span>
         </div>
+        <button class="stat stat-btn" @click="openRestModal">
+          <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </button>
       </div>
     </header>
-
-    <!-- Rest Timer Overlay -->
-    <div v-if="showRestTimer" class="rest-timer-overlay">
-      <RestTimer 
-        :duration="restDuration" 
-        :auto-start="settingsStore.settings.timerBehavior === 'auto'"
-        @complete="dismissRestTimer"
-        @dismiss="dismissRestTimer"
-      />
-    </div>
 
     <!-- Finish Confirmation Modal -->
     <div v-if="showFinishConfirm" class="modal-overlay" @click.self="showFinishConfirm = false">
@@ -146,6 +161,46 @@ function discardWorkout() {
             Discard
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- Rest Stopwatch Modal -->
+    <div v-if="showRestModal" class="modal-overlay" @click.self="pauseRest(); showRestModal = false">
+      <div class="modal rest-modal">
+        <h2>Rest Time</h2>
+        
+        <!-- Stopwatch Display -->
+        <div class="rest-display" :class="{ running: isRestRunning }">
+          {{ restDisplay }}
+        </div>
+
+        <!-- Stopwatch Controls -->
+        <div class="rest-controls">
+          <button v-if="!isRestRunning" class="rest-btn start" @click="startRest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Resume
+          </button>
+          <button v-else class="rest-btn pause" @click="pauseRest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"/>
+              <rect x="14" y="4" width="4" height="16"/>
+            </svg>
+            Pause
+          </button>
+          <button class="rest-btn reset" @click="resetRest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            Reset
+          </button>
+        </div>
+
+        <button class="modal-btn close-rest" @click="pauseRest(); showRestModal = false">
+          Done
+        </button>
       </div>
     </div>
 
@@ -271,6 +326,11 @@ function discardWorkout() {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-gold);
+  line-height: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-label {
@@ -365,20 +425,6 @@ function discardWorkout() {
   transform: translateY(-1px);
 }
 
-.rest-timer-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 100;
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -462,6 +508,110 @@ function discardWorkout() {
 .modal-btn.discard:hover {
   background: rgba(224, 122, 95, 0.1);
   border-color: var(--color-accent-coral);
+}
+
+/* Rest Button Styles */
+.stat-btn {
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stat-btn:hover {
+  background: var(--color-bg-tertiary);
+  transform: scale(1.05);
+}
+
+.stat-icon {
+  color: var(--color-gold);
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+/* Rest Modal Styles */
+.rest-modal {
+  max-width: 320px;
+}
+
+.rest-display {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  background: var(--color-bg-tertiary);
+  transition: all 0.3s ease;
+}
+
+.rest-display.running {
+  color: var(--color-gold);
+  background: rgba(74, 144, 217, 0.1);
+}
+
+.rest-controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.rest-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rest-btn.start {
+  background: var(--color-gold);
+  border: none;
+  color: var(--color-bg-primary);
+}
+
+.rest-btn.start:hover {
+  background: var(--color-gold-light);
+}
+
+.rest-btn.pause {
+  background: rgba(224, 122, 95, 0.2);
+  border: 1px solid var(--color-accent-coral);
+  color: var(--color-accent-coral);
+}
+
+.rest-btn.pause:hover {
+  background: rgba(224, 122, 95, 0.3);
+}
+
+.rest-btn.reset {
+  background: transparent;
+  border: 1px solid rgba(74, 144, 217, 0.3);
+  color: var(--color-text-secondary);
+}
+
+.rest-btn.reset:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.modal-btn.close-rest {
+  width: 100%;
+  background: var(--color-gold);
+  border: none;
+  color: var(--color-bg-primary);
+  margin-top: 0.5rem;
+}
+
+.modal-btn.close-rest:hover {
+  background: var(--color-gold-light);
 }
 </style>
 

@@ -20,11 +20,6 @@ test.describe('Route Accessibility', () => {
     await expect(page.locator('body')).toBeVisible()
   })
 
-  test('timer page loads successfully', async ({ page }) => {
-    await page.goto(`${BASE}/timer`)
-    await expect(page.locator('body')).toBeVisible()
-  })
-
   test('equipment page loads successfully', async ({ page }) => {
     await page.goto(`${BASE}/equipment`)
     await expect(page.locator('body')).toBeVisible()

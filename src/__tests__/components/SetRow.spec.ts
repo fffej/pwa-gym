@@ -10,7 +10,6 @@ describe('SetRow', () => {
     reps: 10,
     weight: 60,
     weightUnit: 'kg',
-    restPeriod: 90,
     isCompleted: false
   }
 

@@ -126,9 +126,9 @@ describe('Workout Store', () => {
         machineId: 'bench-press',
         machineName: 'Bench Press',
         sets: [
-          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', restPeriod: 60, isCompleted: true },
-          { id: 'set2', reps: 10, weight: 50, weightUnit: 'kg', restPeriod: 60, isCompleted: false },
-          { id: 'set3', reps: 10, weight: 50, weightUnit: 'kg', restPeriod: 60, isCompleted: true },
+          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', isCompleted: true },
+          { id: 'set2', reps: 10, weight: 50, weightUnit: 'kg', isCompleted: false },
+          { id: 'set3', reps: 10, weight: 50, weightUnit: 'kg', isCompleted: true },
         ]
       }
       store.activeWorkout!.exercises.push(exercise)
@@ -152,9 +152,9 @@ describe('Workout Store', () => {
         machineId: 'bench-press',
         machineName: 'Bench Press',
         sets: [
-          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', restPeriod: 60, isCompleted: true },  // 500
-          { id: 'set2', reps: 8, weight: 60, weightUnit: 'kg', restPeriod: 60, isCompleted: false },  // 0 (not completed)
-          { id: 'set3', reps: 12, weight: 40, weightUnit: 'kg', restPeriod: 60, isCompleted: true },  // 480
+          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', isCompleted: true },  // 500
+          { id: 'set2', reps: 8, weight: 60, weightUnit: 'kg', isCompleted: false },  // 0 (not completed)
+          { id: 'set3', reps: 12, weight: 40, weightUnit: 'kg', isCompleted: true },  // 480
         ]
       }
       store.activeWorkout!.exercises.push(exercise)
@@ -171,7 +171,7 @@ describe('Workout Store', () => {
         machineId: 'bench-press',
         machineName: 'Bench Press',
         sets: [
-          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', restPeriod: 60, isCompleted: true },  // 500
+          { id: 'set1', reps: 10, weight: 50, weightUnit: 'kg', isCompleted: true },  // 500
         ]
       }
       const exercise2: Exercise = {
@@ -179,7 +179,7 @@ describe('Workout Store', () => {
         machineId: 'squat',
         machineName: 'Squat',
         sets: [
-          { id: 'set2', reps: 5, weight: 100, weightUnit: 'kg', restPeriod: 90, isCompleted: true },  // 500
+          { id: 'set2', reps: 5, weight: 100, weightUnit: 'kg', isCompleted: true },  // 500
         ]
       }
       store.activeWorkout!.exercises.push(exercise1, exercise2)

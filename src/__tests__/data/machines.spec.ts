@@ -174,15 +174,6 @@ describe('machines.json data integrity', () => {
   })
 
   describe('optional numeric fields', () => {
-    it('defaultRestPeriod is a positive number when present', () => {
-      machines.forEach(machine => {
-        if (machine.defaultRestPeriod !== undefined) {
-          expect(typeof machine.defaultRestPeriod).toBe('number')
-          expect(machine.defaultRestPeriod).toBeGreaterThan(0)
-        }
-      })
-    })
-
     it('weightIncrement is a positive number when present', () => {
       machines.forEach(machine => {
         if (machine.weightIncrement !== undefined) {

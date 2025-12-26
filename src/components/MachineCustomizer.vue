@@ -29,7 +29,6 @@ const newAttachmentName = ref('')
 const newAttachmentGrips = ref<GripType[]>([])
 
 // Settings form
-const restPeriodOverride = ref<number | null>(props.machine.defaultRestPeriod ?? null)
 const weightIncrementOverride = ref<number | null>(props.machine.weightIncrement ?? null)
 
 // Available options
@@ -117,7 +116,6 @@ async function addAttachment() {
 // Save settings
 async function saveSettings() {
   await machinesStore.updateMachineOverrides(props.machine.id, {
-    defaultRestPeriod: restPeriodOverride.value ?? undefined,
     weightIncrement: weightIncrementOverride.value ?? undefined
   })
 }
@@ -336,17 +334,6 @@ function formatMuscle(muscle: string): string {
           <p class="tab-description">
             Override default settings for this machine.
           </p>
-
-          <div class="form-group">
-            <label>Default Rest Period (seconds)</label>
-            <input 
-              v-model.number="restPeriodOverride" 
-              type="number" 
-              min="0"
-              step="15"
-              class="form-input"
-            />
-          </div>
 
           <div class="form-group">
             <label>Weight Increment (kg)</label>
