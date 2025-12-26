@@ -59,7 +59,6 @@ export interface Machine {
   weightType: WeightType
   exercises: MachineExercise[]  // Exercises available on this machine
   attachments: Attachment[]
-  defaultRestPeriod?: number
   weightIncrement?: number
   minWeight?: number
   maxWeight?: number
@@ -73,7 +72,6 @@ export interface UserMachineCustomization {
   customExercises: MachineExercise[]
   customAttachments: Attachment[]
   overrides: {
-    defaultRestPeriod?: number
     weightIncrement?: number
   }
   updatedAt: number
@@ -87,7 +85,6 @@ export interface WorkoutSet {
   weightUnit: WeightUnit
   rpe?: number
   plates?: PlateConfig
-  restPeriod: number
   completedAt?: number
   isCompleted: boolean
 }
@@ -116,15 +113,10 @@ export interface Workout {
   updatedAt?: number // For sync conflict resolution
 }
 
-// Timer behavior options
-export type TimerBehavior = 'auto' | 'manual' | 'disabled'
-
 // User settings/preferences
 export interface UserSettings {
   defaultWeightUnit: WeightUnit
-  defaultRestPeriod: number
   availablePlates: { weight: number; unit: WeightUnit }[]
-  timerBehavior: TimerBehavior
   updatedAt?: number // For sync conflict resolution
 }
 

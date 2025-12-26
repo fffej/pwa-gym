@@ -59,7 +59,6 @@ export const db = new GymDatabase()
 // Default user settings
 const defaultSettings: UserSettings = {
   defaultWeightUnit: 'kg',
-  defaultRestPeriod: 60,
   availablePlates: [
     { weight: 1.25, unit: 'kg' },
     { weight: 2.5, unit: 'kg' },
@@ -68,8 +67,7 @@ const defaultSettings: UserSettings = {
     { weight: 15, unit: 'kg' },
     { weight: 20, unit: 'kg' },
     { weight: 25, unit: 'kg' }
-  ],
-  timerBehavior: 'auto'
+  ]
 }
 
 // Workout operations

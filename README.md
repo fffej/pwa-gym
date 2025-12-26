@@ -6,7 +6,6 @@ A Progressive Web App for tracking gym workouts, built with Vue 3, TypeScript, a
 
 - Track workouts with exercises and sets
 - Browse gym equipment with usage instructions
-- Rest timer with customizable duration
 - Smart defaults based on previous workouts
 - Offline support with IndexedDB storage
 - Installable as a PWA on mobile and desktop
@@ -46,7 +45,7 @@ npm run test:coverage
 
 Unit tests cover:
 - **Store logic** - Workout, machines, and settings stores
-- **Calculations** - Weight conversion, volume calculations, timer formatting
+- **Calculations** - Weight conversion, volume calculations
 - **Data validation** - machines.json schema and type validation
 
 ### End-to-End Tests (Playwright)

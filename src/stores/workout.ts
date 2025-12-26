@@ -65,7 +65,6 @@ export const useWorkoutStore = defineStore('workout', () => {
         reps: defaultReps,
         weight: defaultWeight,
         weightUnit: defaultUnit,
-        restPeriod: machine.defaultRestPeriod ?? settingsStore.settings.defaultRestPeriod,
         isCompleted: false
       }]
     }
@@ -98,7 +97,6 @@ export const useWorkoutStore = defineStore('workout', () => {
       reps: lastSet?.reps ?? 10,
       weight: lastSet?.weight ?? 0,
       weightUnit: lastSet?.weightUnit ?? settingsStore.settings.defaultWeightUnit,
-      restPeriod: lastSet?.restPeriod ?? settingsStore.settings.defaultRestPeriod,
       isCompleted: false
     }
 

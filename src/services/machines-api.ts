@@ -260,7 +260,6 @@ export function mergeMachinesWithCustomizations(
       ...machine,
       exercises: mergedExercises,
       attachments: mergedAttachments,
-      defaultRestPeriod: customization.overrides.defaultRestPeriod ?? machine.defaultRestPeriod,
       weightIncrement: customization.overrides.weightIncrement ?? machine.weightIncrement
     }
   })

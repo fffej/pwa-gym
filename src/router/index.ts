@@ -40,11 +40,6 @@ const router = createRouter({
       component: () => import('../views/PlanEditorView.vue')
     },
     {
-      path: '/timer',
-      name: 'timer',
-      component: () => import('../views/TimerView.vue')
-    },
-    {
       path: '/equipment',
       name: 'equipment',
       component: () => import('../views/EquipmentView.vue')

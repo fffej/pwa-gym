@@ -28,7 +28,6 @@ function createExercise(
       weight: s.weight,
       reps: s.reps,
       weightUnit: 'kg' as const,
-      restPeriod: 60,
       isCompleted: s.isCompleted
     }))
   }

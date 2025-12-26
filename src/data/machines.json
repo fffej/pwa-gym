@@ -11,7 +11,6 @@
       "location": "Main Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 90,
       "weightIncrement": 2.5,
       "usage": "Lie flat on the bench with feet firmly on the floor. Grip the bar slightly wider than shoulder-width. Lower the bar to mid-chest, then press up until arms are extended. Keep your back flat and core engaged throughout.",
       "videoUrl": ""
@@ -26,7 +25,6 @@
       "location": "Main Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 90,
       "weightIncrement": 2.5,
       "usage": "Set the bench to 30-45 degrees. Lie back with feet flat on the floor. Grip the bar slightly wider than shoulder-width. Lower to upper chest, then press up. This variation emphasises the upper chest and front deltoids.",
       "videoUrl": ""
@@ -48,7 +46,6 @@
         { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] },
         { "id": "single-handle", "name": "Single Handle", "grips": ["neutral", "supinated"] }
       ],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 100,
@@ -71,7 +68,6 @@
         { "id": "wide-bar", "name": "Wide Bar", "grips": ["pronated"] },
         { "id": "rope", "name": "Rope", "grips": ["neutral"] }
       ],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 100,
@@ -88,7 +84,6 @@
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 80,
@@ -106,7 +101,6 @@
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 80,
@@ -126,7 +120,6 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 120,
       "weightIncrement": 10,
       "usage": "Sit with your back flat against the pad. Place feet shoulder-width apart on the platform. Release the safety handles. Lower the weight by bending your knees to 90 degrees, then press back up without locking your knees.",
       "videoUrl": ""
@@ -142,7 +135,6 @@
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 100,
@@ -160,7 +152,6 @@
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 60,
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 80,
@@ -178,7 +169,6 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 120,
       "weightIncrement": 10,
       "usage": "Position your back against the pad and shoulders under the supports. Place feet shoulder-width apart on the platform. Release the safety handles. Lower until thighs are parallel to the platform, then drive back up.",
       "videoUrl": ""
@@ -194,7 +184,6 @@
       "location": "Leg Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 45,
       "weightIncrement": 5,
       "minWeight": 10,
       "maxWeight": 150,
@@ -233,7 +222,6 @@
         { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] },
         { "id": "wide-bar", "name": "Wide Bar", "grips": ["pronated", "supinated"] }
       ],
-      "defaultRestPeriod": 60,
       "weightIncrement": 2.5,
       "minWeight": 2.5,
       "maxWeight": 50,
@@ -259,7 +247,6 @@
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 90,
       "weightIncrement": 2.5,
       "usage": "The guided bar path provides stability for various exercises. Rotate the bar to unhook from the safety catches. Perform your exercise with controlled movement. Rotate to re-rack. Great for squats, lunges, bench press, and shoulder press.",
       "videoUrl": ""
@@ -289,7 +276,6 @@
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 60,
       "weightIncrement": 2,
       "usage": "Select appropriate weight from the rack (2kg - 50kg available). Use for a wide variety of exercises including curls, presses, rows, and raises. Always control the weight through the full range of motion. Return dumbbells to the correct spot on the rack.",
       "videoUrl": ""
@@ -315,7 +301,6 @@
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
-      "defaultRestPeriod": 90,
       "weightIncrement": 2.5,
       "usage": "The Olympic barbell weighs 20kg. Add weight plates as needed and secure with collars. Essential for compound movements like deadlifts, squats, bench press, and rows. Use a spotter for heavy lifts. Re-rack weights after use.",
       "videoUrl": ""
@@ -330,7 +315,6 @@
       "location": "Main Room",
       "weightType": "stack",
       "attachments": [],
-      "defaultRestPeriod": 45,
       "weightIncrement": 2.5,
       "minWeight": 5,
       "maxWeight": 50,

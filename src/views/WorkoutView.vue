@@ -2,21 +2,14 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorkoutStore } from '@/stores/workout'
-import { useSettingsStore } from '@/stores/settings'
 import ExerciseCard from '@/components/ExerciseCard.vue'
-import RestTimer from '@/components/RestTimer.vue'
 
 const router = useRouter()
 const workoutStore = useWorkoutStore()
-const settingsStore = useSettingsStore()
 
-const showRestTimer = ref(false)
-const restDuration = ref(60)
 const showFinishConfirm = ref(false)
 
 onMounted(async () => {
-  await settingsStore.loadSettings()
-  
   // If no active workout, redirect to home
   if (!workoutStore.isWorkoutActive) {
     router.push('/')
@@ -57,30 +50,10 @@ function handleUpdateSet(exerciseId: string, setId: string, updates: Record<stri
 
 async function handleCompleteSet(exerciseId: string, setId: string) {
   await workoutStore.completeSet(exerciseId, setId)
-  
-  // Check timer behavior setting
-  const timerBehavior = settingsStore.settings.timerBehavior
-  if (timerBehavior === 'disabled') {
-    return // Don't show timer at all
-  }
-  
-  // Get the exercise and check if we should show rest timer
-  const exercise = workoutStore.getExercise(exerciseId)
-  if (exercise) {
-    const set = exercise.sets.find(s => s.id === setId)
-    if (set) {
-      restDuration.value = set.restPeriod
-      showRestTimer.value = true
-    }
-  }
 }
 
 function handleRemoveExercise(exerciseId: string) {
   workoutStore.removeExercise(exerciseId)
-}
-
-function dismissRestTimer() {
-  showRestTimer.value = false
 }
 
 async function finishWorkout() {
@@ -113,16 +86,6 @@ function discardWorkout() {
         </div>
       </div>
     </header>
-
-    <!-- Rest Timer Overlay -->
-    <div v-if="showRestTimer" class="rest-timer-overlay">
-      <RestTimer 
-        :duration="restDuration" 
-        :auto-start="settingsStore.settings.timerBehavior === 'auto'"
-        @complete="dismissRestTimer"
-        @dismiss="dismissRestTimer"
-      />
-    </div>
 
     <!-- Finish Confirmation Modal -->
     <div v-if="showFinishConfirm" class="modal-overlay" @click.self="showFinishConfirm = false">
@@ -363,20 +326,6 @@ function discardWorkout() {
   background: var(--color-gold-light);
   box-shadow: 0 6px 25px rgba(74, 144, 217, 0.4);
   transform: translateY(-1px);
-}
-
-.rest-timer-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 100;
 }
 
 .modal-overlay {
