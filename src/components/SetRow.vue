@@ -344,19 +344,24 @@ function handleComplete() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid rgba(74, 144, 217, 0.25);
+  background: rgba(74, 144, 217, 0.15);
+  border: 2px solid var(--color-gold);
   border-radius: 50%;
-  color: var(--color-text-muted);
+  color: var(--color-gold);
   cursor: pointer;
   transition: all 0.15s ease;
   flex-shrink: 0;
 }
 
 .edit-btn:hover {
-  background: rgba(74, 144, 217, 0.15);
+  background: var(--color-gold);
   border-color: var(--color-gold);
-  color: var(--color-gold);
+  color: var(--color-bg-primary);
+  transform: scale(1.05);
+}
+
+.edit-btn:active {
+  transform: scale(0.95);
 }
 
 .complete-btn {
