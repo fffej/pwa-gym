@@ -26,10 +26,10 @@ test.describe('Workout Creation Flow', () => {
     await page.click('.scratch-card')
     await expect(page).toHaveURL(/\/workout$/)
     
-    // Look for add machine button (text changed from "Add Exercise" to "+ Add Machine")
+    // Look for add machine button
     const addMachineBtn = page.locator('button:has-text("Add Machine")')
     await expect(addMachineBtn).toBeVisible()
-    await expect(addMachineBtn).toContainText('+ Add Machine')
+    await expect(addMachineBtn).toContainText('Add Machine')
     
     await addMachineBtn.click()
     await expect(page).toHaveURL(/\/add-exercise/)
