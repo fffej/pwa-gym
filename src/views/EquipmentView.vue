@@ -14,12 +14,6 @@ onMounted(async () => {
   await machinesStore.initialize()
 })
 
-function getMachineMuscles(machine: Machine): string[] {
-  const muscles = new Set<string>()
-  machine.exercises.forEach(ex => ex.muscles.forEach(m => muscles.add(m)))
-  return Array.from(muscles)
-}
-
 interface OpeningHours {
   regularHours: { days: string; hours: string }[]
   specialEvents: { date: string; title: string; hours: string }[]
@@ -233,11 +227,6 @@ function getYouTubeEmbedUrl(url: string): string | null {
             </div>
             <div class="equipment-info">
               <h4 class="equipment-name">{{ machine.name }}</h4>
-              <div class="equipment-muscles">
-                <span v-for="muscle in getMachineMuscles(machine)" :key="muscle" class="muscle-tag">
-                  {{ muscle }}
-                </span>
-              </div>
             </div>
           </button>
         </div>
@@ -630,24 +619,8 @@ function getYouTubeEmbedUrl(url: string): string | null {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-primary);
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   line-height: 1.3;
-}
-
-.equipment-muscles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.muscle-tag {
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--color-gold);
-  background: rgba(74, 144, 217, 0.15);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  text-transform: capitalize;
 }
 
 /* Modal styles */
