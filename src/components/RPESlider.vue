@@ -55,7 +55,8 @@ function getValueFromPosition(clientX: number): number {
 function handleTrackClick(event: MouseEvent | TouchEvent) {
   if (props.disabled) return
   
-  const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX
+  const clientX = 'touches' in event ? event.touches[0]?.clientX : event.clientX
+  if (clientX === undefined) return
   const value = getValueFromPosition(clientX)
   emit('update:modelValue', value)
 }
@@ -65,7 +66,8 @@ function handleDragStart(event: MouseEvent | TouchEvent) {
   event.preventDefault()
   isDragging.value = true
   
-  const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX
+  const clientX = 'touches' in event ? event.touches[0]?.clientX : event.clientX
+  if (clientX === undefined) return
   const value = getValueFromPosition(clientX)
   emit('update:modelValue', value)
 }
@@ -73,7 +75,8 @@ function handleDragStart(event: MouseEvent | TouchEvent) {
 function handleDragMove(event: MouseEvent | TouchEvent) {
   if (!isDragging.value || props.disabled) return
   
-  const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX
+  const clientX = 'touches' in event ? event.touches[0]?.clientX : event.clientX
+  if (clientX === undefined) return
   const value = getValueFromPosition(clientX)
   emit('update:modelValue', value)
 }
