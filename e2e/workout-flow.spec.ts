@@ -38,11 +38,11 @@ test.describe('Workout Creation Flow', () => {
   test('exercise picker shows available machines', async ({ page }) => {
     await page.goto(`${BASE}/workout/add-exercise`)
     
-    // Should show some machines/exercises
-    await page.waitForLoadState('networkidle')
+    // Wait for the exercise picker page to load and show machines
+    await expect(page.locator('.exercise-picker')).toBeVisible()
     
-    // The page should have loaded content
-    await expect(page.locator('body')).toBeVisible()
+    // The page should have loaded content with machine items
+    await expect(page.locator('.item-card').first()).toBeVisible()
   })
 })
 
@@ -66,8 +66,8 @@ test.describe('Equipment Page', () => {
   test('equipment page displays machines', async ({ page }) => {
     await page.goto(`${BASE}/equipment`)
     
-    // Wait for page to load
-    await page.waitForLoadState('networkidle')
+    // Wait for equipment cards to be visible
+    await expect(page.locator('.equipment-card').first()).toBeVisible()
     
     // Should have content visible
     await expect(page.locator('body')).toBeVisible()
@@ -89,8 +89,8 @@ test.describe('Equipment Page', () => {
   test('machine modal shows per-exercise muscles, not aggregated muscles', async ({ page }) => {
     await page.goto(`${BASE}/equipment`)
     
-    // Wait for page to load
-    await page.waitForLoadState('networkidle')
+    // Wait for equipment cards to be visible
+    await expect(page.locator('.equipment-card').first()).toBeVisible()
     
     // Click on a machine card (e.g., Lat Pulldown which has multiple exercises)
     const machineCard = page.locator('.equipment-card').first()
