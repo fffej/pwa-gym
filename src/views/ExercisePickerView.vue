@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMachinesStore } from '@/stores/machines'
 import { useWorkoutStore } from '@/stores/workout'
+import AddCustomExerciseModal from '@/components/AddCustomExerciseModal.vue'
 import type { Machine, MachineExercise, RoomLocation, MuscleGroup, GripType } from '@/types/workout'
 
 const router = useRouter()
@@ -18,15 +19,24 @@ const searchQuery = ref('')
 const selectedLocation = ref<RoomLocation | null>(null)
 const selectedMuscle = ref<MuscleGroup | null>(null)
 
-// Selection state
-const selectedMachine = ref<Machine | null>(null)
+// Selection state - store machine ID and get machine from store reactively
+const selectedMachineId = ref<string | null>(null)
 const selectedExercise = ref<MachineExercise | null>(null)
 const selectedAttachmentId = ref<string | null>(null)
 const selectedGrip = ref<GripType | null>(null)
 
+// Get the selected machine from the store (reactive to store updates)
+const selectedMachine = computed(() => {
+  if (!selectedMachineId.value) return null
+  return machinesStore.getMachineById(selectedMachineId.value) ?? null
+})
+
 // Current step in the flow
 type SelectionStep = 'browse' | 'exercise' | 'attachment' | 'grip'
 const currentStep = ref<SelectionStep>('browse')
+
+// Add exercise modal state
+const showAddExerciseModal = ref(false)
 
 // Initialize store on mount
 onMounted(async () => {
@@ -88,7 +98,7 @@ function setViewMode(mode: ViewMode) {
 
 // Reset selection state
 function resetSelection() {
-  selectedMachine.value = null
+  selectedMachineId.value = null
   selectedExercise.value = null
   selectedAttachmentId.value = null
   selectedGrip.value = null
@@ -106,7 +116,7 @@ function selectMuscle(muscle: MuscleGroup | null) {
 
 // Machine selection (machine-first flow)
 function selectMachine(machine: Machine) {
-  selectedMachine.value = machine
+  selectedMachineId.value = machine.id
   currentStep.value = 'exercise'
   
   // If machine has only one exercise, auto-select it
@@ -143,7 +153,7 @@ function selectExerciseFromBrowse(exercise: MachineExercise & { machineId: strin
   const machine = machinesStore.getMachineById(exercise.machineId)
   if (!machine) return
   
-  selectedMachine.value = machine
+  selectedMachineId.value = machine.id
   selectedExercise.value = exercise
   
   // If exercise requires a specific attachment, auto-select it
@@ -203,7 +213,7 @@ function goBack() {
     selectedAttachmentId.value = null
   } else if (currentStep.value === 'exercise') {
     currentStep.value = 'browse'
-    selectedMachine.value = null
+    selectedMachineId.value = null
     selectedExercise.value = null
   } else {
     router.push('/workout')
@@ -219,6 +229,20 @@ function formatMuscle(muscle: string): string {
 
 function getExerciseMuscles(exercise: MachineExercise): string {
   return exercise.muscles.slice(0, 2).map(formatMuscle).join(', ')
+}
+
+// Add exercise modal functions
+function openAddExerciseModal() {
+  showAddExerciseModal.value = true
+}
+
+function closeAddExerciseModal() {
+  showAddExerciseModal.value = false
+}
+
+function onExerciseSaved() {
+  // The machines store is reactive, so the exercise list will update automatically
+  closeAddExerciseModal()
 }
 </script>
 
@@ -404,7 +428,26 @@ function getExerciseMuscles(exercise: MachineExercise): string {
             </svg>
           </div>
         </button>
+
+        <!-- Add Exercise Button -->
+        <button class="add-exercise-btn" @click="openAddExerciseModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add Exercise
+        </button>
       </div>
+
+      <!-- Add Custom Exercise Modal -->
+      <AddCustomExerciseModal
+        :machine-id="selectedMachine.id"
+        :machine-name="selectedMachine.name"
+        :attachments="selectedMachine.attachments"
+        :is-open="showAddExerciseModal"
+        @close="closeAddExerciseModal"
+        @saved="onExerciseSaved"
+      />
     </div>
 
     <!-- Attachment Selection View -->
@@ -721,6 +764,31 @@ function getExerciseMuscles(exercise: MachineExercise): string {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   flex-shrink: 0;
+}
+
+.add-exercise-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 2px dashed rgba(74, 144, 217, 0.2);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.add-exercise-btn:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .no-results {

@@ -1,36 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import machinesData from '@/data/machines.json'
+import { useMachinesStore } from '@/stores/machines'
+import AddCustomExerciseModal from '@/components/AddCustomExerciseModal.vue'
 import openingHoursData from '@/data/opening-hours.json'
+import type { Machine } from '@/types/workout'
 
 const router = useRouter()
+const machinesStore = useMachinesStore()
 
-interface MachineExercise {
-  id: string
-  name: string
-  muscles: string[]
-  description?: string
-  requiredAttachment?: string
-  videoUrl?: string
-  isCustom?: boolean
-}
-
-interface Machine {
-  id: string
-  name: string
-  picture: string
-  exercises: MachineExercise[]
-  location: string
-  weightType: string
-  attachments: { id: string; name: string; grips: string[] }[]
-  defaultRestPeriod: number
-  weightIncrement: number
-  minWeight?: number
-  maxWeight?: number
-  usage?: string
-  videoUrl?: string
-}
+// Initialize the machines store
+onMounted(async () => {
+  await machinesStore.initialize()
+})
 
 function getMachineMuscles(machine: Machine): string[] {
   const muscles = new Set<string>()
@@ -43,11 +25,13 @@ interface OpeningHours {
   specialEvents: { date: string; title: string; hours: string }[]
 }
 
-const machines = ref<Machine[]>(machinesData.machines)
 const openingHours = ref<OpeningHours>(openingHoursData)
 
 // Selected machine for modal
 const selectedMachine = ref<Machine | null>(null)
+
+// Add exercise modal state
+const showAddExerciseModal = ref(false)
 
 function openMachineModal(machine: Machine) {
   selectedMachine.value = machine
@@ -55,6 +39,20 @@ function openMachineModal(machine: Machine) {
 
 function closeMachineModal() {
   selectedMachine.value = null
+}
+
+function openAddExerciseModal() {
+  showAddExerciseModal.value = true
+}
+
+function closeAddExerciseModal() {
+  showAddExerciseModal.value = false
+}
+
+function onExerciseSaved() {
+  // The machines store is reactive, so the UI will update automatically
+  // Just close the add exercise modal
+  closeAddExerciseModal()
 }
 
 // Close modal on escape key
@@ -73,19 +71,25 @@ function getImagePath(picture: string): string {
   return `${baseUrl}${cleanPath}`
 }
 
-// Get unique locations for grouping
+// Get unique locations for grouping (using store's merged machines)
 const locations = computed(() => {
-  const locs = [...new Set(machines.value.map(m => m.location))]
+  const locs = [...new Set(machinesStore.machines.map(m => m.location))]
   return locs.sort()
 })
 
-// Group machines by location
+// Group machines by location (using store's merged machines)
 const machinesByLocation = computed(() => {
   const grouped: Record<string, Machine[]> = {}
   for (const loc of locations.value) {
-    grouped[loc] = machines.value.filter(m => m.location === loc)
+    grouped[loc] = machinesStore.machines.filter(m => m.location === loc)
   }
   return grouped
+})
+
+// Get selected machine from store (to get merged version with custom exercises)
+const selectedMachineWithCustoms = computed(() => {
+  if (!selectedMachine.value) return null
+  return machinesStore.getMachineById(selectedMachine.value.id) ?? selectedMachine.value
 })
 
 // Check for today's special events
@@ -226,7 +230,7 @@ function getYouTubeEmbedUrl(url: string): string | null {
 
     <!-- Machine Detail Modal -->
     <Teleport to="body">
-      <div v-if="selectedMachine" class="modal-overlay" @click.self="closeMachineModal">
+      <div v-if="selectedMachineWithCustoms" class="modal-overlay" @click.self="closeMachineModal">
         <div class="modal-content">
           <button class="modal-close" @click="closeMachineModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -237,11 +241,11 @@ function getYouTubeEmbedUrl(url: string): string | null {
 
           <div class="modal-header">
             <div class="modal-image">
-              <img :src="getImagePath(selectedMachine.picture)" :alt="selectedMachine.name" />
+              <img :src="getImagePath(selectedMachineWithCustoms.picture)" :alt="selectedMachineWithCustoms.name" />
             </div>
             <div class="modal-title-section">
-              <h2 class="modal-title">{{ selectedMachine.name }}</h2>
-              <span class="modal-location">{{ selectedMachine.location }}</span>
+              <h2 class="modal-title">{{ selectedMachineWithCustoms.name }}</h2>
+              <span class="modal-location">{{ selectedMachineWithCustoms.location }}</span>
             </div>
           </div>
 
@@ -250,21 +254,33 @@ function getYouTubeEmbedUrl(url: string): string | null {
             <div class="modal-section">
               <h3 class="modal-section-title">Muscles Targeted</h3>
               <div class="modal-muscles">
-                <span v-for="muscle in getMachineMuscles(selectedMachine)" :key="muscle" class="modal-muscle-tag">
+                <span v-for="muscle in getMachineMuscles(selectedMachineWithCustoms)" :key="muscle" class="modal-muscle-tag">
                   {{ muscle }}
                 </span>
               </div>
             </div>
 
             <!-- Available Exercises -->
-            <div v-if="selectedMachine.exercises.length > 0" class="modal-section">
+            <div class="modal-section">
               <h3 class="modal-section-title">Available Exercises</h3>
               <div class="exercises-list">
-                <div v-for="exercise in selectedMachine.exercises" :key="exercise.id" class="exercise-item">
-                  <span class="exercise-name">{{ exercise.name }}</span>
+                <div v-for="exercise in selectedMachineWithCustoms.exercises" :key="exercise.id" class="exercise-item">
+                  <div class="exercise-header">
+                    <span class="exercise-name">{{ exercise.name }}</span>
+                    <span v-if="exercise.isCustom" class="custom-badge">Custom</span>
+                  </div>
                   <span class="exercise-muscles">{{ exercise.muscles.join(', ') }}</span>
                 </div>
               </div>
+              
+              <!-- Add Exercise Button -->
+              <button class="add-exercise-btn" @click="openAddExerciseModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Add Exercise
+              </button>
             </div>
 
             <!-- Equipment details -->
@@ -273,32 +289,32 @@ function getYouTubeEmbedUrl(url: string): string | null {
               <div class="modal-details-grid">
                 <div class="detail-item">
                   <span class="detail-label">Weight Type</span>
-                  <span class="detail-value">{{ formatWeightType(selectedMachine.weightType) }}</span>
+                  <span class="detail-value">{{ formatWeightType(selectedMachineWithCustoms.weightType) }}</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label">Increment</span>
-                  <span class="detail-value">{{ selectedMachine.weightIncrement }}kg</span>
+                  <span class="detail-value">{{ selectedMachineWithCustoms.weightIncrement }}kg</span>
                 </div>
-                <div v-if="selectedMachine.minWeight" class="detail-item">
+                <div v-if="selectedMachineWithCustoms.minWeight" class="detail-item">
                   <span class="detail-label">Min Weight</span>
-                  <span class="detail-value">{{ selectedMachine.minWeight }}kg</span>
+                  <span class="detail-value">{{ selectedMachineWithCustoms.minWeight }}kg</span>
                 </div>
-                <div v-if="selectedMachine.maxWeight" class="detail-item">
+                <div v-if="selectedMachineWithCustoms.maxWeight" class="detail-item">
                   <span class="detail-label">Max Weight</span>
-                  <span class="detail-value">{{ selectedMachine.maxWeight }}kg</span>
+                  <span class="detail-value">{{ selectedMachineWithCustoms.maxWeight }}kg</span>
                 </div>
                 <div class="detail-item">
                   <span class="detail-label">Rest Period</span>
-                  <span class="detail-value">{{ selectedMachine.defaultRestPeriod }}s</span>
+                  <span class="detail-value">{{ selectedMachineWithCustoms.defaultRestPeriod }}s</span>
                 </div>
               </div>
             </div>
 
             <!-- Attachments -->
-            <div v-if="selectedMachine.attachments.length > 0" class="modal-section">
+            <div v-if="selectedMachineWithCustoms.attachments.length > 0" class="modal-section">
               <h3 class="modal-section-title">Available Attachments</h3>
               <div class="attachments-list">
-                <div v-for="attachment in selectedMachine.attachments" :key="attachment.id" class="attachment-item">
+                <div v-for="attachment in selectedMachineWithCustoms.attachments" :key="attachment.id" class="attachment-item">
                   <span class="attachment-name">{{ attachment.name }}</span>
                   <span v-if="attachment.grips.length" class="attachment-grips">
                     {{ attachment.grips.join(', ') }}
@@ -308,17 +324,17 @@ function getYouTubeEmbedUrl(url: string): string | null {
             </div>
 
             <!-- Usage guidance -->
-            <div v-if="selectedMachine.usage" class="modal-section">
+            <div v-if="selectedMachineWithCustoms.usage" class="modal-section">
               <h3 class="modal-section-title">How to Use</h3>
-              <p class="usage-text">{{ selectedMachine.usage }}</p>
+              <p class="usage-text">{{ selectedMachineWithCustoms.usage }}</p>
             </div>
 
             <!-- Video demonstration -->
-            <div v-if="selectedMachine.videoUrl && getYouTubeEmbedUrl(selectedMachine.videoUrl)" class="modal-section">
+            <div v-if="selectedMachineWithCustoms.videoUrl && getYouTubeEmbedUrl(selectedMachineWithCustoms.videoUrl)" class="modal-section">
               <h3 class="modal-section-title">Video Demonstration</h3>
               <div class="video-container">
                 <iframe 
-                  :src="getYouTubeEmbedUrl(selectedMachine.videoUrl)!" 
+                  :src="getYouTubeEmbedUrl(selectedMachineWithCustoms.videoUrl)!" 
                   frameborder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowfullscreen
@@ -329,6 +345,17 @@ function getYouTubeEmbedUrl(url: string): string | null {
         </div>
       </div>
     </Teleport>
+
+    <!-- Add Custom Exercise Modal -->
+    <AddCustomExerciseModal
+      v-if="selectedMachineWithCustoms"
+      :machine-id="selectedMachineWithCustoms.id"
+      :machine-name="selectedMachineWithCustoms.name"
+      :attachments="selectedMachineWithCustoms.attachments"
+      :is-open="showAddExerciseModal"
+      @close="closeAddExerciseModal"
+      @saved="onExerciseSaved"
+    />
   </div>
 </template>
 
@@ -811,6 +838,12 @@ function getYouTubeEmbedUrl(url: string): string | null {
   gap: 0.25rem;
 }
 
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .exercise-name {
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
@@ -818,9 +851,45 @@ function getYouTubeEmbedUrl(url: string): string | null {
   color: var(--color-text-primary);
 }
 
+.custom-badge {
+  padding: 0.15rem 0.4rem;
+  background: rgba(74, 144, 217, 0.2);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 .exercise-muscles {
   font-size: 0.75rem;
   color: var(--color-text-muted);
+}
+
+.add-exercise-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.75rem;
+  background: transparent;
+  border: 2px dashed rgba(74, 144, 217, 0.2);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.add-exercise-btn:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .attachment-name {
