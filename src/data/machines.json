@@ -78,11 +78,10 @@
     },
     {
       "id": "pec-fly",
-      "name": "Pec Fly / Rear Delt",
-      "picture": "/machines/pec-fly.svg",
+      "name": "Nautilus Nitro Plus Pec Fly",
+      "picture": "/machines/Nautilus-Nitro-Plus-Pec-Fly.jpg",
       "exercises": [
-        { "id": "pec-fly-chest", "name": "Pec Fly", "muscles": ["chest"] },
-        { "id": "pec-fly-rear-delt", "name": "Rear Delt Fly", "muscles": ["shoulders", "back"] }
+        { "id": "pec-fly-chest", "name": "Pec Fly", "muscles": ["chest"] }
       ],
       "location": "Main Room",
       "weightType": "stack",
@@ -90,7 +89,7 @@
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 80,
-      "usage": "For pec fly: Sit facing out with arms extended at chest height. Bring handles together in front of your chest with a slight bend in elbows. For rear delt: Face the machine and reverse the movement, pulling handles apart.",
+      "usage": "Adjust the seat height so the handles align with your chest. Sit with your back firmly against the pad. Grasp the handles with arms extended and a slight bend in your elbows. Bring the handles together in front of your chest in a controlled arc, squeezing your pectorals at the centre. The 170-degree rotation targets the lower, more massive portion of the pectorals for efficient muscle engagement.",
       "videoUrl": ""
     },
     {
@@ -340,6 +339,26 @@
       "minWeight": -50,
       "maxWeight": 0,
       "usage": "Select the assistance level on the weight stack—higher weight means more assistance. Climb onto the platform and kneel on the padded knee rest. For chin-ups, grasp the overhead handles and pull yourself up until your chin clears the bar. For dips, grip the parallel bars and lower yourself until your upper arms are parallel to the floor, then press back up. The counterweight assists your bodyweight, making these exercises accessible while building strength.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-evo-pulldown",
+      "name": "Nautilus Nitro Evo Pulldown",
+      "picture": "/machines/Pulldown-Nautilus-Nitro-Evo.webp",
+      "exercises": [
+        { "id": "nitro-evo-pulldown-wide", "name": "Wide Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-close", "name": "Close Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-reverse", "name": "Reverse Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-single-left", "name": "Single Arm Lat Pulldown (Left)", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-single-right", "name": "Single Arm Lat Pulldown (Right)", "muscles": ["back", "biceps"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "Adjust the thigh pad to secure your legs and prevent lifting during the exercise. Grasp the handles with your chosen grip—wide for outer lats, close for inner back, or reverse for bicep emphasis. Pull down towards your upper chest while squeezing your shoulder blades together, then return with control. For unilateral training, use one arm at a time to address muscle imbalances and increase core engagement.",
       "videoUrl": ""
     }
   ]
