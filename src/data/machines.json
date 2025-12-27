@@ -194,7 +194,9 @@
         { "id": "cable-kickback", "name": "Glute Kickback", "muscles": ["glutes"], "requiredAttachment": "ankle-cuff" },
         { "id": "cable-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
         { "id": "cable-front-raise", "name": "Cable Front Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
-        { "id": "cable-upright-row", "name": "Cable Upright Row", "muscles": ["shoulders", "back"], "requiredAttachment": "straight-bar" }
+        { "id": "cable-upright-row", "name": "Cable Upright Row", "muscles": ["shoulders", "back"], "requiredAttachment": "straight-bar" },
+        { "id": "cable-rear-delt-fly", "name": "Cable Rear Delt Fly", "muscles": ["shoulders", "back"], "requiredAttachment": "single-handle" },
+        { "id": "cable-overhead-tricep-extension", "name": "Overhead Tricep Extension", "muscles": ["triceps"], "requiredAttachment": "rope" }
       ],
       "location": "Functional Room",
       "weightType": "cable",
@@ -431,6 +433,31 @@
       "attachments": [],
       "weightIncrement": 5,
       "usage": "Adjust the pad height so your hips are at the top edge when you lean forward. Secure your ankles under the foot pads. Cross your arms over your chest or hold a weight plate against your chest for added resistance. Lower your torso by hinging at the hips until your body is at roughly 90 degrees. Raise back up by contracting your lower back, glutes, and hamstrings until your body forms a straight line. Avoid hyperextending beyond neutral.",
+      "videoUrl": ""
+    },
+    {
+      "id": "freemotion-functional-lift",
+      "name": "FreeMotion Functional Lift",
+      "picture": "/machines/freemotion-functional-lift.jpg",
+      "exercises": [
+        { "id": "freemotion-bayesian-curl", "name": "Bayesian Curl", "muscles": ["biceps"] },
+        { "id": "freemotion-cable-chest-press", "name": "Standing Cable Chest Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "freemotion-cable-row", "name": "Standing Cable Row", "muscles": ["back", "biceps"] },
+        { "id": "freemotion-rotational-chop", "name": "Rotational Chop", "muscles": ["core", "shoulders"] },
+        { "id": "freemotion-rotational-lift", "name": "Rotational Lift", "muscles": ["core", "shoulders"] },
+        { "id": "freemotion-single-arm-press", "name": "Single Arm Cable Press", "muscles": ["chest", "triceps", "core"] },
+        { "id": "freemotion-tricep-extension", "name": "Overhead Tricep Extension", "muscles": ["triceps"] },
+        { "id": "freemotion-reverse-fly", "name": "Reverse Fly", "muscles": ["shoulders", "back"] },
+        { "id": "freemotion-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"] },
+        { "id": "freemotion-pull-through", "name": "Cable Pull Through", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Functional Room",
+      "weightType": "cable",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "minWeight": 2.5,
+      "maxWeight": 50,
+      "usage": "This dual-arm cable machine allows independent arm movement for functional training. Adjust the pulley height for your chosen exercise. For Bayesian curls, set the cable low, stand facing away from the machine, and curl with your arm behind your body to maximise bicep stretch. The freely moving arms enable natural movement patterns and rotational exercises that mimic real-world activities.",
       "videoUrl": ""
     }
   ]
