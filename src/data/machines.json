@@ -193,7 +193,7 @@
     {
       "id": "cable-machine",
       "name": "Cable Machine",
-      "picture": "/machines/cable-machine.svg",
+      "picture": "/machines/cable-machine.jpg",
       "exercises": [
         { "id": "cable-fly", "name": "Cable Fly", "muscles": ["chest"], "requiredAttachment": "single-handle" },
         { "id": "cable-crossover", "name": "Cable Crossover", "muscles": ["chest"], "requiredAttachment": "single-handle" },
@@ -319,6 +319,24 @@
       "minWeight": 5,
       "maxWeight": 50,
       "usage": "Adjust the seat height so the pivot point aligns with your shoulders. Place your arms against the pads. Raise your arms out to the sides until parallel with the floor. Lower with control. Keep a slight bend in your elbows.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-incline-press",
+      "name": "Nautilus Nitro Plus Incline Press",
+      "picture": "/machines/nitro-incline-press.jpg",
+      "exercises": [
+        { "id": "nitro-incline-press-standard", "name": "Incline Chest Press", "muscles": ["chest", "shoulders", "triceps"] },
+        { "id": "nitro-incline-press-wide", "name": "Wide Grip Incline Press", "muscles": ["chest", "shoulders"] },
+        { "id": "nitro-incline-press-narrow", "name": "Narrow Grip Incline Press", "muscles": ["triceps", "chest"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 10,
+      "maxWeight": 150,
+      "usage": "Adjust the seat so the handles align with your upper chest. Sit with your back firmly against the pad and feet flat on the floor. Grasp the handles and press forward and upward until your arms are extended but not locked. Lower the weight with control, feeling a stretch across your chest. The incline angle emphasises the upper chest and front deltoids.",
       "videoUrl": ""
     }
   ]
