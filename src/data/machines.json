@@ -177,7 +177,7 @@
     },
     {
       "id": "cable-machine",
-      "name": "Cable Machine",
+      "name": "Cybex Cable Machine",
       "picture": "/machines/cable-machine.jpg",
       "exercises": [
         { "id": "cable-fly", "name": "Cable Fly", "muscles": ["chest"], "requiredAttachment": "single-handle" },
@@ -198,7 +198,7 @@
         { "id": "cable-rear-delt-fly", "name": "Cable Rear Delt Fly", "muscles": ["shoulders", "back"], "requiredAttachment": "single-handle" },
         { "id": "cable-overhead-tricep-extension", "name": "Overhead Tricep Extension", "muscles": ["triceps"], "requiredAttachment": "rope" }
       ],
-      "location": "Functional Room",
+      "location": "Main Room",
       "weightType": "cable",
       "attachments": [
         { "id": "straight-bar", "name": "Straight Bar", "grips": ["pronated", "supinated"] },
@@ -493,6 +493,36 @@
       "minWeight": 5,
       "maxWeight": 100,
       "usage": "Adjust the leg pads to your desired starting position. For abduction (outer thigh), sit with legs together and press outward against the pads, squeezing your glutes at the end of the movement. For adduction (inner thigh), start with legs apart and squeeze inward. The dual-function design allows you to switch between exercises by repositioning the pads. Control the movement in both directions for maximum benefit.",
+      "videoUrl": ""
+    },
+    {
+      "id": "life-fitness-cable-column",
+      "name": "Life Fitness Cable Column",
+      "picture": "/machines/life-fitness-cable-column.jpg",
+      "exercises": [
+        { "id": "lf-cable-fly", "name": "Cable Fly", "muscles": ["chest"], "requiredAttachment": "single-handle" },
+        { "id": "lf-cable-crossover", "name": "Cable Crossover", "muscles": ["chest"], "requiredAttachment": "single-handle" },
+        { "id": "lf-tricep-pushdown", "name": "Tricep Pushdown", "muscles": ["triceps"], "requiredAttachment": "rope" },
+        { "id": "lf-bicep-curl", "name": "Cable Bicep Curl", "muscles": ["biceps"], "requiredAttachment": "straight-bar" },
+        { "id": "lf-face-pull", "name": "Face Pull", "muscles": ["shoulders", "back"], "requiredAttachment": "rope" },
+        { "id": "lf-cable-row", "name": "Cable Row", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
+        { "id": "lf-woodchop", "name": "Wood Chop", "muscles": ["core"], "requiredAttachment": "single-handle" },
+        { "id": "lf-pallof-press", "name": "Pallof Press", "muscles": ["core"], "requiredAttachment": "single-handle" },
+        { "id": "lf-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
+        { "id": "lf-rear-delt-fly", "name": "Cable Rear Delt Fly", "muscles": ["shoulders", "back"], "requiredAttachment": "single-handle" }
+      ],
+      "location": "Functional Room",
+      "weightType": "cable",
+      "attachments": [
+        { "id": "straight-bar", "name": "Straight Bar", "grips": ["pronated", "supinated"] },
+        { "id": "rope", "name": "Rope", "grips": ["neutral"] },
+        { "id": "single-handle", "name": "Single Handle", "grips": ["neutral", "pronated", "supinated"] },
+        { "id": "v-bar", "name": "V-Bar", "grips": ["neutral"] }
+      ],
+      "weightIncrement": 2.5,
+      "minWeight": 2.5,
+      "maxWeight": 45,
+      "usage": "Adjust the pulley height for your chosen exercise. The dual adjustable columns allow for independent arm movement and a wide variety of functional exercises. Attach your preferred handle, set the weight, and perform controlled movements through the full range of motion. Ideal for cable flies, rows, presses, and rotational movements.",
       "videoUrl": ""
     }
   ]

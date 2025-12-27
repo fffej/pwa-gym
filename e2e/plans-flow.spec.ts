@@ -233,7 +233,10 @@ test.describe('Plan Editor', () => {
     
     // Add a cable machine exercise
     await page.click('.add-exercise-btn')
-    await page.locator('.machine-item:has-text("Cable Machine")').click()
+    // Wait for the machine picker modal to appear
+    await page.waitForSelector('.modal-overlay')
+    // Click the Cable Machine - use exact match to avoid matching Life Fitness Cable Column
+    await page.locator('.machine-item', { hasText: /^Cable Machine/ }).click()
     
     // Cable Machine has multiple exercises, so we need to select one
     // Select Tricep Pushdown which requires rope attachment
