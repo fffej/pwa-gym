@@ -41,13 +41,14 @@ export const useMachinesStore = defineStore('machines', () => {
 
   // Get all exercises across all machines (flattened)
   const allExercises = computed(() => {
-    const exercises: Array<MachineExercise & { machineId: string; machineName: string }> = []
+    const exercises: Array<MachineExercise & { machineId: string; machineName: string; machinePicture: string }> = []
     mergedMachines.value.forEach(machine => {
       machine.exercises.forEach(exercise => {
         exercises.push({
           ...exercise,
           machineId: machine.id,
-          machineName: machine.name
+          machineName: machine.name,
+          machinePicture: machine.picture
         })
       })
     })

@@ -10,6 +10,15 @@ const router = useRouter()
 const machinesStore = useMachinesStore()
 const workoutStore = useWorkoutStore()
 
+// Base URL for image paths
+const baseUrl = import.meta.env.BASE_URL
+
+function getImagePath(picture: string): string {
+  // Remove leading slash and prepend base URL
+  const cleanPath = picture.startsWith('/') ? picture.slice(1) : picture
+  return `${baseUrl}${cleanPath}`
+}
+
 // View mode: 'machines' or 'exercises'
 type ViewMode = 'machines' | 'exercises'
 const viewMode = ref<ViewMode>('machines')
@@ -337,11 +346,7 @@ function onExerciseSaved() {
           @click="selectMachine(machine)"
         >
           <div class="item-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M6.5 6.5h11v11h-11z"/>
-              <path d="M3 12h3M18 12h3M12 3v3M12 18v3"/>
-              <circle cx="12" cy="12" r="2"/>
-            </svg>
+            <img :src="getImagePath(machine.picture)" :alt="machine.name" class="machine-thumb" />
           </div>
           <div class="item-info">
             <span class="item-name">{{ machine.name }}</span>
@@ -369,10 +374,8 @@ function onExerciseSaved() {
           class="item-card"
           @click="selectExerciseFromBrowse(exercise)"
         >
-          <div class="item-icon exercise-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-            </svg>
+          <div class="item-icon">
+            <img :src="getImagePath(exercise.machinePicture)" :alt="exercise.machineName" class="machine-thumb" />
           </div>
           <div class="item-info">
             <span class="item-name">{{ exercise.name }}</span>
@@ -398,11 +401,7 @@ function onExerciseSaved() {
     <div v-else-if="currentStep === 'exercise' && selectedMachine" class="selection-view">
       <div class="selected-header">
         <div class="selected-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6.5 6.5h11v11h-11z"/>
-            <path d="M3 12h3M18 12h3M12 3v3M12 18v3"/>
-            <circle cx="12" cy="12" r="2"/>
-          </svg>
+          <img :src="getImagePath(selectedMachine.picture)" :alt="selectedMachine.name" class="machine-thumb-large" />
         </div>
         <div class="selected-info">
           <h2>{{ selectedMachine.name }}</h2>
@@ -720,10 +719,19 @@ function onExerciseSaved() {
   border-radius: 8px;
   color: var(--color-gold);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
-.item-icon.exercise-icon {
-  background: rgba(74, 144, 217, 0.15);
+.machine-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.machine-thumb-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .item-info {
@@ -824,6 +832,7 @@ function onExerciseSaved() {
   border-radius: 12px;
   color: var(--color-gold);
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .selected-info h2 {
