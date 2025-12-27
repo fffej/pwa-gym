@@ -62,18 +62,18 @@
     },
     {
       "id": "shoulder-press",
-      "name": "Shoulder Press Machine",
-      "picture": "/machines/shoulder-press.svg",
+      "name": "Nautilus XPLOAD Overhead Press",
+      "picture": "/machines/nautilus-xpload-plate-loaded-shoulder-press.webp",
       "exercises": [
-        { "id": "shoulder-press-standard", "name": "Shoulder Press", "muscles": ["shoulders", "triceps"] }
+        { "id": "shoulder-press-standard", "name": "Overhead Press", "muscles": ["shoulders", "triceps"] },
+        { "id": "shoulder-press-single-left", "name": "Single Arm Overhead Press (Left)", "muscles": ["shoulders", "triceps"] },
+        { "id": "shoulder-press-single-right", "name": "Single Arm Overhead Press (Right)", "muscles": ["shoulders", "triceps"] }
       ],
       "location": "Main Room",
-      "weightType": "stack",
+      "weightType": "plates",
       "attachments": [],
       "weightIncrement": 5,
-      "minWeight": 5,
-      "maxWeight": 80,
-      "usage": "Adjust the seat so handles are at shoulder height. Sit with your back firmly against the pad. Press the handles upward until arms are extended but not locked. Lower with control. Keep your core engaged throughout.",
+      "usage": "Load plates onto the weight horns on each side. Adjust the seat height so the handles align with your shoulders. Sit with your back firmly against the pad and feet flat on the floor. Grip the handles and press upward in a smooth arc until your arms are extended but not locked. Lower with control to shoulder height. The converging path of the XPLOAD design provides a natural pressing motion that reduces shoulder strain.",
       "videoUrl": ""
     },
     {
@@ -398,6 +398,22 @@
       "minWeight": 5,
       "maxWeight": 100,
       "usage": "This versatile machine allows you to adjust the angle from a vertical pulldown to a horizontal row position. For pulldowns, secure your thighs under the pads, grasp the handles and pull down towards your upper chest. For rows, adjust the angle and pull the handles towards your midsection, squeezing your shoulder blades together. The adjustable angle lets you target different areas of the back—higher angles emphasise the lats, while lower angles engage more of the mid-back and rhomboids.",
+      "videoUrl": ""
+    },
+    {
+      "id": "cybex-kneeling-leg-curl",
+      "name": "Cybex Kneeling Leg Curl",
+      "picture": "/machines/plate-loaded-cybex-kneeling-leg-curl.jpg",
+      "exercises": [
+        { "id": "cybex-kneeling-leg-curl-standard", "name": "Kneeling Leg Curl", "muscles": ["hamstrings"] },
+        { "id": "cybex-kneeling-leg-curl-single-left", "name": "Single Leg Curl (Left)", "muscles": ["hamstrings"] },
+        { "id": "cybex-kneeling-leg-curl-single-right", "name": "Single Leg Curl (Right)", "muscles": ["hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 5,
+      "usage": "Kneel on the padded platform with your ankles hooked under the roller pads. Grip the handles for stability and keep your hips pressed against the front pad. Curl your heels towards your glutes by contracting your hamstrings, squeezing at the top of the movement. Lower with control to maintain tension throughout. The kneeling position provides excellent hamstring isolation with a greater stretch than seated or lying variations.",
       "videoUrl": ""
     }
   ]
