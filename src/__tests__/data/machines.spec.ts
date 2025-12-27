@@ -8,7 +8,7 @@ const validMuscleGroups: MuscleGroup[] = [
   'core', 'quadriceps', 'hamstrings', 'glutes', 'calves', 'hip-flexors'
 ]
 const validGripTypes: GripType[] = ['pronated', 'supinated', 'neutral', 'mixed']
-const validWeightTypes: WeightType[] = ['stack', 'plates', 'bodyweight', 'cable']
+const validWeightTypes: WeightType[] = ['stack', 'plates', 'bodyweight', 'cable', 'assisted']
 
 describe('machines.json data integrity', () => {
   const machines = machinesData.machines

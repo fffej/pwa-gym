@@ -2,7 +2,7 @@
 export type WeightUnit = 'kg' | 'lbs'
 
 // Machine weight types
-export type WeightType = 'stack' | 'plates' | 'bodyweight' | 'cable'
+export type WeightType = 'stack' | 'plates' | 'bodyweight' | 'cable' | 'assisted'
 
 // Grip types for attachments
 export type GripType = 'pronated' | 'supinated' | 'neutral' | 'mixed'

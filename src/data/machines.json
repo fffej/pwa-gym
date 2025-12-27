@@ -16,23 +16,9 @@
       "videoUrl": ""
     },
     {
-      "id": "incline-bench",
-      "name": "Incline Bench Press",
-      "picture": "/machines/incline-bench.svg",
-      "exercises": [
-        { "id": "incline-bench-press", "name": "Incline Bench Press", "muscles": ["chest", "shoulders", "triceps"] }
-      ],
-      "location": "Main Room",
-      "weightType": "plates",
-      "attachments": [],
-      "weightIncrement": 2.5,
-      "usage": "Set the bench to 30-45 degrees. Lie back with feet flat on the floor. Grip the bar slightly wider than shoulder-width. Lower to upper chest, then press up. This variation emphasises the upper chest and front deltoids.",
-      "videoUrl": ""
-    },
-    {
       "id": "lat-pulldown",
-      "name": "Lat Pulldown",
-      "picture": "/machines/lat-pulldown.svg",
+      "name": "Precor Pulldown FT344",
+      "picture": "/machines/precor-dual-stack-lat-pulldown.jpg",
       "exercises": [
         { "id": "lat-pulldown-wide", "name": "Wide Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "wide-bar" },
         { "id": "lat-pulldown-close", "name": "Close Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
@@ -49,7 +35,7 @@
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 100,
-      "usage": "Sit with thighs secured under the pads. Grasp the bar with a wide overhand grip. Pull the bar down to your upper chest while squeezing your shoulder blades together. Control the weight back up slowly. Avoid leaning too far back.",
+      "usage": "Adjust the thigh pads to secure your legs. Select your attachment and grip style. Sit upright and pull the bar or handle down towards your upper chest, focusing on driving your elbows down and back. Squeeze your shoulder blades together at the bottom of the movement. Return the weight slowly with control. The dual cable system provides smooth, balanced resistance throughout the range of motion.",
       "videoUrl": ""
     },
     {
@@ -76,27 +62,26 @@
     },
     {
       "id": "shoulder-press",
-      "name": "Shoulder Press Machine",
-      "picture": "/machines/shoulder-press.svg",
+      "name": "Nautilus XPLOAD Overhead Press",
+      "picture": "/machines/nautilus-xpload-plate-loaded-shoulder-press.webp",
       "exercises": [
-        { "id": "shoulder-press-standard", "name": "Shoulder Press", "muscles": ["shoulders", "triceps"] }
+        { "id": "shoulder-press-standard", "name": "Overhead Press", "muscles": ["shoulders", "triceps"] },
+        { "id": "shoulder-press-single-left", "name": "Single Arm Overhead Press (Left)", "muscles": ["shoulders", "triceps"] },
+        { "id": "shoulder-press-single-right", "name": "Single Arm Overhead Press (Right)", "muscles": ["shoulders", "triceps"] }
       ],
       "location": "Main Room",
-      "weightType": "stack",
+      "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 5,
-      "minWeight": 5,
-      "maxWeight": 80,
-      "usage": "Adjust the seat so handles are at shoulder height. Sit with your back firmly against the pad. Press the handles upward until arms are extended but not locked. Lower with control. Keep your core engaged throughout.",
+      "weightIncrement": 2.5,
+      "usage": "Load plates onto the weight horns on each side. Adjust the seat height so the handles align with your shoulders. Sit with your back firmly against the pad and feet flat on the floor. Grip the handles and press upward in a smooth arc until your arms are extended but not locked. Lower with control to shoulder height. The converging path of the XPLOAD design provides a natural pressing motion that reduces shoulder strain.",
       "videoUrl": ""
     },
     {
       "id": "pec-fly",
-      "name": "Pec Fly / Rear Delt",
-      "picture": "/machines/pec-fly.svg",
+      "name": "Nautilus Nitro Plus Pec Fly",
+      "picture": "/machines/Nautilus-Nitro-Plus-Pec-Fly.jpg",
       "exercises": [
-        { "id": "pec-fly-chest", "name": "Pec Fly", "muscles": ["chest"] },
-        { "id": "pec-fly-rear-delt", "name": "Rear Delt Fly", "muscles": ["shoulders", "back"] }
+        { "id": "pec-fly-chest", "name": "Pec Fly", "muscles": ["chest"] }
       ],
       "location": "Main Room",
       "weightType": "stack",
@@ -104,7 +89,7 @@
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 80,
-      "usage": "For pec fly: Sit facing out with arms extended at chest height. Bring handles together in front of your chest with a slight bend in elbows. For rear delt: Face the machine and reverse the movement, pulling handles apart.",
+      "usage": "Adjust the seat height so the handles align with your chest. Sit with your back firmly against the pad. Grasp the handles with arms extended and a slight bend in your elbows. Bring the handles together in front of your chest in a controlled arc, squeezing your pectorals at the centre. The 170-degree rotation targets the lower, more massive portion of the pectorals for efficient muscle engagement.",
       "videoUrl": ""
     },
     {
@@ -120,7 +105,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 10,
+      "weightIncrement": 2.5,
       "usage": "Sit with your back flat against the pad. Place feet shoulder-width apart on the platform. Release the safety handles. Lower the weight by bending your knees to 90 degrees, then press back up without locking your knees.",
       "videoUrl": ""
     },
@@ -169,7 +154,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 10,
+      "weightIncrement": 2.5,
       "usage": "Position your back against the pad and shoulders under the supports. Place feet shoulder-width apart on the platform. Release the safety handles. Lower until thighs are parallel to the platform, then drive back up.",
       "videoUrl": ""
     },
@@ -193,7 +178,7 @@
     {
       "id": "cable-machine",
       "name": "Cable Machine",
-      "picture": "/machines/cable-machine.svg",
+      "picture": "/machines/cable-machine.jpg",
       "exercises": [
         { "id": "cable-fly", "name": "Cable Fly", "muscles": ["chest"], "requiredAttachment": "single-handle" },
         { "id": "cable-crossover", "name": "Cable Crossover", "muscles": ["chest"], "requiredAttachment": "single-handle" },
@@ -209,7 +194,9 @@
         { "id": "cable-kickback", "name": "Glute Kickback", "muscles": ["glutes"], "requiredAttachment": "ankle-cuff" },
         { "id": "cable-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
         { "id": "cable-front-raise", "name": "Cable Front Raise", "muscles": ["shoulders"], "requiredAttachment": "single-handle" },
-        { "id": "cable-upright-row", "name": "Cable Upright Row", "muscles": ["shoulders", "back"], "requiredAttachment": "straight-bar" }
+        { "id": "cable-upright-row", "name": "Cable Upright Row", "muscles": ["shoulders", "back"], "requiredAttachment": "straight-bar" },
+        { "id": "cable-rear-delt-fly", "name": "Cable Rear Delt Fly", "muscles": ["shoulders", "back"], "requiredAttachment": "single-handle" },
+        { "id": "cable-overhead-tricep-extension", "name": "Overhead Tricep Extension", "muscles": ["triceps"], "requiredAttachment": "rope" }
       ],
       "location": "Functional Room",
       "weightType": "cable",
@@ -254,7 +241,7 @@
     {
       "id": "dumbbells",
       "name": "Dumbbells",
-      "picture": "/machines/dumbbells.svg",
+      "picture": "/machines/dumbbells.webp",
       "exercises": [
         { "id": "dumbbell-bench-press", "name": "Dumbbell Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
         { "id": "dumbbell-incline-press", "name": "Dumbbell Incline Press", "muscles": ["chest", "shoulders", "triceps"] },
@@ -276,7 +263,7 @@
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 2,
+      "weightIncrement": 2.5,
       "usage": "Select appropriate weight from the rack (2kg - 50kg available). Use for a wide variety of exercises including curls, presses, rows, and raises. Always control the weight through the full range of motion. Return dumbbells to the correct spot on the rack.",
       "videoUrl": ""
     },
@@ -319,6 +306,193 @@
       "minWeight": 5,
       "maxWeight": 50,
       "usage": "Adjust the seat height so the pivot point aligns with your shoulders. Place your arms against the pads. Raise your arms out to the sides until parallel with the floor. Lower with control. Keep a slight bend in your elbows.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-incline-press",
+      "name": "Nautilus Nitro Plus Incline Press",
+      "picture": "/machines/nitro-incline-press.jpg",
+      "exercises": [
+        { "id": "nitro-incline-press-standard", "name": "Incline Chest Press", "muscles": ["chest", "shoulders", "triceps"] },
+        { "id": "nitro-incline-press-wide", "name": "Wide Grip Incline Press", "muscles": ["chest", "shoulders"] },
+        { "id": "nitro-incline-press-narrow", "name": "Narrow Grip Incline Press", "muscles": ["triceps", "chest"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 10,
+      "maxWeight": 150,
+      "usage": "Adjust the seat so the handles align with your upper chest. Sit with your back firmly against the pad and feet flat on the floor. Grasp the handles and press forward and upward until your arms are extended but not locked. Lower the weight with control, feeling a stretch across your chest. The incline angle emphasises the upper chest and front deltoids.",
+      "videoUrl": ""
+    },
+    {
+      "id": "assisted-chin-dip",
+      "name": "Life Fitness Assisted Chin/Dip",
+      "picture": "/machines/life-fitness-dip-chin.jpg",
+      "exercises": [
+        { "id": "assisted-chin-up", "name": "Assisted Chin-Up", "muscles": ["back", "biceps"] },
+        { "id": "assisted-dip", "name": "Assisted Dip", "muscles": ["chest", "triceps", "shoulders"] }
+      ],
+      "location": "Main Room",
+      "weightType": "assisted",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": -50,
+      "maxWeight": 0,
+      "usage": "Select the assistance level on the weight stack—higher weight means more assistance. Climb onto the platform and kneel on the padded knee rest. For chin-ups, grasp the overhead handles and pull yourself up until your chin clears the bar. For dips, grip the parallel bars and lower yourself until your upper arms are parallel to the floor, then press back up. The counterweight assists your bodyweight, making these exercises accessible while building strength.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-evo-pulldown",
+      "name": "Nautilus Nitro Evo Pulldown",
+      "picture": "/machines/Pulldown-Nautilus-Nitro-Evo.webp",
+      "exercises": [
+        { "id": "nitro-evo-pulldown-wide", "name": "Wide Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-close", "name": "Close Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-reverse", "name": "Reverse Grip Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-single-left", "name": "Single Arm Lat Pulldown (Left)", "muscles": ["back", "biceps"] },
+        { "id": "nitro-evo-pulldown-single-right", "name": "Single Arm Lat Pulldown (Right)", "muscles": ["back", "biceps"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "Adjust the thigh pad to secure your legs and prevent lifting during the exercise. Grasp the handles with your chosen grip—wide for outer lats, close for inner back, or reverse for bicep emphasis. Pull down towards your upper chest while squeezing your shoulder blades together, then return with control. For unilateral training, use one arm at a time to address muscle imbalances and increase core engagement.",
+      "videoUrl": ""
+    },
+    {
+      "id": "glute-drive",
+      "name": "Nautilus Glute Drive",
+      "picture": "/machines/nautilus-glute-drive-black.jpg",
+      "exercises": [
+        { "id": "glute-drive-standard", "name": "Hip Thrust", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-single-left", "name": "Single Leg Hip Thrust (Left)", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-single-right", "name": "Single Leg Hip Thrust (Right)", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-pause", "name": "Pause Rep Hip Thrust", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "usage": "Adjust the back pad height and position the belt comfortably across your hips. Sit with your upper back against the pad and feet flat on the footplate, shoulder-width apart. Drive through your heels to extend your hips until your body forms a straight line from shoulders to knees. Squeeze your glutes hard at the top, then lower with control. For single leg work, keep one foot planted while the other is raised.",
+      "videoUrl": ""
+    },
+    {
+      "id": "cybex-vr1-pulldown-row",
+      "name": "Cybex VR1 Dual Pulldown/Row",
+      "picture": "/machines/cybex-vr1-cable-dual-pulldown-row.jpg",
+      "exercises": [
+        { "id": "cybex-vr1-lat-pulldown", "name": "Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-close-grip-pulldown", "name": "Close Grip Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-reverse-grip-pulldown", "name": "Reverse Grip Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-seated-row", "name": "Seated Row", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-wide-row", "name": "Wide Grip Row", "muscles": ["back", "shoulders"] },
+        { "id": "cybex-vr1-high-row", "name": "High Row", "muscles": ["back", "shoulders", "biceps"] },
+        { "id": "cybex-vr1-low-row", "name": "Low Row", "muscles": ["back", "biceps"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "This versatile machine allows you to adjust the angle from a vertical pulldown to a horizontal row position. For pulldowns, secure your thighs under the pads, grasp the handles and pull down towards your upper chest. For rows, adjust the angle and pull the handles towards your midsection, squeezing your shoulder blades together. The adjustable angle lets you target different areas of the back—higher angles emphasise the lats, while lower angles engage more of the mid-back and rhomboids.",
+      "videoUrl": ""
+    },
+    {
+      "id": "cybex-kneeling-leg-curl",
+      "name": "Cybex Kneeling Leg Curl",
+      "picture": "/machines/plate-loaded-cybex-kneeling-leg-curl.jpg",
+      "exercises": [
+        { "id": "cybex-kneeling-leg-curl-standard", "name": "Kneeling Leg Curl", "muscles": ["hamstrings"] },
+        { "id": "cybex-kneeling-leg-curl-single-left", "name": "Single Leg Curl (Left)", "muscles": ["hamstrings"] },
+        { "id": "cybex-kneeling-leg-curl-single-right", "name": "Single Leg Curl (Right)", "muscles": ["hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "usage": "Kneel on the padded platform with your ankles hooked under the roller pads. Grip the handles for stability and keep your hips pressed against the front pad. Curl your heels towards your glutes by contracting your hamstrings, squeezing at the top of the movement. Lower with control to maintain tension throughout. The kneeling position provides excellent hamstring isolation with a greater stretch than seated or lying variations.",
+      "videoUrl": ""
+    },
+    {
+      "id": "hyperextension",
+      "name": "Plate Loaded Hyperextension",
+      "picture": "/machines/hyper-extension.jpg",
+      "exercises": [
+        { "id": "hyperextension-standard", "name": "Back Extension", "muscles": ["back", "glutes", "hamstrings"] },
+        { "id": "hyperextension-weighted", "name": "Weighted Back Extension", "muscles": ["back", "glutes", "hamstrings"] },
+        { "id": "hyperextension-twist", "name": "Twisting Back Extension", "muscles": ["back", "core"] },
+        { "id": "hyperextension-glute-focus", "name": "Glute-Focused Hyperextension", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "usage": "Adjust the pad height so your hips are at the top edge when you lean forward. Secure your ankles under the foot pads. Cross your arms over your chest or hold a weight plate against your chest for added resistance. Lower your torso by hinging at the hips until your body is at roughly 90 degrees. Raise back up by contracting your lower back, glutes, and hamstrings until your body forms a straight line. Avoid hyperextending beyond neutral.",
+      "videoUrl": ""
+    },
+    {
+      "id": "freemotion-functional-lift",
+      "name": "FreeMotion Functional Lift",
+      "picture": "/machines/freemotion-functional-lift.jpg",
+      "exercises": [
+        { "id": "freemotion-bayesian-curl", "name": "Bayesian Curl", "muscles": ["biceps"] },
+        { "id": "freemotion-cable-chest-press", "name": "Standing Cable Chest Press", "muscles": ["chest", "triceps", "shoulders"] },
+        { "id": "freemotion-cable-row", "name": "Standing Cable Row", "muscles": ["back", "biceps"] },
+        { "id": "freemotion-rotational-chop", "name": "Rotational Chop", "muscles": ["core", "shoulders"] },
+        { "id": "freemotion-rotational-lift", "name": "Rotational Lift", "muscles": ["core", "shoulders"] },
+        { "id": "freemotion-single-arm-press", "name": "Single Arm Cable Press", "muscles": ["chest", "triceps", "core"] },
+        { "id": "freemotion-tricep-extension", "name": "Overhead Tricep Extension", "muscles": ["triceps"] },
+        { "id": "freemotion-reverse-fly", "name": "Reverse Fly", "muscles": ["shoulders", "back"] },
+        { "id": "freemotion-lateral-raise", "name": "Cable Lateral Raise", "muscles": ["shoulders"] },
+        { "id": "freemotion-pull-through", "name": "Cable Pull Through", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Functional Room",
+      "weightType": "cable",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "minWeight": 2.5,
+      "maxWeight": 50,
+      "usage": "This dual-arm cable machine allows independent arm movement for functional training. Adjust the pulley height for your chosen exercise. For Bayesian curls, set the cable low, stand facing away from the machine, and curl with your arm behind your body to maximise bicep stretch. The freely moving arms enable natural movement patterns and rotational exercises that mimic real-world activities.",
+      "videoUrl": ""
+    },
+    {
+      "id": "gymleco-hip-press",
+      "name": "Gymleco Hip Press",
+      "picture": "/machines/leco-leg-press.webp",
+      "exercises": [
+        { "id": "gymleco-hip-press-standard", "name": "Hip Press", "muscles": ["quadriceps", "glutes"] },
+        { "id": "gymleco-hip-press-narrow", "name": "Narrow Stance Hip Press", "muscles": ["quadriceps"] },
+        { "id": "gymleco-hip-press-wide", "name": "Wide Stance Hip Press", "muscles": ["quadriceps", "glutes", "hamstrings"] },
+        { "id": "gymleco-hip-press-single-left", "name": "Single Leg Hip Press (Left)", "muscles": ["quadriceps", "glutes"] },
+        { "id": "gymleco-hip-press-single-right", "name": "Single Leg Hip Press (Right)", "muscles": ["quadriceps", "glutes"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "usage": "Load weight plates onto either of the two loading positions. Sit with your back against the pad and place your feet on the large footplate. The natural lever movement activates the front of the thigh while reducing shearing forces on the knees. Press through your heels to extend your legs, then lower with control. The footplate allows for different foot positions to target different muscle groups.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-abduction-adduction",
+      "name": "Nautilus Nitro Plus Abduction / Adduction",
+      "picture": "/machines/Nautilus-Nitro-Plus-Abduction-Adduction.jpg",
+      "exercises": [
+        { "id": "nitro-hip-abduction", "name": "Hip Abduction", "muscles": ["glutes"] },
+        { "id": "nitro-hip-adduction", "name": "Hip Adduction", "muscles": ["hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "Adjust the leg pads to your desired starting position. For abduction (outer thigh), sit with legs together and press outward against the pads, squeezing your glutes at the end of the movement. For adduction (inner thigh), start with legs apart and squeeze inward. The dual-function design allows you to switch between exercises by repositioning the pads. Control the movement in both directions for maximum benefit.",
       "videoUrl": ""
     }
   ]

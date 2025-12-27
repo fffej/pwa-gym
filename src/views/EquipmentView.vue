@@ -129,7 +129,8 @@ function formatWeightType(type: string): string {
   const types: Record<string, string> = {
     'plates': 'Plate Loaded',
     'stack': 'Weight Stack',
-    'cable': 'Cable System'
+    'cable': 'Cable System',
+    'assisted': 'Assisted'
   }
   return types[type] || type
 }

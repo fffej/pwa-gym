@@ -41,13 +41,14 @@ export const useMachinesStore = defineStore('machines', () => {
 
   // Get all exercises across all machines (flattened)
   const allExercises = computed(() => {
-    const exercises: Array<MachineExercise & { machineId: string; machineName: string }> = []
+    const exercises: Array<MachineExercise & { machineId: string; machineName: string; machinePicture: string }> = []
     mergedMachines.value.forEach(machine => {
       machine.exercises.forEach(exercise => {
         exercises.push({
           ...exercise,
           machineId: machine.id,
-          machineName: machine.name
+          machineName: machine.name,
+          machinePicture: machine.picture
         })
       })
     })
@@ -104,7 +105,7 @@ export const useMachinesStore = defineStore('machines', () => {
   }
 
   // Get exercise by ID
-  function getExerciseById(exerciseId: string): (MachineExercise & { machineId: string; machineName: string }) | undefined {
+  function getExerciseById(exerciseId: string): (MachineExercise & { machineId: string; machineName: string; machinePicture: string }) | undefined {
     return allExercises.value.find(e => e.id === exerciseId)
   }
 
@@ -127,7 +128,7 @@ export const useMachinesStore = defineStore('machines', () => {
   }
 
   // Get exercises by muscle group
-  function getExercisesByMuscle(muscle: MuscleGroup): Array<MachineExercise & { machineId: string; machineName: string }> {
+  function getExercisesByMuscle(muscle: MuscleGroup): Array<MachineExercise & { machineId: string; machineName: string; machinePicture: string }> {
     return allExercises.value.filter(ex => ex.muscles.includes(muscle))
   }
 
@@ -144,7 +145,7 @@ export const useMachinesStore = defineStore('machines', () => {
   }
 
   // Search exercises
-  function searchExercises(query: string): Array<MachineExercise & { machineId: string; machineName: string }> {
+  function searchExercises(query: string): Array<MachineExercise & { machineId: string; machineName: string; machinePicture: string }> {
     const lowerQuery = query.toLowerCase()
     return allExercises.value.filter(ex => 
       ex.name.toLowerCase().includes(lowerQuery) ||

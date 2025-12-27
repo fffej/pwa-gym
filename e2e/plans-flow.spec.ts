@@ -174,8 +174,8 @@ test.describe('Plan Editor', () => {
     // Machine picker modal should appear
     await expect(page.locator('.picker-modal')).toBeVisible()
     
-    // Select a machine without attachments (e.g., Shoulder Press)
-    await page.locator('.machine-item:has-text("Shoulder Press")').click()
+    // Select a machine without attachments (e.g., Lateral Raise Machine - has 1 exercise, auto-adds)
+    await page.locator('.machine-item:has-text("Lateral Raise Machine")').click()
     
     // Exercise should be added to the list
     await expect(page.locator('.exercise-item')).toHaveCount(1)
@@ -186,9 +186,9 @@ test.describe('Plan Editor', () => {
     
     await page.fill('#plan-name', 'Remove Exercise Plan')
     
-    // Add an exercise
+    // Add an exercise (Pec Fly has 1 exercise, auto-adds)
     await page.click('.add-exercise-btn')
-    await page.locator('.machine-item:has-text("Shoulder Press")').click()
+    await page.locator('.machine-item:has-text("Nautilus Nitro Plus Pec Fly")').click()
     await expect(page.locator('.exercise-item')).toHaveCount(1)
     
     // Remove the exercise
@@ -204,9 +204,9 @@ test.describe('Plan Editor', () => {
     await page.fill('#plan-name', 'Reorder Exercise Plan')
     
     // Add two exercises
-    // First: Shoulder Press Machine (has 1 exercise, auto-adds)
+    // First: Lateral Raise Machine (has 1 exercise, auto-adds)
     await page.click('.add-exercise-btn')
-    await page.locator('.machine-item:has-text("Shoulder Press")').click()
+    await page.locator('.machine-item:has-text("Lateral Raise Machine")').click()
     
     // Second: Bench Press (has 2 exercises, need to select one)
     await page.click('.add-exercise-btn')
@@ -216,8 +216,8 @@ test.describe('Plan Editor', () => {
     
     await expect(page.locator('.exercise-item')).toHaveCount(2)
     
-    // First exercise should be Shoulder Press
-    await expect(page.locator('.exercise-item').first()).toContainText('Shoulder Press')
+    // First exercise should be Lateral Raise
+    await expect(page.locator('.exercise-item').first()).toContainText('Lateral Raise')
     
     // Move first exercise down
     await page.locator('.exercise-item').first().locator('.action-btn').nth(1).click() // down button
