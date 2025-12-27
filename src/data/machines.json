@@ -72,7 +72,7 @@
       "location": "Main Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 5,
+      "weightIncrement": 2.5,
       "usage": "Load plates onto the weight horns on each side. Adjust the seat height so the handles align with your shoulders. Sit with your back firmly against the pad and feet flat on the floor. Grip the handles and press upward in a smooth arc until your arms are extended but not locked. Lower with control to shoulder height. The converging path of the XPLOAD design provides a natural pressing motion that reduces shoulder strain.",
       "videoUrl": ""
     },
@@ -105,7 +105,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 10,
+      "weightIncrement": 2.5,
       "usage": "Sit with your back flat against the pad. Place feet shoulder-width apart on the platform. Release the safety handles. Lower the weight by bending your knees to 90 degrees, then press back up without locking your knees.",
       "videoUrl": ""
     },
@@ -154,7 +154,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 10,
+      "weightIncrement": 2.5,
       "usage": "Position your back against the pad and shoulders under the supports. Place feet shoulder-width apart on the platform. Release the safety handles. Lower until thighs are parallel to the platform, then drive back up.",
       "videoUrl": ""
     },
@@ -241,7 +241,7 @@
     {
       "id": "dumbbells",
       "name": "Dumbbells",
-      "picture": "/machines/dumbbells.svg",
+      "picture": "/machines/dumbbells.webp",
       "exercises": [
         { "id": "dumbbell-bench-press", "name": "Dumbbell Bench Press", "muscles": ["chest", "triceps", "shoulders"] },
         { "id": "dumbbell-incline-press", "name": "Dumbbell Incline Press", "muscles": ["chest", "shoulders", "triceps"] },
@@ -263,7 +263,7 @@
       "location": "Functional Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 2,
+      "weightIncrement": 2.5,
       "usage": "Select appropriate weight from the rack (2kg - 50kg available). Use for a wide variety of exercises including curls, presses, rows, and raises. Always control the weight through the full range of motion. Return dumbbells to the correct spot on the rack.",
       "videoUrl": ""
     },
@@ -376,7 +376,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 10,
+      "weightIncrement": 2.5,
       "usage": "Adjust the back pad height and position the belt comfortably across your hips. Sit with your upper back against the pad and feet flat on the footplate, shoulder-width apart. Drive through your heels to extend your hips until your body forms a straight line from shoulders to knees. Squeeze your glutes hard at the top, then lower with control. For single leg work, keep one foot planted while the other is raised.",
       "videoUrl": ""
     },
@@ -414,7 +414,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 5,
+      "weightIncrement": 2.5,
       "usage": "Kneel on the padded platform with your ankles hooked under the roller pads. Grip the handles for stability and keep your hips pressed against the front pad. Curl your heels towards your glutes by contracting your hamstrings, squeezing at the top of the movement. Lower with control to maintain tension throughout. The kneeling position provides excellent hamstring isolation with a greater stretch than seated or lying variations.",
       "videoUrl": ""
     },
@@ -431,7 +431,7 @@
       "location": "Leg Room",
       "weightType": "plates",
       "attachments": [],
-      "weightIncrement": 5,
+      "weightIncrement": 2.5,
       "usage": "Adjust the pad height so your hips are at the top edge when you lean forward. Secure your ankles under the foot pads. Cross your arms over your chest or hold a weight plate against your chest for added resistance. Lower your torso by hinging at the hips until your body is at roughly 90 degrees. Raise back up by contracting your lower back, glutes, and hamstrings until your body forms a straight line. Avoid hyperextending beyond neutral.",
       "videoUrl": ""
     },
@@ -458,6 +458,41 @@
       "minWeight": 2.5,
       "maxWeight": 50,
       "usage": "This dual-arm cable machine allows independent arm movement for functional training. Adjust the pulley height for your chosen exercise. For Bayesian curls, set the cable low, stand facing away from the machine, and curl with your arm behind your body to maximise bicep stretch. The freely moving arms enable natural movement patterns and rotational exercises that mimic real-world activities.",
+      "videoUrl": ""
+    },
+    {
+      "id": "gymleco-hip-press",
+      "name": "Gymleco Hip Press",
+      "picture": "/machines/leco-leg-press.webp",
+      "exercises": [
+        { "id": "gymleco-hip-press-standard", "name": "Hip Press", "muscles": ["quadriceps", "glutes"] },
+        { "id": "gymleco-hip-press-narrow", "name": "Narrow Stance Hip Press", "muscles": ["quadriceps"] },
+        { "id": "gymleco-hip-press-wide", "name": "Wide Stance Hip Press", "muscles": ["quadriceps", "glutes", "hamstrings"] },
+        { "id": "gymleco-hip-press-single-left", "name": "Single Leg Hip Press (Left)", "muscles": ["quadriceps", "glutes"] },
+        { "id": "gymleco-hip-press-single-right", "name": "Single Leg Hip Press (Right)", "muscles": ["quadriceps", "glutes"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 2.5,
+      "usage": "Load weight plates onto either of the two loading positions. Sit with your back against the pad and place your feet on the large footplate. The natural lever movement activates the front of the thigh while reducing shearing forces on the knees. Press through your heels to extend your legs, then lower with control. The footplate allows for different foot positions to target different muscle groups.",
+      "videoUrl": ""
+    },
+    {
+      "id": "nitro-abduction-adduction",
+      "name": "Nautilus Nitro Plus Abduction / Adduction",
+      "picture": "/machines/Nautilus-Nitro-Plus-Abduction-Adduction.jpg",
+      "exercises": [
+        { "id": "nitro-hip-abduction", "name": "Hip Abduction", "muscles": ["glutes"] },
+        { "id": "nitro-hip-adduction", "name": "Hip Adduction", "muscles": ["hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "Adjust the leg pads to your desired starting position. For abduction (outer thigh), sit with legs together and press outward against the pads, squeezing your glutes at the end of the movement. For adduction (inner thigh), start with legs apart and squeeze inward. The dual-function design allows you to switch between exercises by repositioning the pads. Control the movement in both directions for maximum benefit.",
       "videoUrl": ""
     }
   ]
