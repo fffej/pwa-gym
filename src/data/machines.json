@@ -17,8 +17,8 @@
     },
     {
       "id": "lat-pulldown",
-      "name": "Lat Pulldown",
-      "picture": "/machines/lat-pulldown.svg",
+      "name": "Precor Pulldown FT344",
+      "picture": "/machines/precor-dual-stack-lat-pulldown.jpg",
       "exercises": [
         { "id": "lat-pulldown-wide", "name": "Wide Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "wide-bar" },
         { "id": "lat-pulldown-close", "name": "Close Grip Lat Pulldown", "muscles": ["back", "biceps"], "requiredAttachment": "v-bar" },
@@ -35,7 +35,7 @@
       "weightIncrement": 5,
       "minWeight": 5,
       "maxWeight": 100,
-      "usage": "Sit with thighs secured under the pads. Grasp the bar with a wide overhand grip. Pull the bar down to your upper chest while squeezing your shoulder blades together. Control the weight back up slowly. Avoid leaning too far back.",
+      "usage": "Adjust the thigh pads to secure your legs. Select your attachment and grip style. Sit upright and pull the bar or handle down towards your upper chest, focusing on driving your elbows down and back. Squeeze your shoulder blades together at the bottom of the movement. Return the weight slowly with control. The dual cable system provides smooth, balanced resistance throughout the range of motion.",
       "videoUrl": ""
     },
     {
