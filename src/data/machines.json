@@ -338,6 +338,23 @@
       "maxWeight": 150,
       "usage": "Adjust the seat so the handles align with your upper chest. Sit with your back firmly against the pad and feet flat on the floor. Grasp the handles and press forward and upward until your arms are extended but not locked. Lower the weight with control, feeling a stretch across your chest. The incline angle emphasises the upper chest and front deltoids.",
       "videoUrl": ""
+    },
+    {
+      "id": "assisted-chin-dip",
+      "name": "Life Fitness Assisted Chin/Dip",
+      "picture": "/machines/life-fitness-dip-chin.jpg",
+      "exercises": [
+        { "id": "assisted-chin-up", "name": "Assisted Chin-Up", "muscles": ["back", "biceps"] },
+        { "id": "assisted-dip", "name": "Assisted Dip", "muscles": ["chest", "triceps", "shoulders"] }
+      ],
+      "location": "Main Room",
+      "weightType": "assisted",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": -50,
+      "maxWeight": 0,
+      "usage": "Select the assistance level on the weight stack—higher weight means more assistance. Climb onto the platform and kneel on the padded knee rest. For chin-ups, grasp the overhead handles and pull yourself up until your chin clears the bar. For dips, grip the parallel bars and lower yourself until your upper arms are parallel to the floor, then press back up. The counterweight assists your bodyweight, making these exercises accessible while building strength.",
+      "videoUrl": ""
     }
   ]
 }
