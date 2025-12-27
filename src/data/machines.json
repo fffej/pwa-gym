@@ -360,6 +360,45 @@
       "maxWeight": 100,
       "usage": "Adjust the thigh pad to secure your legs and prevent lifting during the exercise. Grasp the handles with your chosen grip—wide for outer lats, close for inner back, or reverse for bicep emphasis. Pull down towards your upper chest while squeezing your shoulder blades together, then return with control. For unilateral training, use one arm at a time to address muscle imbalances and increase core engagement.",
       "videoUrl": ""
+    },
+    {
+      "id": "glute-drive",
+      "name": "Nautilus Glute Drive",
+      "picture": "/machines/nautilus-glute-drive-black.jpg",
+      "exercises": [
+        { "id": "glute-drive-standard", "name": "Hip Thrust", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-single-left", "name": "Single Leg Hip Thrust (Left)", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-single-right", "name": "Single Leg Hip Thrust (Right)", "muscles": ["glutes", "hamstrings"] },
+        { "id": "glute-drive-pause", "name": "Pause Rep Hip Thrust", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 10,
+      "usage": "Adjust the back pad height and position the belt comfortably across your hips. Sit with your upper back against the pad and feet flat on the footplate, shoulder-width apart. Drive through your heels to extend your hips until your body forms a straight line from shoulders to knees. Squeeze your glutes hard at the top, then lower with control. For single leg work, keep one foot planted while the other is raised.",
+      "videoUrl": ""
+    },
+    {
+      "id": "cybex-vr1-pulldown-row",
+      "name": "Cybex VR1 Dual Pulldown/Row",
+      "picture": "/machines/cybex-vr1-cable-dual-pulldown-row.jpg",
+      "exercises": [
+        { "id": "cybex-vr1-lat-pulldown", "name": "Lat Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-close-grip-pulldown", "name": "Close Grip Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-reverse-grip-pulldown", "name": "Reverse Grip Pulldown", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-seated-row", "name": "Seated Row", "muscles": ["back", "biceps"] },
+        { "id": "cybex-vr1-wide-row", "name": "Wide Grip Row", "muscles": ["back", "shoulders"] },
+        { "id": "cybex-vr1-high-row", "name": "High Row", "muscles": ["back", "shoulders", "biceps"] },
+        { "id": "cybex-vr1-low-row", "name": "Low Row", "muscles": ["back", "biceps"] }
+      ],
+      "location": "Main Room",
+      "weightType": "stack",
+      "attachments": [],
+      "weightIncrement": 5,
+      "minWeight": 5,
+      "maxWeight": 100,
+      "usage": "This versatile machine allows you to adjust the angle from a vertical pulldown to a horizontal row position. For pulldowns, secure your thighs under the pads, grasp the handles and pull down towards your upper chest. For rows, adjust the angle and pull the handles towards your midsection, squeezing your shoulder blades together. The adjustable angle lets you target different areas of the back—higher angles emphasise the lats, while lower angles engage more of the mid-back and rhomboids.",
+      "videoUrl": ""
     }
   ]
 }
