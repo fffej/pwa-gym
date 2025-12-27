@@ -294,8 +294,8 @@
     },
     {
       "id": "lateral-raise-machine",
-      "name": "Lateral Raise Machine",
-      "picture": "/machines/lateral-raise.svg",
+      "name": "Life Fitness Pro 1 Lateral Raise",
+      "picture": "/machines/life-fitness-lateral-raise.jpg",
       "exercises": [
         { "id": "lateral-raise-machine-standard", "name": "Lateral Raise", "muscles": ["shoulders"] }
       ],

@@ -174,8 +174,8 @@ test.describe('Plan Editor', () => {
     // Machine picker modal should appear
     await expect(page.locator('.picker-modal')).toBeVisible()
     
-    // Select a machine without attachments (e.g., Lateral Raise Machine - has 1 exercise, auto-adds)
-    await page.locator('.machine-item:has-text("Lateral Raise Machine")').click()
+    // Select a machine without attachments (e.g., Life Fitness Pro 1 Lateral Raise - has 1 exercise, auto-adds)
+    await page.locator('.machine-item:has-text("Life Fitness Pro 1 Lateral Raise")').click()
     
     // Exercise should be added to the list
     await expect(page.locator('.exercise-item')).toHaveCount(1)
@@ -204,9 +204,9 @@ test.describe('Plan Editor', () => {
     await page.fill('#plan-name', 'Reorder Exercise Plan')
     
     // Add two exercises
-    // First: Lateral Raise Machine (has 1 exercise, auto-adds)
+    // First: Life Fitness Pro 1 Lateral Raise (has 1 exercise, auto-adds)
     await page.click('.add-exercise-btn')
-    await page.locator('.machine-item:has-text("Lateral Raise Machine")').click()
+    await page.locator('.machine-item:has-text("Life Fitness Pro 1 Lateral Raise")').click()
     
     // Second: Bench Press (has 2 exercises, need to select one)
     await page.click('.add-exercise-btn')
