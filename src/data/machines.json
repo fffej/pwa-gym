@@ -415,6 +415,23 @@
       "weightIncrement": 5,
       "usage": "Kneel on the padded platform with your ankles hooked under the roller pads. Grip the handles for stability and keep your hips pressed against the front pad. Curl your heels towards your glutes by contracting your hamstrings, squeezing at the top of the movement. Lower with control to maintain tension throughout. The kneeling position provides excellent hamstring isolation with a greater stretch than seated or lying variations.",
       "videoUrl": ""
+    },
+    {
+      "id": "hyperextension",
+      "name": "Plate Loaded Hyperextension",
+      "picture": "/machines/hyper-extension.jpg",
+      "exercises": [
+        { "id": "hyperextension-standard", "name": "Back Extension", "muscles": ["back", "glutes", "hamstrings"] },
+        { "id": "hyperextension-weighted", "name": "Weighted Back Extension", "muscles": ["back", "glutes", "hamstrings"] },
+        { "id": "hyperextension-twist", "name": "Twisting Back Extension", "muscles": ["back", "core"] },
+        { "id": "hyperextension-glute-focus", "name": "Glute-Focused Hyperextension", "muscles": ["glutes", "hamstrings"] }
+      ],
+      "location": "Leg Room",
+      "weightType": "plates",
+      "attachments": [],
+      "weightIncrement": 5,
+      "usage": "Adjust the pad height so your hips are at the top edge when you lean forward. Secure your ankles under the foot pads. Cross your arms over your chest or hold a weight plate against your chest for added resistance. Lower your torso by hinging at the hips until your body is at roughly 90 degrees. Raise back up by contracting your lower back, glutes, and hamstrings until your body forms a straight line. Avoid hyperextending beyond neutral.",
+      "videoUrl": ""
     }
   ]
 }
